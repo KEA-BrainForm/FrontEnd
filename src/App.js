@@ -4,6 +4,7 @@ import Createsurvey from './pages/createsurvey';
 import Managesurvey from './pages/managesurvey';
 import Mypage from './pages/mypage';
 import NavigationBar from './Layout/NavigationBar';
+import Login from './pages/login';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path='/createsurvey' element={<Createsurvey />}></Route>
           <Route path='/managesurvey' element={<Managesurvey />}></Route>
           <Route path='/mypage' element={<Mypage />}></Route>
+          <Route path='/login' element={<Login />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
