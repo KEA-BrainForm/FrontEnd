@@ -4,20 +4,20 @@
 }
 
 .signup-card {
-    padding-top: 75%;
-
-    width: 50vw;
+    width: 70vw;
     height: fit-content;
     padding: 10px;
-    
     border-radius: 20px;
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
     background : rgba(255, 255, 255, 1);
     text-align: center;
     margin: auto;
 }
+.content-center{
+    align-items: center;
+    justify-content: center;
 
-
+}
 .nickname{
     display: grid;
     grid-template-columns: 1fr;
@@ -27,6 +27,7 @@
 .genderagegrid{
     
     display: grid;
+    padding-bottom : 50%;
     
     grid-template-columns: repeat(4,100px) ;
     grid-auto-rows: 30px 30px;
@@ -36,20 +37,20 @@
 
 
 .jobgrid{
-    margin-top: 50px;
+    margin-top: 60px;
     display: grid;
     grid-template-columns: repeat(4,100px) ;
     grid-auto-rows: 30px 30px;
-    line-height:35px;
+    line-height:20px;
     
 }
 
 .signuptext{
-    margin :center;
+ 
     text-align: left;
-    margin-left: 30%;
-    padding-left: 0;
-    
+ 
+    padding-left: 35%;
+    padding-right: 30%;
     word-spacing: 0.2em;
 }
 
@@ -57,12 +58,12 @@
     margin-left: 20px;
     
 }
-button {
-    margin-top: 90px;
+
+.signupbutton {
+
     background-color: #ffeb3b;
-    color: black;
-    border: none;
-    padding: 10px 20px;
+    
+    border: none; 
     border-radius: 5px;
     text-align: center;
     text-decoration: none;
@@ -70,11 +71,10 @@ button {
     font-weight: bold;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     cursor: pointer;
+    width: 100px;
+    height: 30px;
   }
 
-  button:hover {
-    background-color: #ffeb3b;
-  }
 
   .genderagegrid label input[type="radio"] {
     margin-right: 5px; /* adjust as needed */

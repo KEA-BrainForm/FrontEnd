@@ -5,6 +5,7 @@ import Managesurvey from './pages/managesurvey';
 import Mypage from './pages/mypage';
 import NavigationBar from './Layout/NavigationBar';
 import Signup from './pages/signup';
+import Login from './pages/login';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path='/' element={<Home />}></Route>
           <Route path='/createsurvey' element={<Createsurvey />}></Route>
           <Route path='/managesurvey' element={<Managesurvey />}></Route>
+          <Route path='/login' element={<Login />}></Route>
           <Route path='/mypage' element={<Mypage />}></Route>
           <Route path='/signup' element={<Signup />}></Route>
         </Routes>

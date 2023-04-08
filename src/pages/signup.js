@@ -6,6 +6,7 @@ function signup() {
   return (
     <div className="background">
       <div className="signup-card">
+        <div className="content-center">
         <img className="logeSignup" src={logo} alt="logo" /><br />
         <h1>Sign up</h1><br />
         <form className="signuptext">
@@ -94,16 +95,17 @@ function signup() {
 
           
           </div>
-        </form>
-        <div className="button">
+          </form>
+        <div ><br/><br/><br/><br/>
         <Link to="/">
-              <button type="submit">Sign up</button>
+              <button className="signupbutton" type="submit">Sign up</button>
               </Link>
             </div>
-        
+            
       </div>
-      
+      </div>
     </div>
+    
   );
 }
 
