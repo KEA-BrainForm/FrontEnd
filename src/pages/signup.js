@@ -98,7 +98,7 @@ function signup() {
           </form>
         <div ><br/><br/><br/><br/>
         <Link to="/">
-              <button className="signupbutton" type="submit">Sign up</button>
+              <button className="signupbutton" type="submit">회원가입</button>
               </Link>
             </div>
             
