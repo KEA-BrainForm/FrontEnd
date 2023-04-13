@@ -3,7 +3,8 @@ import './css/home.css'
 import logo from '../images/Logo.png';
 import googleLogin from '../images/google_login.png';
 import kakaoLogin from '../images/kakao_login.png';
-import naverLogin from '../images/naver_login.png'
+import naverLogin from '../images/naver_login.png';
+import Chat from './chat';
 
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 function ImageButton(props) {
@@ -41,6 +42,7 @@ const login = () => {
                     <br /><br />
                     <h5>Kakao 99%, All rights reserved</h5>
                 </div>
+                <Chat></Chat>
             </div>
 
         </div>
