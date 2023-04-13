@@ -2,6 +2,7 @@ import React from 'react';
 import './css/home.css'
 import logo from '../images/Logo.png';
 import brainwave from '../images/brainwave.png';
+import Chat from './chat';
 
 const Home = () => {
   return (
@@ -21,7 +22,7 @@ const Home = () => {
           <p>또한 나만의 설문 생성을 통해<br />뇌파 분석 결과를 다양한 기준으로 답변 결과를<br /> 비교/분석 및 활용할 수 있습니다.</p>
         </div>
       </div>
-
+    <Chat></Chat>
     </div>
 
   );
