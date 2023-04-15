@@ -10,7 +10,8 @@
 }
 
 .home-card {
-    width: 95vw;
+    width: 80%;
+    color: black;
     height: fit-content;
     padding: 10px;
     border-radius: 20px;
