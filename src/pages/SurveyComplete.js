@@ -1,12 +1,11 @@
 import React from "react";
 import logo from '../images/Logo.png';
-import './css/signup.css'
-import './css/surveycomplete.css'
 
+import './css/surveycomplete.css'
 import brainwaves from '../images/brainwaves.png';
 import { Link } from 'react-router-dom';
 
-function signup() {
+function SurveyComplete() {
   return (
     <div className='background'>
       <img src={logo} alt="Logo" className="img"/>
@@ -25,7 +24,7 @@ function signup() {
             </div>
           </div>
           <Link to="/"> 
-          <button className="signupbutton">닫기</button>
+          <button className="completebutton">닫기</button>
           </Link>
         </div>
       </div>
@@ -33,4 +32,6 @@ function signup() {
   );
 }
 
-export default signup;
+
+
+export default SurveyComplete;
