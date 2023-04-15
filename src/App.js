@@ -6,6 +6,7 @@ import Mypage from './pages/mypage';
 import NavigationBar from './Layout/NavigationBar';
 import Signup from './pages/signup';
 import Login from './pages/login';
+import SurveyResponse from './pages/SurveyResponse';
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
           <Route path='/mypage' element={<Mypage />}></Route>
           <Route path='/signup' element={<Signup />}></Route>
           <Route path='/login' element={<Login />}></Route>
-
+          <Route path='/survey-response' element={<SurveyResponse />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
