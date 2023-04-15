@@ -7,6 +7,8 @@ import NavigationBar from './Layout/NavigationBar';
 import Signup from './pages/signup';
 import Login from './pages/login';
 import SurveyResponse from './pages/SurveyResponse';
+import MyResponse from './pages/MyResponse';
+
 
 function App() {
   return (
@@ -22,6 +24,7 @@ function App() {
           <Route path='/signup' element={<Signup />}></Route>
           <Route path='/login' element={<Login />}></Route>
           <Route path='/survey-response' element={<SurveyResponse />}></Route>
+          <Route path='/my-response' element={<MyResponse />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
