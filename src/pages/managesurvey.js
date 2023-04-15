@@ -16,7 +16,7 @@ const answeredSurvey = [
 ]
 const Managesurvey = () => {
     return (
-        <div className='background'>
+        <div className='background1'>
             <h2>생성한 설문 목록</h2><br />
             <table>
                 <colgroup>
