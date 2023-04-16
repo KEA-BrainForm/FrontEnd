@@ -4,7 +4,9 @@ import Dropdown from "./ui/Dropdown";
 import styled from "styled-components";
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-// import TextInput from './ui/TextInput';
+import Button from "./ui/Button";
+import { Grid, TextField } from "@mui/material";
+
 
 const Wrapper = styled.div`
     padding: 16px;
@@ -24,6 +26,22 @@ const Container = styled.div`
         }
     }
 `;
+const HorizonLine = ({ text }) => {
+  return (
+    <div
+      style={{
+        width: "100%",
+        textAlign: "center",
+        borderBottom: "1px solid #aaa",
+        lineHeight: "0.1em",
+        margin: "10px 0 20px",
+      }}
+    >
+      <span style={{ background: "#fff", padding: "0 10px" }}>{text}</span>
+    </div>
+  );
+};
+
 
 function TitleInput() { // 제목
   const [title, setTitle] = useState("");
@@ -34,13 +52,25 @@ function TitleInput() { // 제목
 
   return (
     <div>
-      <label htmlFor="title-input">설문 제목</label>
+      {/* <h3 htmlFor="title-input">설문 제목</h3>  // 참고
       <input
         type="text"
         id="title-input"
         value={title}
         onChange={handleTitleChange}
-      />
+      /> */}
+
+      <Grid container style={{ marginTop: 20 }}>
+        <h3 htmlFor="title-input">설문 제목</h3>
+        <Grid xs={11} md={11} item style={{ paddingRight: 16 }}>
+          <TextField placeholder="제목을 입력하세요" fullWidth value={title}
+            onChange={(event) => {
+              setTitle(event.target.value);
+            }} />
+        </Grid>
+      </Grid>
+      <br/>
+      <HorizonLine text="질문을 추가해주세요" />
     </div>
   );
 }
@@ -90,7 +120,7 @@ function WearableSelector() { // 기기 착용 여부
     <div>
       <p> [기기 착용 필수 여부]</p>
       <label>
-      착용
+        착용
         <input
           type="radio"
           value="worn"
@@ -99,7 +129,7 @@ function WearableSelector() { // 기기 착용 여부
         />
       </label>
       <label>
-      미착용
+        미착용
         <input
           type="radio"
           value="not-worn"
@@ -119,31 +149,32 @@ const Createsurvey = () => {
     event.preventDefault();
     // 서버로 데이터를 보내는 로직 작성
     // ...
-  
+
     // 다른 페이지로 이동
     // history.push("/home");
     navigate("/signup");
   };
-  
+
   return (
     <Wrapper>
-      
+
       <Container>
-        <h1>Createsurvey</h1>
         <TitleInput />
         <div className='body'>
           <Dropdown />
           <Chat></Chat>
         </div>
 
-      </Container>
-      <div style={{float: 'right'}}>
-      <VisibilitySelector /> <br />
-      <WearableSelector />
-      <form onSubmit={handleSubmit}>
-      <button type="submit">설문 생성</button>
-      </form>
+      <br/>
+      <HorizonLine text="완료 설정" />
+      <div style={{ float: 'right' }}>
+        <VisibilitySelector /> <br />
+        <WearableSelector /><br />
+        <form onSubmit={handleSubmit}>
+          <Button type="submit" title="설문 생성 완료"></Button>
+        </form>
       </div>
+      </Container>
     </Wrapper>
   );
 };

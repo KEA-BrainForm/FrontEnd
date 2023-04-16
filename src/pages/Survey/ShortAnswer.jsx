@@ -29,7 +29,7 @@ function ShortAnswer(props) {
             <br/>
             <div>
                     <Button
-                        title="설문 생성"
+                        title="질문 추가"
                         onClick={handleAddClick}
                     />
             </div>                
