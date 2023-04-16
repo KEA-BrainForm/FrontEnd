@@ -14,7 +14,7 @@ function signup() {
         <div className="complete-card">
           <div class="container">
             <div class="item2 itemmerge">
-              <h2><strong>설문 응답 제출이 완료되었습니다.</strong></h2>
+              <h2><strong>설문 생성이 완료되었습니다.</strong></h2>
             </div>
             <div class="con2 ">
             뇌파 분석 결과<br/><br/>
