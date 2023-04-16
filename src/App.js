@@ -8,7 +8,8 @@ import Signup from './pages/signup';
 import Login from './pages/login';
 import SurveyResponse from './pages/SurveyResponse';
 import MyResponse from './pages/MyResponse';
-
+import SurveyComplete from './pages/SurveyComplete';
+import SurveyStatistics from './pages/statistics';
 
 function App() {
   return (
@@ -24,6 +25,8 @@ function App() {
           <Route path='/signup' element={<Signup />}></Route>
           <Route path='/login' element={<Login />}></Route>
           <Route path='/survey-response' element={<SurveyResponse />}></Route>
+          <Route path='/survey-complete' element={<SurveyComplete />}></Route>
+          <Route path='/statistics' element={<SurveyStatistics />}></Route>
           <Route path='/my-response' element={<MyResponse />}></Route>
         </Routes>
       </BrowserRouter>

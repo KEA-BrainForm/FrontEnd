@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './css/managesurvey.css';
 import search from '../images/search.png';
 import filter from '../images/filter.png';
@@ -15,6 +17,11 @@ const answeredSurvey = [
     { id: 3, name: "응답한 설문 제목 3", ddate: "2023/02/11 (마감)"}
 ]
 const Managesurvey = () => {
+    const [selectedSurvey, setSelectedSurvey] = useState('');
+
+    const handleStatisticsClick = (name) => {
+        setSelectedSurvey(name);
+    };
     return (
         <div className='background1'>
             <h2>생성한 설문 목록</h2><br />
@@ -39,7 +46,7 @@ const Managesurvey = () => {
                             <td>Q{survey.id}</td>
                             <td>{survey.name}</td>
                             <td>
-                                <button>통계</button>
+                                <Link to={`/statistics?surveyName=${encodeURIComponent(survey.name)}`}><button>통계</button></Link>
                             </td>
                             <td>
                                 <button>수정</button>
@@ -78,7 +85,9 @@ const Managesurvey = () => {
                             <td>Q{survey.id}</td>
                             <td>{survey.name}</td>
                             <td>
-                                <button>통계</button>
+                                
+                                <button onClick={() => setSelectedSurvey(survey.name)}>통계</button>
+                                
                             </td>
                             <td>
                                 <button>수정</button>
