@@ -42,9 +42,7 @@ function Dropdown() {
       </select>
       {renderComponent()}
       <div>
-
         <SurveyForm questions={questions} setQuestions={setQuestions} />
-
       </div>
     </div>
   );
