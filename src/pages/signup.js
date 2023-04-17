@@ -1,35 +1,112 @@
 import React from "react";
 import logo from '../images/Logo.png';
 import './css/signup.css'
-import './css/surveycomplete.css'
-
-import brainwaves from '../images/brainwaves.png';
 import { Link } from 'react-router-dom';
-
 function signup() {
   return (
-    <div className='background'>
-      <img src={logo} alt="Logo" className="img"/>
-      <div className="home-card">
-        <div className="complete-card">
-          <div class="container">
-            <div class="item2 itemmerge">
-              <h2><strong>설문 생성이 완료되었습니다.</strong></h2>
+    <div className="background">
+      <div className="signup-card">
+        <div className="content-center">
+        <img className="logeSignup" src={logo} alt="logo" /><br />
+        <h1>Sign up</h1><br />
+        <form className="signuptext">
+          <div className="nickname">
+            <div >
+              <label htmlFor="nickname">Nickname :</label>
+              <input className="signupinput" type="text" id="nickname" />
             </div>
-            <div class="con2 ">
-            뇌파 분석 결과<br/><br/>
-              설문 중 전반적으로 <br/>행복/불안/우울 증세가 나타납니다.
+            <div className="genderagegrid">
+              <label htmlFor="gender">성별 : </label>
+              <label>
+                <input type="radio" name="gender" value="male" />
+                Male
+              </label>
+              <label>
+                <input type="radio" name="gender" value="female" />
+                Female
+              </label>
             </div>
-            <div class="con3 ">
-              <img src={brainwaves} alt="brainwave" />
+
+
+            <div className="genderagegrid">
+              <label htmlFor="age">나이 : </label>
+              <label>
+                <input type="radio" name="age" value="10대" />
+                10대
+              </label>
+              <label>
+                <input type="radio" name="age" value="20대" />
+                20대
+              </label>
+              <label>
+                <input type="radio" name="age" value="30대" />
+                30대
+              </label> 
+              <label>
+        
+              </label> 
+            
+              <label>
+                <input type="radio" name="age" value="40대" />
+                40대
+              </label> 
+              <label>
+                <input type="radio" name="age" value="50대" />
+                50대
+              </label>
+              
+              <label>  <input type="radio" name="age" value="60대 이상  " />60대
+             
+              
+     </label>
+
             </div>
+
+
+            <div className="jobgrid">
+              <label htmlFor="occupation">직업 : </label>
+             
+              <label>
+                <input type="radio" name="occupation" value="student" />
+                학생
+              </label>
+              <label>
+                <input type="radio" name="occupation" value="office" />
+                사무직     
+              </label>
+              <label>
+                <input type="radio" name="occupation" value="professional" />
+                전문직
+              </label> 
+              <span>
+              </span> 
+              <label>
+                <input type="radio" name="occupation" value="civil-servant" />
+                공무원
+              </label> 
+              <label>
+                <input type="radio" name="occupation" value="research" />
+                연구직
+              </label>
+              <label>
+                <input type="radio" name="occupation" value="job-unavailable" />
+                무직
+              </label>
+            </div>
+
+          
           </div>
-          <Link to="/"> 
-          <button className="signupbutton">닫기</button>
-          </Link>
-        </div>
+          </form>
+        <div ><br/><br/><br/><br/>
+        <Link to="/">
+              <button className="signupbutton" type="submit">회원가입</button>
+              </Link>
+            </div>
+            
+      </div>
       </div>
     </div>
+    
   );
 }
 

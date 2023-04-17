@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Chat from './chat';
+
 import './css/pages.css';
 
 function SurveyResponse() {
@@ -113,7 +113,7 @@ function SurveyResponse() {
                     <button className="signupbutton" type="submit">제출하기</button>
                 </Link>
             </div>
-            <Chat />
+  
         </div>
     );
 }

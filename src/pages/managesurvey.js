@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './css/managesurvey.css';
 import search from '../images/search.png';
 import filter from '../images/filter.png';
-import Chat from './chat';
+
 
 const createdSurvey = [
     { id: 1, name: "생성한 설문 제목 1", ddate: "2023/04/23 (진행중)"},
@@ -103,7 +103,7 @@ const Managesurvey = () => {
                     ))}
                 </tbody>
             </table>
-            <Chat></Chat>
+           
         </div>
     );
 }

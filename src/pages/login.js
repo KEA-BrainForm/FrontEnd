@@ -42,7 +42,7 @@ const login = () => {
                     <br /><br />
                     <h5>Kakao 99%, All rights reserved</h5>
                 </div>
-                <Chat></Chat>
+           
             </div>
 
         </div>

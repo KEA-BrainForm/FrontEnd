@@ -1,5 +1,5 @@
 import './css/stat.css';
-import Chat from './chat';
+
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 

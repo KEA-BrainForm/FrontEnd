@@ -7,7 +7,7 @@ export class chat extends Component {
     (function(d, m){
         var kommunicateSettings = 
             {"appId":"d562b49efa6a5ef8c0cfb2d3fc019fa","popupWidget":true,"automaticChatOpenOnNavigation":true};
-        var s = document.createElement("script");
+        var s = document.createElement("script1");
         s.type = "text/javascript";
          s.async = true;
         s.src = "https://widget.kommunicate.io/v2/kommunicate.app";

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Chat from './chat';
+
 import Chart from './Chart';
 import './css/pages.css';
 
@@ -107,7 +107,7 @@ function MyResponse() {
                     <button className="signupbutton" type="submit">수정하기</button>
                 </Link>
             </div>
-            <Chat />
+   
         </div>
     );
 }

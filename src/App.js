@@ -9,8 +9,9 @@ import Login from './pages/login';
 import SurveyResponse from './pages/SurveyResponse';
 import MyResponse from './pages/MyResponse';
 import SurveyComplete from './pages/SurveyComplete';
+import SurveyGenComplete from './pages/SurveyGenerateComplete';
 import SurveyStatistics from './pages/statistics';
-
+import Chat from './pages/chat';
 function App() {
   return (
     <div>
@@ -26,10 +27,12 @@ function App() {
           <Route path='/login' element={<Login />}></Route>
           <Route path='/survey-response' element={<SurveyResponse />}></Route>
           <Route path='/survey-complete' element={<SurveyComplete />}></Route>
+          <Route path='/survey-gen-complete' element={<SurveyGenComplete />}></Route>
           <Route path='/statistics' element={<SurveyStatistics />}></Route>
           <Route path='/my-response' element={<MyResponse />}></Route>
         </Routes>
       </BrowserRouter>
+      <Chat/>
     </div>
   );
 }

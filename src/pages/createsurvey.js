@@ -1,5 +1,5 @@
 import './css/pages.css';
-import Chat from './chat';
+
 import Dropdown from "./ui/Dropdown";
 import styled from "styled-components";
 import React, { useState } from 'react';
@@ -152,7 +152,7 @@ const Createsurvey = () => {
 
     // 다른 페이지로 이동
     // history.push("/home");
-    navigate("/signup");
+    navigate("/survey-gen-complete");
   };
 
   return (
@@ -162,7 +162,7 @@ const Createsurvey = () => {
         <TitleInput />
         <div className='body'>
           <Dropdown />
-          <Chat></Chat>
+       
         </div>
 
       <br/>
