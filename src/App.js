@@ -12,6 +12,9 @@ import SurveyComplete from './pages/SurveyComplete';
 import SurveyGenComplete from './pages/SurveyGenerateComplete';
 import SurveyStatistics from './pages/statistics';
 import Chat from './pages/chat';
+import SocialLogin from './pages/SocialLogin';
+
+
 function App() {
   return (
     <div>
@@ -30,6 +33,7 @@ function App() {
           <Route path='/survey-gen-complete' element={<SurveyGenComplete />}></Route>
           <Route path='/statistics' element={<SurveyStatistics />}></Route>
           <Route path='/my-response' element={<MyResponse />}></Route>
+          <Route path='/social-login' element={<SocialLogin />}></Route>
         </Routes>
       </BrowserRouter>
       <Chat/>
