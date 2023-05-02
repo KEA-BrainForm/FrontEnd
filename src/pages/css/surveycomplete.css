@@ -1,3 +1,7 @@
+.shareImg {
+  width: 30%; /* 이미지 가로 크기 */
+  height: auto; /* 이미지 세로 크기 */
+}
 .complete-card {
     color: black;
     height: 100%;

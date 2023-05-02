@@ -1,7 +1,11 @@
 import './css/pages.css';
 
 import Dropdown from "./ui/Dropdown";
+import { questionList } from "./ui/Dropdown";
+
+import Axios from 'axios';
 import styled from "styled-components";
+
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import Button from "./ui/Button";
@@ -42,6 +46,8 @@ const HorizonLine = ({ text }) => {
   );
 };
 
+let globalTitle = "";
+
 
 function TitleInput() { // 제목
   const [title, setTitle] = useState("");
@@ -66,22 +72,25 @@ function TitleInput() { // 제목
           <TextField placeholder="제목을 입력하세요" fullWidth value={title}
             onChange={(event) => {
               setTitle(event.target.value);
+              globalTitle = event.target.value;
+
             }} />
         </Grid>
       </Grid>
-      <br/>
+      <br />
       <HorizonLine text="질문을 추가해주세요" />
     </div>
   );
 }
 
+let visibilityTemp = null;
 function VisibilitySelector() { //  공개 여부
   const [visibility, setVisibility] = useState("public");
 
   const handleVisibilityChange = (event) => {
     setVisibility(event.target.value);
   };
-
+  visibilityTemp = visibility;  // **
   return (
     <div>
       <p> [공개 여부]</p>
@@ -108,6 +117,7 @@ function VisibilitySelector() { //  공개 여부
     </div>
   );
 }
+let wearableTemp = null;
 
 function WearableSelector() { // 기기 착용 여부
   const [wearable, setWearable] = useState("worn");
@@ -115,7 +125,7 @@ function WearableSelector() { // 기기 착용 여부
   const handleWearableChange = (event) => {
     setWearable(event.target.value);
   };
-
+  wearableTemp = wearable;
   return (
     <div>
       <p> [기기 착용 필수 여부]</p>
@@ -145,11 +155,30 @@ const Createsurvey = () => {
   const navigate = useNavigate();
   // const history = useHistory();
 
-  const handleSubmit = (event) => {
+
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     // 서버로 데이터를 보내는 로직 작성
     // ...
+    console.log(globalTitle);
+    console.log(questionList);
+    console.log(typeof questionList);
+    console.log("visibility: ", visibilityTemp);
+    console.log("wearable: ", wearableTemp);
 
+    let result = await Axios.post("/api/new-question", {
+      title: "globalTitle",
+      questionList: questionList,
+      visibility: visibilityTemp,
+      wearable: wearableTemp,
+    });
+    console.log(result);
+    if (result.status === 200) {
+      alert("success to create new question");
+    } else {
+      alert("failed to create new Car");
+    }
     // 다른 페이지로 이동
     // history.push("/home");
     navigate("/survey-gen-complete");
@@ -162,18 +191,18 @@ const Createsurvey = () => {
         <TitleInput />
         <div className='body'>
           <Dropdown />
-       
+
         </div>
 
-      <br/>
-      <HorizonLine text="완료 설정" />
-      <div style={{ float: 'right' }}>
-        <VisibilitySelector /> <br />
-        <WearableSelector /><br />
-        <form onSubmit={handleSubmit}>
-          <Button type="submit" title="설문 생성 완료"></Button>
-        </form>
-      </div>
+        <br />
+        <HorizonLine text="완료 설정" />
+        <div style={{ float: 'right' }}>
+          <VisibilitySelector /> <br />
+          <WearableSelector /><br />
+          <form onSubmit={handleSubmit}>
+            <Button type="submit" title="설문 생성 완료"></Button>
+          </form>
+        </div>
       </Container>
     </Wrapper>
   );

@@ -1,7 +1,10 @@
 import React from 'react'
 import SurveyItem from './SurveyItem';
 
-function SurveyForm(props) {
+// function SurveyForm(props) {
+export const SurveyForm = (props) => {
+  
+// export const SurveyForm = (props) => {
     const {questions, setQuestions} = props;
     console.log(questions);
 
