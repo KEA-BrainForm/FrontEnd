@@ -4,23 +4,31 @@ import ShortAnswer from '../Survey/ShortAnswer';
 import YesOrNo from '../Survey/YesOrNo';
 import Button from '../ui/Button';
 import SurveyForm from './SurveyForm';
+// import questions from '../questions';
 
+export let questionList;
 
 function Dropdown() {
+
   const [selectedComponent, setSelectedComponent] = useState('MultipleChoice');
 
   const [questions, setQuestions] = useState([]);
 
   const handleAddQuestions = (newQuestion) => {
+    // const newQuestions = [...questions];
+    // newQuestions.push({id:questions.length+1, type: questions.type,options})
       setQuestions([...questions, newQuestion]);
+      // test = questions;
   };
 
 
   const handleChange = (event) => {
     setSelectedComponent(event.target.value);
+    // test = questions;
   };
 
   const renderComponent = () => {
+    questionList = questions;
     switch (selectedComponent) {
       case 'MultipleChoice':
         return <MultipleChoice onAddQuestions={handleAddQuestions} questionsLen={questions.length}/>;
@@ -48,4 +56,6 @@ function Dropdown() {
   );
 }
 
+
 export default Dropdown;
+// export const initialQuestions=questions;
