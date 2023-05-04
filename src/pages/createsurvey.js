@@ -46,7 +46,7 @@ const HorizonLine = ({ text }) => {
   );
 };
 
-let globalTitle = "";
+let globalTitle ;
 
 
 function TitleInput() { // 제목
@@ -55,6 +55,8 @@ function TitleInput() { // 제목
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
   };
+  
+globalTitle = title;
 
   return (
     <div>
@@ -173,7 +175,7 @@ const Createsurvey = () => {
     
 
     let result = await Axios.post("/api/new-question", {
-      title: "globalTitle",
+      title: globalTitle,
       questionList: questionList,
       visibility: visibilityTemp,
       wearable: wearableTemp,
