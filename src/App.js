@@ -13,7 +13,8 @@ import SurveyGenComplete from './pages/SurveyGenerateComplete';
 import SurveyStatistics from './pages/statistics';
 import Chat from './pages/chat';
 import SocialLogin from './pages/SocialLogin';
-
+import SurveyForm from './pages/ui/SurveyForm';
+import SurveyItem from './pages/ui/SurveyItem';
 
 function App() {
   return (
@@ -21,25 +22,24 @@ function App() {
       <BrowserRouter>
         <NavigationBar />
         <Routes>
-          <Route path='/' element={<Home />}></Route>
-          <Route path='/createsurvey' element={<Createsurvey />}></Route>
-          <Route path='/managesurvey' element={<Managesurvey />}></Route>
-          <Route path='/login' element={<Login />}></Route>
-          <Route path='/mypage' element={<Mypage />}></Route>
-          <Route path='/signup' element={<Signup />}></Route>
-          <Route path='/login' element={<Login />}></Route>
-          <Route path='/survey-response' element={<SurveyResponse />}></Route>
-          <Route path='/survey-complete' element={<SurveyComplete />}></Route>
-          <Route path='/survey-gen-complete' element={<SurveyGenComplete />}></Route>
-          <Route path='/statistics' element={<SurveyStatistics />}></Route>
-          <Route path='/my-response' element={<MyResponse />}></Route>
-          <Route path='/social-login' element={<SocialLogin />}></Route>
+          <Route path='/' element={<Home />} />
+          <Route path='/createsurvey' element={<Createsurvey />} />
+          <Route path='/managesurvey' element={<Managesurvey />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/mypage' element={<Mypage />} />
+          <Route path='/signup' element={<Signup />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/survey-response' element={<SurveyResponse />} />
+          <Route path='/survey-gen-complete' element={<SurveyGenComplete />} />
+          <Route path='/statistics' element={<SurveyStatistics />} />
+          <Route path='/my-response' element={<MyResponse />} />
+          <Route path='/social-login' element={<SocialLogin />} />
+          <Route path='/surveyitem' element={<SurveyItem />} />
+          <Route path="/survey-response/:surveyId" element={<SurveyResponse />} />
         </Routes>
       </BrowserRouter>
-      <Chat/>
+      <Chat />
     </div>
-    
-   
   );
 }
 

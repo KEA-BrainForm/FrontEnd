@@ -4,6 +4,7 @@ import Button from "../ui/Button";
 import { useNavigate } from "react-router-dom";
 import questions from "../ui/Dropdown";
 
+
 function MultipleChoice(props) {
     const [options, setOptions] = useState([]);
     const [title, setTitle] = useState("");
@@ -15,6 +16,7 @@ function MultipleChoice(props) {
         
         const newItem = {id, title, type, options};
         props.onAddQuestions(newItem);
+        
     }
 
     function addOption(newOption) {

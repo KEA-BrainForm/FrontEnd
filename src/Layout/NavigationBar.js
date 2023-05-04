@@ -9,6 +9,7 @@ class NavigationBar extends React.Component {
           <li><a href="/">Home</a></li>
           <li><a href="/createsurvey">설문 생성</a></li>
           <li><a href="/managesurvey">설문 관리</a></li>
+          <li><a href="/surveyform">설문 응답</a></li>
           <li><a href="/mypage">마이페이지</a></li>
           <li><a href="/login">Log In</a></li>
          

@@ -167,21 +167,31 @@ const Createsurvey = () => {
     console.log("visibility: ", visibilityTemp);
     console.log("wearable: ", wearableTemp);
 
+    const min = 1;
+    const max = 1000;
+    var randomInt = Math.floor(Math.random() * (max - min + 1)) + min;
+    
+
     let result = await Axios.post("/api/new-question", {
       title: "globalTitle",
       questionList: questionList,
       visibility: visibilityTemp,
       wearable: wearableTemp,
+      surveyId : randomInt
     });
     console.log(result);
     if (result.status === 200) {
       alert("success to create new question");
+      const baseUrl = "http://localhost:3000/survey-response/";
+      const uniqueUrl = `${baseUrl}${randomInt}`;
+      navigate("/survey-gen-complete", { state: { uniqueUrl } });
+      
     } else {
       alert("failed to create new Car");
     }
     // 다른 페이지로 이동
     // history.push("/home");
-    navigate("/survey-gen-complete");
+    
   };
 
   return (
