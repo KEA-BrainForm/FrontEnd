@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 function SurveyResponse() {
   const { surveyId } = useParams();
   const [surveyData, setSurveyData] = useState(null);
+  const [selectedAnswers, setSelectedAnswers] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,7 +24,47 @@ function SurveyResponse() {
     fetchData();
   }, [surveyId]);
 
+  function handleSelectedAnswer(questionNum, answer, questionType) {
+    const newAnswerObj = {
+      questionNum,
+      answer,
+      type: questionType,
+    };
 
+    setSelectedAnswers((prevAnswers) => {
+      const index = prevAnswers.findIndex((a) => a.questionNum === questionNum);
+      if (index !== -1) {
+        const updatedAnswers = [...prevAnswers];
+        updatedAnswers[index] = newAnswerObj;
+        return updatedAnswers;
+      } else {
+        return [...prevAnswers, newAnswerObj];
+      }
+    });
+  }
+
+  async function handleSubmit() {
+    // Just log the values to be sent in the POST request
+    console.log("Survey ID:", surveyId);
+    const selectedAnswersJSON = JSON.stringify(selectedAnswers);
+    console.log("Selected Answers JSON:", selectedAnswersJSON);
+  
+    try {
+      const response = await axios.post('/api/answer', {
+        surveyId: surveyId,
+        answers: selectedAnswers, // 변경된 부분: 'answer'를 'answers'로 수정하고 selectedAnswers를 그대로 보냅니다.
+      });
+  
+      if (response.status === 200) {
+        console.log('설문 응답이 성공적으로 제출되었습니다.');
+      } else {
+        console.error('설문 응답 제출에 실패했습니다:', response.status);
+      }
+    } catch (error) {
+      console.error('설문 응답 제출 중 오류가 발생했습니다:', error);
+    }
+  }
+  
 
   if (!surveyData) {
     return <div>Loading...</div>;
@@ -37,7 +78,7 @@ function SurveyResponse() {
           key={question.id}
           question={question}
           questionType="yesOrNoQueQuestions"
-         
+          onSelectedAnswer={(questionNum, answer) => handleSelectedAnswer(question.num, answer, 'yesOrNoQueQuestions')}
         />
       ))}
       {surveyData.multipleChoiceQuestions.map((question) => (
@@ -45,7 +86,7 @@ function SurveyResponse() {
           key={question.id}
           question={question}
           questionType="multipleChoiceQuestions"
-          
+          onSelectedAnswer={(questionNum, answer) => handleSelectedAnswer(question.num, answer, 'multipleChoiceQuestions')}
         />
       ))}
       {surveyData.subjectiveQuestions.map((question) => (
@@ -53,12 +94,11 @@ function SurveyResponse() {
           key={question.id}
           question={question}
           questionType="subjectiveQuestions"
-         
+          onSelectedAnswer={(questionNum, answer) => handleSelectedAnswer(question.num, answer, 'subjectiveQuestions')}
         />
       ))}
+      <Button type="submit" title="설문 응답 제출" onClick={handleSubmit}></Button>
 
-            <Button type="submit" title="설문 응답 제출"></Button>
- 
     </div>
   );
 }
