@@ -8,7 +8,8 @@ import questions from "../ui/Dropdown";
 function MultipleChoice(props) {
     const [options, setOptions] = useState([]);
     const [title, setTitle] = useState("");
-    
+    const [selectedOption, setSelectedOption] = useState(null);
+
     const type = "multipleChoice";
     const id = props.questionsLen + 1;
 
@@ -16,11 +17,15 @@ function MultipleChoice(props) {
         
         const newItem = {id, title, type, options};
         props.onAddQuestions(newItem);
+        setTitle("");
+        setOptions([]);
+        setSelectedOption(null);
         
     }
-
+    // props.onAddQuestions({});
     function addOption(newOption) {
         setOptions([...options, {text: ''}]);
+
     }
 
     function handleChangeOptionText(index, event) {
@@ -55,10 +60,9 @@ function MultipleChoice(props) {
 
     return (
         <div>
-            <br/>
             <Grid container style={{ marginTop: 20 }}>
                 <Grid xs={11} md={11} item style={{ paddingRight: 16 }}>
-                    질문:  <TextField placeholder="질문을 입력하세요" fullWidth value={title}  
+                    <h5>질문</h5>  <TextField placeholder="질문을 입력하세요" fullWidth value={title}  
                             onChange={(event) => {
                             setTitle(event.target.value);  }}  />
                 </Grid>

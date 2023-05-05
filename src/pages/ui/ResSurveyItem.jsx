@@ -86,7 +86,7 @@ function ResSurveyItem(props) {
           {renderOptions()}
         </div>
       );
-    case 'yesOrNoQueQuestions':
+    case 'yesOrNoQuestions':
       return (
         <div>
           <h2>Q.{question.num}</h2>
