@@ -24,8 +24,9 @@ function SurveyResponse() {
     fetchData();
   }, [surveyId]);
 
-  function handleSelectedAnswer(questionNum, answer, questionType) {
+  function handleSelectedAnswer(questionId, questionNum, answer, questionType) {
     const newAnswerObj = {
+      questionId,
       questionNum,
       answer,
       type: questionType,
@@ -78,7 +79,7 @@ function SurveyResponse() {
           key={question.id}
           question={question}
           questionType="yesOrNoQueQuestions"
-          onSelectedAnswer={(questionNum, answer) => handleSelectedAnswer(question.num, answer, 'yesOrNoQueQuestions')}
+          onSelectedAnswer={(questionNum, answer) => handleSelectedAnswer(question.id, question.num, answer, 'yesOrNoQueQuestions')}
         />
       ))}
       {surveyData.multipleChoiceQuestions.map((question) => (
@@ -86,7 +87,7 @@ function SurveyResponse() {
           key={question.id}
           question={question}
           questionType="multipleChoiceQuestions"
-          onSelectedAnswer={(questionNum, answer) => handleSelectedAnswer(question.num, answer, 'multipleChoiceQuestions')}
+          onSelectedAnswer={(questionNum, answer) => handleSelectedAnswer(question.id, question.num, answer, 'multipleChoiceQuestions')}
         />
       ))}
       {surveyData.subjectiveQuestions.map((question) => (
@@ -94,7 +95,7 @@ function SurveyResponse() {
           key={question.id}
           question={question}
           questionType="subjectiveQuestions"
-          onSelectedAnswer={(questionNum, answer) => handleSelectedAnswer(question.num, answer, 'subjectiveQuestions')}
+          onSelectedAnswer={(questionNum, answer) => handleSelectedAnswer(question.id, question.num, answer, 'subjectiveQuestions')}
         />
       ))}
       <Button type="submit" title="설문 응답 제출" onClick={handleSubmit}></Button>
