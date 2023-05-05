@@ -210,9 +210,7 @@ const Createsurvey = () => {
         <TitleInput />
         <div className='body'>
           <Dropdown />
-
         </div>
-
         <br />
         <HorizonLine text="완료 설정" />
         <div style={{ float: 'right' }}>

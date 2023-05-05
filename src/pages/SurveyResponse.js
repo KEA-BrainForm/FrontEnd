@@ -56,13 +56,13 @@ function SurveyResponse() {
       const response = await axios.post('/api/answer', {
         surveyId: surveyId,
         answers: selectedAnswers, // 변경된 부분: 'answer'를 'answers'로 수정하고 selectedAnswers를 그대로 보냅니다.
-      },{
+      }, {
         headers: {
           'Content-Type': 'application/json', // 요청 본문의 타입을 지정합니다.
           Authorization: `Bearer ${token}` // JWT 토큰을 헤더에 추가합니다.
         }
       });
-  
+
       if (response.status === 200) {
         console.log('설문 응답이 성공적으로 제출되었습니다.');
       } else {
@@ -72,16 +72,19 @@ function SurveyResponse() {
       console.error('설문 응답 제출 중 오류가 발생했습니다:', error);
     }
   }
-  
+
 
   if (!surveyData) {
     return <div>Loading...</div>;
   }
+  const sortedQuestions = [...surveyData.yesOrNoQuestions, ...surveyData.multipleChoiceQuestions, ...surveyData.subjectiveQuestions].sort((a, b) => a.num - b.num);
 
+
+  console.log("sortedQuestions: ", sortedQuestions);
   return (
     <div>
       <h1>제목 : {surveyData.title}</h1>
-      {surveyData.yesOrNoQueQuestions.map((question) => (
+      {/* {surveyData.yesOrNoQueQuestions.map((question) => (
         <ResSurveyItem
           key={question.id}
           question={question}
@@ -104,7 +107,33 @@ function SurveyResponse() {
           questionType="subjectiveQuestions"
           onSelectedAnswer={(questionNum, answer) => handleSelectedAnswer(question.id, question.num, answer, 'subjectiveQuestions')}
         />
-      ))}
+      ))} */}
+      {sortedQuestions.map((question) => {
+        let questionType;
+        if (surveyData.yesOrNoQuestions.includes(question)) {
+          questionType = "yesOrNoQuestions";
+        } else if (surveyData.multipleChoiceQuestions.includes(question)) {
+          questionType = "multipleChoiceQuestions";
+        } else if (surveyData.subjectiveQuestions.includes(question)) {
+          questionType = "subjectiveQuestions";
+        }
+        return (
+          <ResSurveyItem
+            key={question.id}
+            question={question}
+            questionType={questionType}
+            onSelectedAnswer={(questionNum, answer) =>
+              handleSelectedAnswer(
+                question.id,
+                question.num,
+                answer,
+                questionType
+              )
+            }
+          />
+        );
+      })}
+
       <Button type="submit" title="설문 응답 제출" onClick={handleSubmit}></Button>
 
     </div>
