@@ -173,19 +173,26 @@ const Createsurvey = () => {
     const max = 1000;
     var randomInt = Math.floor(Math.random() * (max - min + 1)) + min;
     
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    console.log("token", token);
 
     let result = await Axios.post("/api/new-question", {
       title: globalTitle,
       questionList: questionList,
       visibility: visibilityTemp,
       wearable: wearableTemp,
-      surveyId : randomInt
+      // surveyId : randomInt
+    }, {
+      headers: {
+        'Content-Type': 'application/json', // 요청 본문의 타입을 지정합니다.
+        Authorization: `Bearer ${token}` // JWT 토큰을 헤더에 추가합니다.
+      }
     });
     console.log(result);
     if (result.status === 200) {
       alert("success to create new question");
       const baseUrl = "http://localhost:3000/survey-response/";
-      const uniqueUrl = `${baseUrl}${randomInt}`;
+      const uniqueUrl = `${baseUrl}${result.data}`;
       navigate("/survey-gen-complete", { state: { uniqueUrl } });
       
     } else {

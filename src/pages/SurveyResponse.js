@@ -49,11 +49,18 @@ function SurveyResponse() {
     console.log("Survey ID:", surveyId);
     const selectedAnswersJSON = JSON.stringify(selectedAnswers);
     console.log("Selected Answers JSON:", selectedAnswersJSON);
-  
+    // localStorage.setItem("ACCESS_TOKEN", token);
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    console.log("token", token);
     try {
       const response = await axios.post('/api/answer', {
         surveyId: surveyId,
         answers: selectedAnswers, // 변경된 부분: 'answer'를 'answers'로 수정하고 selectedAnswers를 그대로 보냅니다.
+      },{
+        headers: {
+          'Content-Type': 'application/json', // 요청 본문의 타입을 지정합니다.
+          Authorization: `Bearer ${token}` // JWT 토큰을 헤더에 추가합니다.
+        }
       });
   
       if (response.status === 200) {
