@@ -42,7 +42,9 @@ function Dropdown() {
   };
 
   return (
+    
     <div>
+      <h4>질문 유형</h4>
       <select value={selectedComponent} onChange={handleChange}>
         <option value="MultipleChoice">객관식</option>
         <option value="ShortAnswer">주관식</option>

@@ -60,10 +60,9 @@ function MultipleChoice(props) {
 
     return (
         <div>
-            <br/>
             <Grid container style={{ marginTop: 20 }}>
                 <Grid xs={11} md={11} item style={{ paddingRight: 16 }}>
-                    질문:  <TextField placeholder="질문을 입력하세요" fullWidth value={title}  
+                    <h5>질문</h5>  <TextField placeholder="질문을 입력하세요" fullWidth value={title}  
                             onChange={(event) => {
                             setTitle(event.target.value);  }}  />
                 </Grid>
