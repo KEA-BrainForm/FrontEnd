@@ -2,12 +2,24 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Button from "./ui/Button";
 import ResSurveyItem from './ui/ResSurveyItem';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import SurveyComplete from './SurveyComplete';
+// import { useHistory } from 'react-router-dom';
 
 function SurveyResponse() {
   const { surveyId } = useParams();
   const [surveyData, setSurveyData] = useState(null);
   const [selectedAnswers, setSelectedAnswers] = useState([]);
+  const navigate = useNavigate();
+
+  const handleAfterSubmit = async (event) => {
+    event.preventDefault();
+    
+    // 서버로 데이터를 보내는 로직 작성
+
+    // 다른 페이지로 이동
+    navigate("/response-success");
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,6 +55,8 @@ function SurveyResponse() {
       }
     });
   }
+
+
 
   async function handleSubmit() {
     // Just log the values to be sent in the POST request
@@ -133,9 +147,9 @@ function SurveyResponse() {
           />
         );
       })}
-
+    <form onSubmit={handleAfterSubmit}>
       <Button type="submit" title="설문 응답 제출" onClick={handleSubmit}></Button>
-
+      </form>
     </div>
   );
 }
