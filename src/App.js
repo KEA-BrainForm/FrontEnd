@@ -36,6 +36,7 @@ function App() {
           <Route path='/social-login' element={<SocialLogin />} />
           <Route path='/surveyitem' element={<SurveyItem />} />
           <Route path="/survey-response/:surveyId" element={<SurveyResponse />} />
+          <Route path="/response-success" element={<SurveyComplete />} />
         </Routes>
       </BrowserRouter>
       <Chat />
