@@ -26,11 +26,11 @@ function YesOrNo(props) {
                 </Grid>
             </Grid>
             <br />
-            <div>
+            <div><span></span>
                 <Button
                     title="질문 추가"
                     onClick={handleAddClick}
-                />
+                /><br></br><br></br>
             </div>
         </div>
     );

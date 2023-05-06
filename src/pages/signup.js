@@ -54,9 +54,11 @@ function SignUp() {
   return (
     <div className="background">
       <div className="signup-card">
+      <img className="logeSignup" src={logo} alt="logo" /><br />
+      <h1>Sign up</h1><br />
         <div className="content-center">
-          <img className="logeSignup" src={logo} alt="logo" /><br />
-          <h1>Sign up</h1><br />
+          
+
           <form className="signuptext" onSubmit={handleSubmit}>
             <div className="nickname">
               <div >
@@ -99,6 +101,7 @@ function SignUp() {
                     onChange={handleAgeOptionChange} required/>
                   30대
                 </label>
+                <label></label>
                 <label>
                   <input type="radio"
                     value="40대"
@@ -106,6 +109,7 @@ function SignUp() {
                     onChange={handleAgeOptionChange} required />
                   40대
                 </label>
+               
                 <label>
                   <input type="radio"
                     value="50대"
@@ -116,7 +120,7 @@ function SignUp() {
                 <label>
                   <input type="radio"
                     value="60대이상"
-                    checked={age === '60대이상'}
+                    checked={age === '60대'}
                     onChange={handleAgeOptionChange} required/>
                   60대 이상
                 </label>
@@ -154,12 +158,14 @@ function SignUp() {
               </label>
             </div>
           <div ><br /><br /><br /><br />
-          <button className="signupbutton" type="submit">회원가입</button>
+         
 
         </div>
         </form>
-      </div>
+      </div> <button className="signupbutton" type="submit">회원가입</button>
+
     </div >
+    
   </div >
     
   );
