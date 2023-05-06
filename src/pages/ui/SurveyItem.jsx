@@ -2,6 +2,7 @@
 import React from 'react';
 
 import TextInput from './TextInput';
+import Styles from '../css/SurveyItem.module.css';
 
 function SurveyItem(props) {
 
@@ -25,44 +26,43 @@ function SurveyItem(props) {
     switch (question.type) {
         case "shortAnswer":
             return (
-                <div>
-                    <h2>Q.{question.id}</h2>
-                    <p>질문: {question.title}</p>
+                <div className={Styles.surveyItem}>
+                    <h2 className={Styles.questionNumber}>Q.{question.id}</h2>
+                    <p className={Styles.questionTitle}>질문: {question.title}</p>
                     <TextInput />
 
-                    <button onClick={handleDeleteClick}>Delete</button>
+                    <button className={Styles.deleteButton} onClick={handleDeleteClick}>Delete</button>
 
                 </div>
             );
         case "multipleChoice":
             return (
-                <div>
-                    <h2>Q.{question.id}</h2>
-                    <p>질문: {question.title}</p>
+                <div className={Styles.surveyItem}>
+                    <h2 className={Styles.questionNumber}>Q.{question.id}</h2>
+                    <p className={Styles.questionTitle}>질문: {question.title}</p>
                     {renderOptions()}
 
-                    <button onClick={handleDeleteClick}>Delete</button>
+                    <button className={Styles.deleteButton} onClick={handleDeleteClick}>Delete</button>
 
                 </div>
             );
         case "yesOrNo":
             return (
-                <div>
-                    <h2>Q.{question.id}</h2>
-                    <p>질문: {question.title}</p>
+                <div className={Styles.surveyItem}>
+                    <h2 className={Styles.questionNumber}>Q.{question.id}</h2>
+                    <p className={Styles.questionTitle}>질문: {question.title}</p>
                     <form>
                         <input type="radio" name="myCheckbox" value="true" required /> 참
                         <input type="radio" name="myCheckbox" value="false" required /> 거짓
                         <br />
                     </form>
 
-                    <button onClick={handleDeleteClick}>Delete</button>
+                    <button className={Styles.deleteButton} onClick={handleDeleteClick}>Delete</button>
 
                 </div>
             );
     }
 }
-
 
 export default SurveyItem;
 

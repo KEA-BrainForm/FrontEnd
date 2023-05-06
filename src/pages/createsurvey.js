@@ -191,7 +191,7 @@ const Createsurvey = () => {
     console.log(result);
     if (result.status === 200) {
       alert("success to create new question");
-      const baseUrl = "http://localhost:3000/survey-response/";
+      const baseUrl = "http://localhost:3000/check-password/";
       const uniqueUrl = `${baseUrl}${result.data}`;
       navigate("/survey-gen-complete", { state: { uniqueUrl } });
       
@@ -205,21 +205,26 @@ const Createsurvey = () => {
 
   return (
     <Wrapper>
-
       <Container>
         <TitleInput />
-        <div className='body'>
+        <div className="body">
           <Dropdown />
         </div>
         <br />
         <HorizonLine text="완료 설정" />
-        <div style={{ float: 'right' }}>
-          <VisibilitySelector /> <br />
-          <WearableSelector /><br />
-          <form onSubmit={handleSubmit}>
-            <Button type="submit" title="설문 생성 완료"></Button>
-          </form>
-        </div>
+        <Grid container>
+          <Grid item xs={12} md={4}>
+            <VisibilitySelector />
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <WearableSelector />
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <form onSubmit={handleSubmit}>
+              <Button type="submit" title="설문 생성 완료"></Button>
+            </form>
+          </Grid>
+        </Grid>
       </Container>
     </Wrapper>
   );

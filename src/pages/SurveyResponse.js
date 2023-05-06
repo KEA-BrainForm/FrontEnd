@@ -2,15 +2,20 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Button from "./ui/Button";
 import ResSurveyItem from './ui/ResSurveyItem';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom'; // Add useLocation
 import SurveyComplete from './SurveyComplete';
-// import { useHistory } from 'react-router-dom';
-
+import Styles from '../pages/css/SurveyItem.module.css';
+const token = localStorage.getItem("ACCESS_TOKEN");
 function SurveyResponse() {
-  const { surveyId } = useParams();
+
+ 
   const [surveyData, setSurveyData] = useState(null);
   const [selectedAnswers, setSelectedAnswers] = useState([]);
   const navigate = useNavigate();
+
+  const { surveyId } = useParams();
+  const location = useLocation(); // Add this line
+  const password = location.state.password; // Add this line
 
   const handleAfterSubmit = async (event) => {
     event.preventDefault();
@@ -87,7 +92,25 @@ function SurveyResponse() {
     }
   }
 
+  const handleStop = async () => {
+    try {
+      const response = await axios.post(`/api/${surveyId}/${password}/stop`, {}, {
+        headers: {
+          Authorization: `Bearer ${token}` // JWT 토큰을 헤더에 추가합니다.
+        }
+      });
+  
+      if (response.status === 200) {
+        window.alert("설문 종료"); // Show an alert when the survey is stopped
+        // Perform any other actions needed after stopping the survey
+      }
+    } catch (error) {
+      console.error('Error stopping the survey:', error);
+    }
+  };
+  
 
+  
   if (!surveyData) {
     return <div>Loading...</div>;
   }
@@ -95,8 +118,10 @@ function SurveyResponse() {
 
 
   console.log("sortedQuestions: ", sortedQuestions);
+
+
   return (
-    <div>
+    <div >
       <h1>제목 : {surveyData.title}</h1>
       {/* {surveyData.yesOrNoQueQuestions.map((question) => (
         <ResSurveyItem
@@ -146,9 +171,14 @@ function SurveyResponse() {
             }
           />
         );
-      })}
+      })}<br></br>
     <form onSubmit={handleAfterSubmit}>
-      <Button type="submit" title="설문 응답 제출" onClick={handleSubmit}></Button>
+    
+   
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <Button type="submit" title="설문 응답 제출" onClick={(e) => { handleSubmit(e); handleStop(e); }}></Button>
+
       </form>
     </div>
   );

@@ -47,11 +47,13 @@ function MultipleChoice(props) {
         <div key={index}>
           <label>
             Option {index + 1}:{' '}
+            <br></br>
             <input
               type="text"
               value={option.text}
               onChange={(event) => handleChangeOptionText(index, event)}
             />
+            &nbsp;
             <button onClick={() => handleDeleteOption(index)}>Delete Option</button>
           </label>
         </div>
@@ -70,14 +72,15 @@ function MultipleChoice(props) {
             <br />
             <div>
                 <button onClick={addOption}>Add Option</button>
+               
             </div>
             {renderOptions()}
 
-            <div>
+            <div><br></br><br></br>
                 <Button
                     title="질문 추가"
                     onClick={handleAddClick}
-                />
+                /><br></br><br></br>
             </div>
         </div>
     );

@@ -13,8 +13,8 @@ import SurveyGenComplete from './pages/SurveyGenerateComplete';
 import SurveyStatistics from './pages/statistics';
 import Chat from './pages/chat';
 import SocialLogin from './pages/SocialLogin';
-import SurveyForm from './pages/ui/SurveyForm';
 import SurveyItem from './pages/ui/SurveyItem';
+import CheckPassword from './pages/CheckPassword';
 
 function App() {
   return (
@@ -37,6 +37,7 @@ function App() {
           <Route path='/surveyitem' element={<SurveyItem />} />
           <Route path="/survey-response/:surveyId" element={<SurveyResponse />} />
           <Route path="/response-success" element={<SurveyComplete />} />
+          <Route path="/check-password/:surveyId" element={<CheckPassword />} />
         </Routes>
       </BrowserRouter>
       <Chat />

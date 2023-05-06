@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ResTextInput from './ResTextInput';
+import styles from '../css/SurveyItem.module.css';
 
 function ResSurveyItem(props) {
   const { question, onDelete, questionType, onSelectedAnswer } = props;
@@ -72,25 +73,25 @@ function ResSurveyItem(props) {
   switch (questionType) {
     case 'subjectiveQuestions':
       return (
-        <div>
-          <h2>Q.{question.num}</h2>
-          <p>질문: {question.question}</p>
+        <div className={styles.surveyItem}>
+          <h2 className={styles.questionNumber}>Q.{question.num}</h2>
+          <p className={styles.questionTitle}>질문: {question.question}</p>
           {renderShortAnswer()}
         </div>
       );
     case 'multipleChoiceQuestions':
       return (
-        <div>
-          <h2>Q.{question.num}</h2>
-          <p>질문: {question.question}</p>
+        <div className={styles.surveyItem}>
+          <h2 className={styles.questionNumber}>Q.{question.num}</h2>
+          <p className={styles.questionTitle}>질문: {question.question}</p>
           {renderOptions()}
         </div>
       );
     case 'yesOrNoQuestions':
       return (
-        <div>
-          <h2>Q.{question.num}</h2>
-          <p>질문: {question.question}</p>
+        <div className={styles.surveyItem}>
+          <h2 className={styles.questionNumber}>Q.{question.num}</h2>
+          <p className={styles.questionTitle}>질문: {question.question}</p>
           {renderYesNo()}
         </div>
       );
