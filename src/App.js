@@ -18,7 +18,7 @@ import CheckPassword from './pages/CheckPassword';
 
 function App() {
   return (
-    <div>
+    <div>   <Chat />
       <BrowserRouter>
         <NavigationBar />
         <Routes>
