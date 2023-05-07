@@ -188,7 +188,9 @@ const Createsurvey = () => {
         Authorization: `Bearer ${token}` // JWT 토큰을 헤더에 추가합니다.
       }
     });
+
     console.log(result);
+  
     if (result.status === 200) {
       alert("success to create new question");
       const baseUrl = "http://localhost:3000/check-password/";

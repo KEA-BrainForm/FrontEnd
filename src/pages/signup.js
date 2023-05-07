@@ -41,7 +41,7 @@ function SignUp() {
     })
     .then((response) => {
       if (response.status === 200) {
-        alert(response.data);
+        alert("회원가입 완료! 한번 더 로그인해주세요!");
         window.location.href = "/login"
       } else {
         console.log(response.data);
@@ -55,10 +55,9 @@ function SignUp() {
     <div className="background">
       <div className="signup-card">
       <img className="logeSignup" src={logo} alt="logo" /><br />
-      <h1>Sign up</h1><br />
+          <h1>Sign up</h1><br />
         <div className="content-center">
-          
-
+        
           <form className="signuptext" onSubmit={handleSubmit}>
             <div className="nickname">
               <div >
@@ -109,7 +108,6 @@ function SignUp() {
                     onChange={handleAgeOptionChange} required />
                   40대
                 </label>
-               
                 <label>
                   <input type="radio"
                     value="50대"
@@ -120,9 +118,9 @@ function SignUp() {
                 <label>
                   <input type="radio"
                     value="60대이상"
-                    checked={age === '60대'}
+                    checked={age === '60대이상'}
                     onChange={handleAgeOptionChange} required/>
-                  60대 이상
+                  60대
                 </label>
               </div>
             </div>
@@ -158,14 +156,12 @@ function SignUp() {
               </label>
             </div>
           <div ><br /><br /><br /><br />
-         
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<button className="signupbutton" type="submit">회원가입</button>
 
         </div>
         </form>
-      </div> <button className="signupbutton" type="submit">회원가입</button>
-
+      </div>
     </div >
-    
   </div >
     
   );
