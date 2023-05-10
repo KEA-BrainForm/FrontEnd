@@ -102,3 +102,10 @@ label {
 }
 
 
+.submitButtonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: calc(100% - 2rem); /* 높이를 설정하고, 적절한 값을 빼줍니다. */
+    margin-top: 1rem; /* 상단 여백을 설정하여 필요한 간격을 확보합니다. */
+  }
