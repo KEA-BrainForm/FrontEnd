@@ -14,29 +14,34 @@ function SurveyGenerateComplete() {
   const uniqueUrl = location.state.uniqueUrl;
   console.log(uniqueUrl);
   return (
-    
+
     <div className='background'>
       <img src={logo} alt="Logo" className="img" />
       <div className="home-card">
         <div className="complete-card">
           <div class="container2">
             <div class="item2 itemmerge">
-              <h2><strong>설문 생성이 완료되었습니다.</strong></h2><br /><br />
+              <h2><strong>설문 생성이 완료되었습니다.</strong></h2>
             </div>
             <div class="item2 itemmerge2">
               <h2>설문 내용을 공유해보세요.</h2>
             </div>
             <div class="item2 itemmerge2">
-              <h3><strong>URL</strong></h3>
-              {uniqueUrl}
+              <TextField
+                id="outlined-basic"
+                label="URL"
+                variant="outlined"
+                value={{uniqueUrl}}z
+                style={{background: 'white', width: '50%'}}
+                InputProps={{
+                  style: { color: 'black', textAlign: 'center' }
+                }}
+              />
+              <img src={urlShare} width='70px' height='auto' style={{ marginLeft: "10px" }} />
             </div>
-            <div class="con2 ">
-              <img src={kakaoShare}  class="shareImg"/>
-            </div>
-            <div class="con3 ">
-              <img src={urlShare} class="shareImg"/> <br />
-              {/* URL로 공유 */}
-            </div>
+          </div>
+          <div class="con2">
+              <img src={kakaoShare} class="shareImg" style={{ marginBottom: "50px" }}/>
           </div>
           <Link to="/">
             <button className="completebutton">닫기</button>
@@ -46,7 +51,6 @@ function SurveyGenerateComplete() {
     </div>
   );
 }
-
 
 
 export default SurveyGenerateComplete;
