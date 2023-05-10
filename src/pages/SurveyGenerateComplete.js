@@ -13,6 +13,7 @@ function SurveyGenerateComplete() {
   const location = useLocation();
   const uniqueUrl = location.state.uniqueUrl;
   console.log(uniqueUrl);
+  
   return (
 
     <div className='background'>
@@ -31,7 +32,7 @@ function SurveyGenerateComplete() {
                 id="outlined-basic"
                 label="URL"
                 variant="outlined"
-                value={{uniqueUrl}}z
+                value={uniqueUrl}
                 style={{background: 'white', width: '50%'}}
                 InputProps={{
                   style: { color: 'black', textAlign: 'center' }
