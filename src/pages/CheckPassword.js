@@ -6,7 +6,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import SurveyComplete from './SurveyComplete';
 import CheckPasswordTextInput from './ui/PasswordTextInput';
 
-import styles from '../pages/css/CheckPassword.module.css';
+import Styles from '../pages/css/CheckPassword.module.css';
 const token = localStorage.getItem("ACCESS_TOKEN");
 
 
@@ -66,25 +66,27 @@ const handlePasswordChange = (event) => {
   
 
   return (
-    <div className={styles.container}>
+    <div className={Styles.container}>
     {surveyData ? (
       <>
-        <h1 className={styles.header}>설문 제목 : "{surveyData.title}"</h1>
+        <h1 className={Styles.header}>설문 제목 : "{surveyData.title}"</h1>
         <p>설문을 진행하기 위해 응용프로그램에 나타난 비밀번호를 입력해주세요</p>
       </>
     ) : (
       <p>Loading...</p>
     )}<br></br>
+    
 
-    <div className={styles.formWrapper}>
-      <form className={styles.form} onSubmit={handleAfterCheck}>
+    <div className={Styles.formWrapper}>
+      <form className={Styles.form} onSubmit={handleAfterCheck}>
         <CheckPasswordTextInput
           name="password"
           height={60}
           value={password}
           onChange={handlePasswordChange}
         /><br></br>
-        <Button type="submit" className={styles.submitButton}>Submit</Button>
+        <Button type="submit" className={Styles.submitButton} title={"Submit"}>Submit</Button>
+  
       </form>
     </div>
   </div>

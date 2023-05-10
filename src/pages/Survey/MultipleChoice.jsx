@@ -54,7 +54,7 @@ function MultipleChoice(props) {
               onChange={(event) => handleChangeOptionText(index, event)}
             />
             &nbsp;
-            <button onClick={() => handleDeleteOption(index)}>Delete Option</button>
+            <Button onClick={() => handleDeleteOption(index)} title={"Delete Option"}>Delete Option</Button>
           </label>
         </div>
       ));
@@ -71,7 +71,7 @@ function MultipleChoice(props) {
             </Grid>
             <br />
             <div>
-                <button onClick={addOption}>Add Option</button>
+                <Button onClick={addOption} title={"Add Option"}>Add Option</Button>
                
             </div>
             {renderOptions()}
