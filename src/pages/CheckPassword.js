@@ -1,29 +1,54 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import Button from "./ui/Button";
-import ResSurveyItem from './ui/ResSurveyItem';
+
 import { useParams, useNavigate } from 'react-router-dom';
-import SurveyComplete from './SurveyComplete';
+
 import CheckPasswordTextInput from './ui/PasswordTextInput';
 
 import Styles from '../pages/css/CheckPassword.module.css';
 const token = localStorage.getItem("ACCESS_TOKEN");
 
 
+
 function CheckPassword() {
-    const { surveyId } = useParams();
+  
+  const { surveyId } = useParams();
   const [surveyData, setSurveyData] = useState(null);
   const [selectedAnswers, setSelectedAnswers] = useState([]);
   const navigate = useNavigate();
 
- 
-  const [password, setPassword] = useState('');
 
 const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
+    setInputPassword(event.target.value);
 };
 
+const [inputPassword, setInputPassword] = useState(['', '', '', '','','']);
+const inputsRef = useRef([]);
 
+function handleInput(e, inputIndex) {
+  const value = e.target.value;
+  const newPass = [...inputPassword];
+  newPass[inputIndex] = value;
+  setInputPassword(newPass);
+
+  if (value.length === 1 && inputIndex < 5) {
+    const nextIndex = inputIndex + 1;
+    inputsRef.current[nextIndex].focus();
+  }
+
+}
+
+function handleKeyDown(e, inputIndex) {
+  if (e.keyCode === 8 && inputPassword[inputIndex] === '') {
+    const prevIndex = inputIndex - 1;
+    if (prevIndex >= 0) {
+      inputsRef.current[prevIndex].focus();
+    }
+  }
+}
+
+  
 
 
   useEffect(() => {
@@ -43,7 +68,8 @@ const handlePasswordChange = (event) => {
 
   const handleAfterCheck = async (event) => {
     event.preventDefault();
-  
+    const password = inputPassword.join('');
+    console.log(password);
     try {
       const response = await axios.post(`/api/${surveyId}/${password}`, {
         // ...
@@ -79,13 +105,21 @@ const handlePasswordChange = (event) => {
 
     <div className={Styles.formWrapper}>
       <form className={Styles.form} onSubmit={handleAfterCheck}>
-        <CheckPasswordTextInput
-          name="password"
-          height={60}
-          value={password}
-          onChange={handlePasswordChange}
-        /><br></br>
-        <Button type="submit" className={Styles.submitButton} title={"Submit"}>Submit</Button>
+      <div>
+      {inputPassword.map((value, index) => (
+        <input
+          key={index}
+          type="password"
+          maxLength={1}
+          ref={(el) => (inputsRef.current[index] = el)}
+          value={value}
+          onChange={(e) => handleInput(e, index)}
+          onKeyDown={(e) => handleKeyDown(e, index)}
+        />
+      ))}
+    </div>
+<br></br>
+        <Button type="submit" className={Styles.submitButton} title={"응답시작"}>Submit</Button>
   
       </form>
     </div>
