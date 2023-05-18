@@ -1,0 +1,67 @@
+import React, { useState, useEffect } from 'react';
+import Modal from 'react-modal';
+import Login from '../login';
+import { Navigate, redirect } from 'react-router-dom';
+import '../css/LoginButton.css'; // 스타일 파일 import
+
+const customModalStyles = {
+  overlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)'
+  },
+  content: {
+    width: '70%',
+    height: '70%',
+    margin: 'auto',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+};
+
+const LoginButton = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    setIsAuthenticated(!!token);
+  }, []);
+
+  const logOut = () => {
+    localStorage.removeItem("ACCESS_TOKEN");
+    window.location.href="/"
+  }
+
+  if (isAuthenticated) {
+    return (
+        <>
+          <button className="login-button" onClick={logOut}>로그아웃</button>
+        </>
+      );
+  } else {
+    return (
+        <>
+          <button className="login-button" onClick={openModal}>로그인</button>
+          <Modal
+            isOpen={isOpen}
+            onRequestClose={closeModal}
+            style={customModalStyles}
+            contentLabel="로그인"
+          >
+            <Login closeModal={closeModal} />
+          </Modal>
+        </>
+      );
+  }
+};
+
+export default LoginButton;
