@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import ResTextInput from './ResTextInput';
 import styles from '../css/SurveyItem.module.css';
 
-function ResSurveyItem(props) {
+// 통계 화면에 사용되는 설문 항목 item
+function StatisticSurveyItem(props) {
   const { question, onDelete, questionType, onSelectedAnswer } = props;
   const [selectedAnswer, setSelectedAnswer] = useState('');
   const [selectedshortAnswer, setonShortAnswer] = useState('');
@@ -18,57 +19,92 @@ function ResSurveyItem(props) {
   }
 
   function renderOptions() {
+
     const options = [];
     for (let i = 1; i <= 5; i++) {
       if (question[`choice${i}`]) {
         options.push(
           <div key={i}>
-            <input
-              type="radio"
-              name={`question-${question.num}`}
-              value={question[`choice${i}`]}
-              onChange={handleRadioOptionChange}
-              required
-            />
-            {question[`choice${i}`]}
+            <text> 보기{i}: {question[`choice${i}`]}</text>
           </div>
         );
       }
     }
-    return options;
+
+    return (
+      <div>
+      <button onClick={handleShowAnswers}>
+        {showAnswers ? '통계 숨기기' : '통계 보기'}
+      </button>
+      {showAnswers && (
+        <div>
+          {options}
+        </div>
+      )}
+    </div>
+    );
   }
 
   function renderYesNo() {
+
     return (
-      <form>
-        <input
-          type="radio"
-          name={`question-${question.num}`}
-          value="true"
-          onChange={handleRadioOptionChange}
-          required
-        />
-        참
-        <input
-          type="radio"
-          name={`question-${question.num}`}
-          value="false"
-          onChange={handleRadioOptionChange}
-          required
-        />
-        거짓
-      </form>
+      <div>
+      <button onClick={handleShowAnswers}>
+        {showAnswers ? '통계 숨기기' : '통계 보기'}
+      </button>
+      {showAnswers && (
+        <div>
+          <text>참:</text> <br/>
+          <text>거짓:</text>
+        </div>
+      )}
+    </div>
+    
+      // <form>
+      //   <input
+      //     type="radio"
+      //     name={`question-${question.num}`}
+      //     value="true"
+      //     onChange={handleRadioOptionChange}
+      //     required
+      //   />
+      //   참
+      //   <input
+      //     type="radio"
+      //     name={`question-${question.num}`}
+      //     value="false"
+      //     onChange={handleRadioOptionChange}
+      //     required
+      //   />
+      //   거짓
+      // </form>
     );
   }
 
   function renderShortAnswer() {
     return (
       <div>
-         <ResTextInput onChange={(e) => handleShortAnswerChange(e)} />
-        
+        <button onClick={handleShowAnswers}>
+          {showAnswers ? '답변 숨기기' : '답변 보기'}
+        </button>
+        {showAnswers && (
+          <div>
+            {/* 답변 리스트 */}
+            
+            <p>Answer 1</p>
+            <p>Answer 2</p>
+            <p>Answer 3</p>
+          </div>
+        )}
       </div>
-    );
+    )
   }
+
+  const [showAnswers, setShowAnswers] = useState(false);  // 답변 보기 버튼 -> 보기 or 숨기기 setting
+
+  const handleShowAnswers = () => {
+    setShowAnswers(!showAnswers);
+  };
 
   switch (questionType) {
     case 'subjectiveQuestions':
@@ -78,6 +114,7 @@ function ResSurveyItem(props) {
           <h5>주관식</h5>
           <p className={styles.questionTitle}>질문: {question.question}</p>
           {renderShortAnswer()}
+
         </div>
       );
     case 'multipleChoiceQuestions':
@@ -103,4 +140,4 @@ function ResSurveyItem(props) {
   }
 }
 
-export default ResSurveyItem;
+export default StatisticSurveyItem;

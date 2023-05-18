@@ -86,7 +86,7 @@ const Managesurvey = ({ surveyData }) => {
                             <td>Q{index + 1}</td>   {/* 이 id가 1부터 survey.length가 되어야 함.*/}
                             <td>{survey.title}</td>
                             <td>
-                                <Link to={`/statistics?surveyName=${encodeURIComponent(survey.title)}`}><button>통계</button></Link>
+                                <Link to={`/managesurvey/survey/${encodeURIComponent(survey.id)}/statistic`}><button>통계</button></Link>
                             </td>
                             <td>
                                 <button>수정</button>

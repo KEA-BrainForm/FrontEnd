@@ -31,7 +31,7 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/survey-response' element={<SurveyResponse />} />
           <Route path='/survey-gen-complete' element={<SurveyGenComplete />} />
-          <Route path='/statistics' element={<SurveyStatistics />} />
+          <Route path='/managesurvey/survey/:surveyId/statistic' element={<SurveyStatistics />} />
           <Route path='/my-response' element={<MyResponse />} />
           <Route path='/social-login' element={<SocialLogin />} />
           <Route path='/surveyitem' element={<SurveyItem />} />
