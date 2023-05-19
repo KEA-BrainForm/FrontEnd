@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ResTextInput from './ResTextInput';
 import styles from '../css/SurveyItem.module.css';
 
+
 function ResSurveyItem(props) {
   const { question, onDelete, questionType, onSelectedAnswer } = props;
   const [selectedAnswer, setSelectedAnswer] = useState('');

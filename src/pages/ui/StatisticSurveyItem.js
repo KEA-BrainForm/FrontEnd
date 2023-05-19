@@ -18,30 +18,49 @@ function StatisticSurveyItem(props) {
     onSelectedAnswer(question.id, e.target.value);
   }
 
+  // 원본
   function renderOptions() {
-
+    let opt = [0, 0, 0, 0, 0, 0]; // (index+1)번을 선택한 인원수
+    console.log("question: ", question);
+    console.log("questionmultipleChoiceAnswers.: ", question.multipleChoiceAnswers);
+    console.log("questionmultipleChoiceAnswers.id: ", question.multipleChoiceAnswers[0].id);  // ${id}번 보기 출력 (선택한 보기)
+    console.log("questionmultipleChoiceAnswers.answer: ", question.multipleChoiceAnswers[0].answer);  // ${id}번 보기 내용 (선택한 보기)
+    let num = 0;
     const options = [];
     for (let i = 1; i <= 5; i++) {
       if (question[`choice${i}`]) {
+        for(let j = 0; j<question.multipleChoiceAnswers.length; j++){
+          if(question[`choice${i}`] === question.multipleChoiceAnswers[j].answer){
+            opt[i+1] +=1;
+          }
+        }
+        
         options.push(
           <div key={i}>
-            <text> 보기{i}: {question[`choice${i}`]}</text>
+            <p> 보기{i}: {question[`choice${i}`]} - 선택한 전체 인원: {opt[i+1]}명 </p>
           </div>
         );
+
+        // options.push(
+        //   <div key={i}>
+        //     <text> 보기{i}: {question[`choice${i}`]}
+        //     </text>
+        //   </div>
+        // );
       }
     }
 
     return (
       <div>
-      <button onClick={handleShowAnswers}>
-        {showAnswers ? '통계 숨기기' : '통계 보기'}
-      </button>
-      {showAnswers && (
-        <div>
-          {options}
-        </div>
-      )}
-    </div>
+        <button onClick={handleShowAnswers}>
+          {showAnswers ? '통계 숨기기' : '통계 보기'}
+        </button>
+        {showAnswers && (
+          <div>
+            {options}
+          </div>
+        )}
+      </div>
     );
   }
 
@@ -49,17 +68,17 @@ function StatisticSurveyItem(props) {
 
     return (
       <div>
-      <button onClick={handleShowAnswers}>
-        {showAnswers ? '통계 숨기기' : '통계 보기'}
-      </button>
-      {showAnswers && (
-        <div>
-          <text>참:</text> <br/>
-          <text>거짓:</text>
-        </div>
-      )}
-    </div>
-    
+        <button onClick={handleShowAnswers}>
+          {showAnswers ? '통계 숨기기' : '통계 보기'}
+        </button>
+        {showAnswers && (
+          <div>
+            <text>참:</text> <br />
+            <text>거짓:</text>
+          </div>
+        )}
+      </div>
+
       // <form>
       //   <input
       //     type="radio"
@@ -90,7 +109,7 @@ function StatisticSurveyItem(props) {
         {showAnswers && (
           <div>
             {/* 답변 리스트 */}
-            
+
             <p>Answer 1</p>
             <p>Answer 2</p>
             <p>Answer 3</p>

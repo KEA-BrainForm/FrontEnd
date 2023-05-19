@@ -29,8 +29,6 @@ const SurveyStatistic = () => {
         return <div>Loading...</div>; // 데이터가 로딩 중일 때 보여줄 내용
     }
 
-
-
     console.log("surveyData: ", surveyData);
     const sortedQuestions = [...surveyData.yesOrNoQuestions, ...surveyData.multipleChoiceQuestions, ...surveyData.subjectiveQuestions];
     console.log("sortedQuestions: ", sortedQuestions);
@@ -53,7 +51,7 @@ const SurveyStatistic = () => {
                             key={question.id}
                             question={question}
                             questionType={questionType}
-
+                        
                         // onSelectedAnswer={(questionNum, answer) =>
                         //     handleSelectedAnswer(
                         //         question.id,
