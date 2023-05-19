@@ -13,8 +13,21 @@
     padding-right: 5vw;
 }
 
+.background-statistic {
+    min-height: 100vh;
+    display: flex;
+    /* 전체 div를 플렉스 박스로 설정 */
+    flex-direction: row;
+    /* 플렉스 박스의 주축을 가로 방향으로 설정 */
+    height: 100%;
+    /* 높이를 100%로 설정하여 전체 화면을 차지하도록 함 */
+    padding-top: 5vh;
+    padding-left: 5vw;
+    padding-right: 5vw;
+}
+
 .left-side {
-    width: 50%;
+    width: 70%;
     /* 왼쪽 영역의 너비를 50%로 설정 */
     padding: 20px;
     /* 내부 여백을 추가하여 가독성을 높임 */
@@ -26,7 +39,7 @@
 .right-side {
     position: relative;
     margin-left: 20px;
-    width: 50%;
+    width: 30%;
     /* 오른쪽 영역의 너비를 50%로 설정 */
     padding: 20px;
     /* 내부 여백을 추가하여 가독성을 높임 */

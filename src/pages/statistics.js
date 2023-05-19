@@ -13,7 +13,7 @@ const SurveyStatistic = () => {
     useEffect(() => {
         const fetchSurvey = async () => {
             try {
-                const response = await axios.get(`/api/statistic/surveys/${surveyId}`); 
+                const response = await axios.get(`/api/statistic/surveys/${surveyId}`);
                 setsurveyData(response.data);
                 console.log("response: ", response);
             } catch (error) {
@@ -29,25 +29,15 @@ const SurveyStatistic = () => {
         return <div>Loading...</div>; // 데이터가 로딩 중일 때 보여줄 내용
     }
 
-// 설문 통계페이지에서 질문 내용 띄우는 거 하다가 중단함 !!!
+
 
     console.log("surveyData: ", surveyData);
     const sortedQuestions = [...surveyData.yesOrNoQuestions, ...surveyData.multipleChoiceQuestions, ...surveyData.subjectiveQuestions];
     console.log("sortedQuestions: ", sortedQuestions);
 
-    // function handleSelectedAnswer(questionId, questionNum, answer, questionType) {
-    //     const newAnswerObj = {
-    //         questionId,
-    //         questionNum,
-    //         answer,
-    //         type: questionType,
-    //     };
-        
-
-        return (
-            // <Statistics />
-
-            <div >
+    return (
+        <div className='background-statistic'>
+            <div className='left-side'>
                 <h1>제목 : {surveyData.title}</h1>
                 {sortedQuestions.map((question) => {
                     let questionType;
@@ -63,19 +53,68 @@ const SurveyStatistic = () => {
                             key={question.id}
                             question={question}
                             questionType={questionType}
-                            // onSelectedAnswer={(questionNum, answer) =>
-                            //     handleSelectedAnswer(
-                            //         question.id,
-                            //         question.num,
-                            //         answer,
-                            //         questionType
-                            //     )
-                            // }
+
+                        // onSelectedAnswer={(questionNum, answer) =>
+                        //     handleSelectedAnswer(
+                        //         question.id,
+                        //         question.num,
+                        //         answer,
+                        //         questionType
+                        //     )
+                        // }
                         />
                     );
                 })}<br></br>
             </div>
-        );
+            <div className='right-side'>
+                <h2 style={{ marginBottom: '40px' }}>필터</h2>
+                <div className='filters'>
+                    <h3>성별</h3>
+                    <label>
+                        <input type='checkbox' name='gender' value='male' />남성
+                    </label>
+                    <label>
+                        <input type='checkbox' name='gender' value='female' />여성
+                    </label>
+                    <label>
+                        <input type='checkbox' name='gender' value='other' />기타
+                    </label>
+                    <h3 style={{ marginTop: '40px' }}>연령대</h3>
+                    <label>
+                        <input type='checkbox' name='age' value='10s' />10대
+                    </label>
+                    <label>
+                        <input type='checkbox' name='age' value='20s' />20대
+                    </label>
+                    <label>
+                        <input type='checkbox' name='age' value='30s' />30대
+                    </label>
+                    <label>
+                        <input type='checkbox' name='age' value='40s' />40대
+                    </label>
+                    <label>
+                        <input type='checkbox' name='age' value='50s' />50대 이상
+                    </label>
+                    <h3 style={{ marginTop: '40px' }}>직업</h3>
+                    <label>
+                        <input type='checkbox' name='occupation' value='student' />학생
+                    </label>
+                    <label>
+                        <input type='checkbox' name='occupation' value='office' />사무직
+                    </label>
+                    <label>
+                        <input type='checkbox' name='occupation' value='service' />서비스직
+                    </label>
+                    <label>
+                        <input type='checkbox' name='occupation' value='freelancer' />프리랜서
+                    </label>
+
+                    <button className="apply-filter-button">필터 적용</button>
+                </div>
+            </div>
+        </div>
+
+    );
     // }
 
     // =====================
@@ -217,5 +256,5 @@ const SurveyStatistic = () => {
         );
     };
 }
-    // export default Statistics;
+// export default Statistics;
 export default SurveyStatistic;
