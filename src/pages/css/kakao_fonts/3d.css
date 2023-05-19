@@ -1,0 +1,20 @@
+
+.satellites {
+
+    animation: rotate-axis 10s linear infinite;
+    transform-style: preserve-3d;
+}
+
+.satellite {
+    width: 100px;
+    transform: translateZ(100px);
+}
+
+@keyframes rotate-axis {
+  from {
+      transform: perspective(800px) rotateY(0deg);
+  }
+  to {
+      transform: perspective(800px) rotateY(360deg);
+  }
+}

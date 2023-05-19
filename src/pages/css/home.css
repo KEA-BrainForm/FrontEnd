@@ -83,4 +83,18 @@
     }
   }
 
+  .Container {
+    margin-top:10%;
   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  /* 이 부분은 브라우저 창의 높이에 맞춰 조정됩니다. */
+    
+  }
+
+
+  
+  .row{
+    margin-top:20%;
+  }

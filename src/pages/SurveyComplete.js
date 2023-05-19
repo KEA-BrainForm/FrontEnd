@@ -11,7 +11,7 @@ function SurveyComplete() {
       <img src={logo} alt="Logo" className="img"/>
       <div className="home-card">
         <div className="complete-card">
-          <div class="container">
+          <div class="container1">
             <div class="item2 itemmerge">
               <h2><strong>설문 응답 제출이 완료되었습니다.</strong></h2>
             </div>
