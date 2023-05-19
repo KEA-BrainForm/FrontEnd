@@ -92,3 +92,8 @@ label{
 li{
     margin-bottom: 10px;
 }
+
+.piechart {
+    width: 300px;
+    height: 300px;
+}

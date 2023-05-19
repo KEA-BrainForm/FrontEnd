@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import ResTextInput from './ResTextInput';
+import React, { useState, useEffect } from 'react';
 import styles from '../css/SurveyItem.module.css';
+import { PieChart } from 'react-minimal-pie-chart';
 
 // 통계 화면에 사용되는 설문 항목 item
 function StatisticSurveyItem(props) {
@@ -18,17 +18,18 @@ function StatisticSurveyItem(props) {
     onSelectedAnswer(question.id, e.target.value);
   }
 
-  // 원본
-  function renderOptions() {
+  function RenderOptions() {
     let opt = [0, 0, 0, 0, 0, 0]; // (index+1)번을 선택한 인원수
+    const options = [];
+    const label = [];
     console.log("question: ", question);
     console.log("questionmultipleChoiceAnswers.: ", question.multipleChoiceAnswers);
     console.log("questionmultipleChoiceAnswers.id: ", question.multipleChoiceAnswers[0].id);  // ${id}번 보기 출력 (선택한 보기)
     console.log("questionmultipleChoiceAnswers.answer: ", question.multipleChoiceAnswers[0].answer);  // ${id}번 보기 내용 (선택한 보기)
-    let num = 0;
-    const options = [];
+    
     for (let i = 1; i <= 5; i++) {
       if (question[`choice${i}`]) {
+        label[i] = String(question[`choice${i}`]);
         for(let j = 0; j<question.multipleChoiceAnswers.length; j++){
           if(question[`choice${i}`] === question.multipleChoiceAnswers[j].answer){
             opt[i+1] +=1;
@@ -41,14 +42,18 @@ function StatisticSurveyItem(props) {
           </div>
         );
 
-        // options.push(
-        //   <div key={i}>
-        //     <text> 보기{i}: {question[`choice${i}`]}
-        //     </text>
-        //   </div>
-        // );
+      }else{
+        label[i]='';
       }
     }
+
+    const data = [
+      { value: Number(opt[1]), title: String(label[0]), color: '#E38627' , label: String(label[0])},
+      { value: Number(opt[2]), title: String(label[1]), color: '#C13C37' , label: String(label[1])},
+      { value: Number(opt[3]), title: String(label[2]), color: '#6A2135' , label: String(label[2])},
+      { value: Number(opt[4]), title: String(label[3]), color: '#95B8D1' , label: String(label[3])},
+      { value: Number(opt[5]), title: String(label[4]), color: '#1C7C54' , label: String(label[4])},
+    ];
 
     return (
       <div>
@@ -58,6 +63,25 @@ function StatisticSurveyItem(props) {
         {showAnswers && (
           <div>
             {options}
+            <div className='piechart'>
+            <PieChart
+            radius={40}
+          data={data}
+          animate={true}
+          animationDuration={500}
+          animationEasing="ease-out"
+          label={({ dataEntry }) => {
+            if (dataEntry.value === 0) {
+              return ''; // value가 0인 경우 빈 문자열 반환하여 라벨을 안 보이게 함
+            }
+            return `${dataEntry.title}: ${dataEntry.value}`}}
+          
+          labelStyle={{
+            fontSize: '6px', // 라벨의 폰트 크기 조절
+            fontWeight: 'bold', // 라벨의 글자 굵기 조절
+          }}
+        />
+        </div>
           </div>
         )}
       </div>
@@ -78,25 +102,6 @@ function StatisticSurveyItem(props) {
           </div>
         )}
       </div>
-
-      // <form>
-      //   <input
-      //     type="radio"
-      //     name={`question-${question.num}`}
-      //     value="true"
-      //     onChange={handleRadioOptionChange}
-      //     required
-      //   />
-      //   참
-      //   <input
-      //     type="radio"
-      //     name={`question-${question.num}`}
-      //     value="false"
-      //     onChange={handleRadioOptionChange}
-      //     required
-      //   />
-      //   거짓
-      // </form>
     );
   }
 
@@ -142,7 +147,7 @@ function StatisticSurveyItem(props) {
           <h2 className={styles.questionNumber}>Q.{question.num}</h2>
           <h5>객관식</h5>
           <p className={styles.questionTitle}>질문: {question.question}</p>
-          {renderOptions()}
+          {RenderOptions()}
         </div>
       );
     case 'yesOrNoQuestions':
