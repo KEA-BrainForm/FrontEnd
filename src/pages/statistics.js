@@ -11,7 +11,7 @@ const SurveyStatistic = () => {
     const { surveyId } = useParams();
     const [surveyData, setSurveyData] = useState(null);
     // const [sortedQuestions, setSortedQuestions] = useState([]);
-    const [title, setTitle] = useState(null);
+    
 
     useEffect(() => {
         const fetchSurvey = async () => {
@@ -19,7 +19,7 @@ const SurveyStatistic = () => {
                 const response = await axios.get(`/api/statistic/surveys/${surveyId}`);
                 console.log("response: ", response.data);
                 setSurveyData(response.data);
-                setTitle(response.data.title);
+
 
             } catch (error) {
                 console.error(error);
@@ -34,7 +34,6 @@ const SurveyStatistic = () => {
         return <div>Loading...</div>; // 데이터가 로딩 중일 때 보여줄 내용
     }
 
-    console.log("surveyData: ", surveyData);
 
 
     // 필터 적용 버튼을 클릭했을 때 호출되는 함수
@@ -69,7 +68,7 @@ const SurveyStatistic = () => {
                 }
             });
 
-            console.log('필터 적용 완료 데이터:', response.data);
+            console.log('** 2nd. 필터 적용 완료 데이터:', response.data);
 
         } catch (error) {
             console.error("필터 적용 실패", error);
@@ -81,7 +80,7 @@ const SurveyStatistic = () => {
     sortedQuestionsTest.sort((a, b) => {
         return a.num - b.num;   // num 크기 순서대로 정렬
     });
-
+    console.log("** 1st. surveyData: ", sortedQuestionsTest);
 
     return (
         <div className='background-statistic'>

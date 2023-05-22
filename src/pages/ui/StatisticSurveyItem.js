@@ -4,26 +4,12 @@ import { PieChart } from 'react-minimal-pie-chart';
 
 // 통계 화면에 사용되는 설문 항목 item
 function StatisticSurveyItem(props) {
-  const { question, questionType, onSelectedAnswer, sortedQuestions } = props;
+  const { question, questionType, onSelectedAnswer, pieChartData } = props;
   const [selectedAnswer, setSelectedAnswer] = useState('');
   const [selectedshortAnswer, setonShortAnswer] = useState('');
 
-  // state 추가: 필터링된 데이터를 저장할 변수
-  // const [filteredQuestions, setFilteredQuestions] = useState(sortedQuestions);
 
-  // function handleRadioOptionChange(e) {
-  //   setSelectedAnswer(e.target.value);
-  //   onSelectedAnswer(question.id, e.target.value);
-  // }
-
-  // function handleShortAnswerChange(e) {
-  //   setonShortAnswer(e.target.value);
-  //   onSelectedAnswer(question.id, e.target.value);
-  // }
-
-
-
-
+  
   function RenderOptions() {
     let opt = [0, 0, 0, 0, 0, 0]; // (index+1)번을 선택한 인원수
     const options = [];
@@ -61,19 +47,6 @@ function StatisticSurveyItem(props) {
       { value: Number(opt[5]), title: String(label[4]), color: '#1C7C54', label: String(label[4]) },
     ];
 
-    // 필터 적용 버튼을 클릭했을 때 호출되는 함수
-    const applyFilters = async () => {
-      // ...
-
-      try {
-        // ...
-
-        // 필터링된 데이터를 저장하고, 그에 따라 pie chart를 다시 그립니다.
-        // setFilteredQuestions(sortedQuestions);
-      } catch (error) {
-        console.error("필터 적용 실패", error);
-      }
-    };
     const colors = ["#FF6384", "#36A2EB", "#FFCE56", "#8A2BE2", "#3CB371"];
 
     return (
@@ -88,7 +61,7 @@ function StatisticSurveyItem(props) {
               <div className='piechart'>
                 <PieChart
                   radius={40}
-                  data={data}
+                  data={pieChartData}
                   animate={true}
                   animationDuration={500}
                   animationEasing="ease-out"
