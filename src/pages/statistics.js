@@ -4,18 +4,23 @@ import { useState, useEffect } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import StatisticSurveyItem from './ui/StatisticSurveyItem';
 import axios from 'axios';
+const token = localStorage.getItem("ACCESS_TOKEN");
 
 const SurveyStatistic = () => {
 
     const { surveyId } = useParams();
-    const [surveyData, setsurveyData] = useState(null);
+    const [surveyData, setSurveyData] = useState(null);
+    // const [sortedQuestions, setSortedQuestions] = useState([]);
+    const [title, setTitle] = useState(null);
 
     useEffect(() => {
         const fetchSurvey = async () => {
             try {
                 const response = await axios.get(`/api/statistic/surveys/${surveyId}`);
-                setsurveyData(response.data);
-                console.log("response: ", response);
+                console.log("response: ", response.data);
+                setSurveyData(response.data);
+                setTitle(response.data.title);
+
             } catch (error) {
                 console.error(error);
             }
@@ -23,21 +28,67 @@ const SurveyStatistic = () => {
 
         fetchSurvey();
     }, [surveyId]);
-    console.log("surveyId: ", surveyId);
+
 
     if (!surveyData) {
         return <div>Loading...</div>; // 데이터가 로딩 중일 때 보여줄 내용
     }
 
     console.log("surveyData: ", surveyData);
-    const sortedQuestions = [...surveyData.yesOrNoQuestions, ...surveyData.multipleChoiceQuestions, ...surveyData.subjectiveQuestions];
-    console.log("sortedQuestions: ", sortedQuestions);
+
+
+    // 필터 적용 버튼을 클릭했을 때 호출되는 함수
+    const applyFilters = async () => {
+        // 선택된 체크박스 값을 가져옵니다.
+        const genderCheckboxes = document.querySelectorAll('input[name="gender"]:checked');
+        const ageCheckboxes = document.querySelectorAll('input[name="age"]:checked');
+        const occupationCheckboxes = document.querySelectorAll('input[name="occupation"]:checked');
+
+        // 선택된 체크박스 값을 배열로 변환합니다.
+        const selectedGenders = Array.from(genderCheckboxes).map((checkbox) => checkbox.value);
+        const selectedAges = Array.from(ageCheckboxes).map((checkbox) => checkbox.value);
+        const selectedOccupations = Array.from(occupationCheckboxes).map((checkbox) => checkbox.value);
+
+        const queryString = new URLSearchParams({
+            genders: selectedGenders,
+            ages: selectedAges,
+            occupations: selectedOccupations,
+            surveyId: surveyId,
+        }).toString();
+
+        try {
+            const response = await axios.post('/api/statistic/surveys/filter', {      //POST로 요청
+                genders: selectedGenders,
+                ages: selectedAges,
+                occupations: selectedOccupations,
+                surveyId: surveyId
+            }, {
+                headers: {
+                    'Content-Type': 'application/json', // 요청 본문의 타입을 지정합니다.
+                    Authorization: `Bearer ${token}` // JWT 토큰을 헤더에 추가합니다.
+                }
+            });
+
+            console.log('필터 적용 완료 데이터:', response.data);
+
+        } catch (error) {
+            console.error("필터 적용 실패", error);
+        }
+    }
+
+    
+    const sortedQuestionsTest = [...surveyData.yesOrNoQuestions, ...surveyData.multipleChoiceQuestions, ...surveyData.subjectiveQuestions];
+    sortedQuestionsTest.sort((a, b) => {
+        return a.num - b.num;   // num 크기 순서대로 정렬
+    });
+
 
     return (
         <div className='background-statistic'>
             <div className='left-side'>
                 <h1>제목 : {surveyData.title}</h1>
-                {sortedQuestions.map((question) => {
+
+                {sortedQuestionsTest.map((question) => {
                     let questionType;
                     if (surveyData.yesOrNoQuestions.includes(question)) {
                         questionType = "yesOrNoQuestions";
@@ -51,15 +102,7 @@ const SurveyStatistic = () => {
                             key={question.id}
                             question={question}
                             questionType={questionType}
-                        
-                        // onSelectedAnswer={(questionNum, answer) =>
-                        //     handleSelectedAnswer(
-                        //         question.id,
-                        //         question.num,
-                        //         answer,
-                        //         questionType
-                        //     )
-                        // }
+                            sortedQuestions={sortedQuestionsTest}
                         />
                     );
                 })}<br></br>
@@ -74,24 +117,21 @@ const SurveyStatistic = () => {
                     <label>
                         <input type='checkbox' name='gender' value='female' />여성
                     </label>
-                    <label>
-                        <input type='checkbox' name='gender' value='other' />기타
-                    </label>
                     <h3 style={{ marginTop: '40px' }}>연령대</h3>
                     <label>
-                        <input type='checkbox' name='age' value='10s' />10대
+                        <input type='checkbox' name='age' value='10' />10대
                     </label>
                     <label>
-                        <input type='checkbox' name='age' value='20s' />20대
+                        <input type='checkbox' name='age' value='20' />20대
                     </label>
                     <label>
-                        <input type='checkbox' name='age' value='30s' />30대
+                        <input type='checkbox' name='age' value='30' />30대
                     </label>
                     <label>
-                        <input type='checkbox' name='age' value='40s' />40대
+                        <input type='checkbox' name='age' value='40' />40대
                     </label>
                     <label>
-                        <input type='checkbox' name='age' value='50s' />50대 이상
+                        <input type='checkbox' name='age' value='50+' />50대 이상
                     </label>
                     <h3 style={{ marginTop: '40px' }}>직업</h3>
                     <label>
@@ -107,152 +147,11 @@ const SurveyStatistic = () => {
                         <input type='checkbox' name='occupation' value='freelancer' />프리랜서
                     </label>
 
-                    <button className="apply-filter-button">필터 적용</button>
+                    <button className="apply-filter-button" onClick={applyFilters}>필터 적용</button>
                 </div>
             </div>
         </div>
-
     );
-    // }
-
-    // =====================
-
-
-    const Statistics = () => {
-        const location = useLocation();
-        const searchParams = new URLSearchParams(location.search);
-        const surveyName = searchParams.get('surveyName');
-        // 필터 상태값 추가
-        const questions = [
-            {
-                title: '질문 1',
-                type: '객관식',
-                options: [
-                    { text: '옵션 1', count: 10 },
-                    { text: '옵션 2', count: 20 },
-                    { text: '옵션 3', count: 5 },
-                ],
-            },
-            {
-                title: '질문 2',
-                type: '주관식',
-                options: [
-                    { text: '옵션 A', user: 'a' },
-                    { text: '옵션 B', user: 'b' },
-                    { text: '옵션 C', user: 'c' },
-                    { text: '옵션 D', user: 'd' },
-                    { text: '옵션 E', user: 'e' },
-                    { text: '옵션 F', user: 'f' },
-                    { text: '옵션 G', user: 'g' },
-                ],
-            },
-            {
-                title: '질문 3',
-                type: '찬반투표',
-                options: [
-                    { text: '찬성', count: 10 },
-                    { text: '반대', count: 20 },
-                ],
-            },
-        ];
-
-        const [showAll, setShowAll] = useState(false); // 초기값: false
-
-        const handleShowAllClick = () => {
-            setShowAll(true); // showAll 상태를 true로 변경
-        };
-
-        const handleShowLessClick = () => {
-            setShowAll(false); // showAll 상태를 false로 변경
-        };
-
-        return (
-            <div className='background'>
-                <div className='left-side'>
-                    {/* <h2>{question.title}의 통계</h2>    설문 제목 */}
-                    <h2>설문 제목</h2>
-                    {questions.map((question, index) => (
-                        <div key={index}>
-                            <h2 style={{ marginTop: '40px' }}>{question.title}</h2> {/* 질문 제목*/}
-                            <div style={{ marginTop: '20px' }}>
-                                {question.type === '주관식' ? // {/* 질문 타입 */}
-                                    (showAll ? // showAll이 true이면 모든 주관식 옵션 렌더링
-                                        question.options.map((option, optionIndex) => (
-                                            <li key={optionIndex}>
-                                                {option.text} : User Name: {option.user}
-                                            </li>
-                                        )) :
-                                        question.options.slice(0, 3).map((option, optionIndex) => ( // showAll이 false이면 첫 3개의 주관식 옵션만 렌더링
-                                            <li key={optionIndex}>
-                                                {option.text} : User Name: {option.user}
-                                            </li>
-                                        ))
-                                    ) :
-                                    question.options.map((option, optionIndex) => (
-                                        <li key={optionIndex}>
-                                            {option.text} : {option.count} 표
-                                        </li>
-                                    ))
-                                }
-                            </div>
-                            {!showAll && question.type === '주관식' && ( // showAll이 false이고 주관식 질문일 때만 버튼 렌더링
-                                <button className='button' onClick={handleShowAllClick} >▼</button>
-                            )}
-                            {showAll && question.type === '주관식' && ( // showAll이 false이고 주관식 질문일 때만 버튼 렌더링
-                                <button className='button' onClick={handleShowLessClick}>▲</button>
-                            )}
-                        </div>
-                    ))}
-                </div>
-                <div className='right-side'>
-                    <h2 style={{ marginBottom: '40px' }}>필터</h2>
-                    <div className='filters'>
-                        <h3>성별</h3>
-                        <label>
-                            <input type='checkbox' name='gender' value='male' />남성
-                        </label>
-                        <label>
-                            <input type='checkbox' name='gender' value='female' />여성
-                        </label>
-                        <label>
-                            <input type='checkbox' name='gender' value='other' />기타
-                        </label>
-                        <h3 style={{ marginTop: '40px' }}>연령대</h3>
-                        <label>
-                            <input type='checkbox' name='age' value='10s' />10대
-                        </label>
-                        <label>
-                            <input type='checkbox' name='age' value='20s' />20대
-                        </label>
-                        <label>
-                            <input type='checkbox' name='age' value='30s' />30대
-                        </label>
-                        <label>
-                            <input type='checkbox' name='age' value='40s' />40대
-                        </label>
-                        <label>
-                            <input type='checkbox' name='age' value='50s' />50대 이상
-                        </label>
-                        <h3 style={{ marginTop: '40px' }}>직업</h3>
-                        <label>
-                            <input type='checkbox' name='occupation' value='student' />학생
-                        </label>
-                        <label>
-                            <input type='checkbox' name='occupation' value='office' />사무직
-                        </label>
-                        <label>
-                            <input type='checkbox' name='occupation' value='service' />서비스직
-                        </label>
-                        <label>
-                            <input type='checkbox' name='occupation' value='freelancer' />프리랜서
-                        </label>
-
-                        <button className="apply-filter-button">필터 적용</button>
-                    </div>
-                </div>
-            </div>
-        );
-    };
 }
-// export default Statistics;
+
 export default SurveyStatistic;

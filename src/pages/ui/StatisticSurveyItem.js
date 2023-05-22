@@ -4,19 +4,25 @@ import { PieChart } from 'react-minimal-pie-chart';
 
 // 통계 화면에 사용되는 설문 항목 item
 function StatisticSurveyItem(props) {
-  const { question, onDelete, questionType, onSelectedAnswer } = props;
+  const { question, questionType, onSelectedAnswer, sortedQuestions } = props;
   const [selectedAnswer, setSelectedAnswer] = useState('');
   const [selectedshortAnswer, setonShortAnswer] = useState('');
 
-  function handleRadioOptionChange(e) {
-    setSelectedAnswer(e.target.value);
-    onSelectedAnswer(question.id, e.target.value);
-  }
+  // state 추가: 필터링된 데이터를 저장할 변수
+  // const [filteredQuestions, setFilteredQuestions] = useState(sortedQuestions);
 
-  function handleShortAnswerChange(e) {
-    setonShortAnswer(e.target.value);
-    onSelectedAnswer(question.id, e.target.value);
-  }
+  // function handleRadioOptionChange(e) {
+  //   setSelectedAnswer(e.target.value);
+  //   onSelectedAnswer(question.id, e.target.value);
+  // }
+
+  // function handleShortAnswerChange(e) {
+  //   setonShortAnswer(e.target.value);
+  //   onSelectedAnswer(question.id, e.target.value);
+  // }
+
+
+
 
   function RenderOptions() {
     let opt = [0, 0, 0, 0, 0, 0]; // (index+1)번을 선택한 인원수
@@ -26,64 +32,82 @@ function StatisticSurveyItem(props) {
     console.log("questionmultipleChoiceAnswers.: ", question.multipleChoiceAnswers);
     console.log("questionmultipleChoiceAnswers.id: ", question.multipleChoiceAnswers[0].id);  // ${id}번 보기 출력 (선택한 보기)
     console.log("questionmultipleChoiceAnswers.answer: ", question.multipleChoiceAnswers[0].answer);  // ${id}번 보기 내용 (선택한 보기)
-    
+
     for (let i = 1; i <= 5; i++) {
       if (question[`choice${i}`]) {
         label[i] = String(question[`choice${i}`]);
-        for(let j = 0; j<question.multipleChoiceAnswers.length; j++){
-          if(question[`choice${i}`] === question.multipleChoiceAnswers[j].answer){
-            opt[i+1] +=1;
+        for (let j = 0; j < question.multipleChoiceAnswers.length; j++) {
+          if (question[`choice${i}`] === question.multipleChoiceAnswers[j].answer) {
+            opt[i + 1] += 1;
           }
         }
-        
+
         options.push(
           <div key={i}>
-            <p> 보기{i}: {question[`choice${i}`]} - 선택한 전체 인원: {opt[i+1]}명 </p>
+            <p> 보기{i}: {question[`choice${i}`]} - 선택한 전체 인원: {opt[i + 1]}명 </p>
           </div>
         );
 
-      }else{
-        label[i]='';
+      } else {
+        label[i] = '';
       }
     }
 
     const data = [
-      { value: Number(opt[1]), title: String(label[0]), color: '#E38627' , label: String(label[0])},
-      { value: Number(opt[2]), title: String(label[1]), color: '#C13C37' , label: String(label[1])},
-      { value: Number(opt[3]), title: String(label[2]), color: '#6A2135' , label: String(label[2])},
-      { value: Number(opt[4]), title: String(label[3]), color: '#95B8D1' , label: String(label[3])},
-      { value: Number(opt[5]), title: String(label[4]), color: '#1C7C54' , label: String(label[4])},
+      { value: Number(opt[1]), title: String(label[0]), color: '#E38627', label: String(label[0]) },
+      { value: Number(opt[2]), title: String(label[1]), color: '#C13C37', label: String(label[1]) },
+      { value: Number(opt[3]), title: String(label[2]), color: '#6A2135', label: String(label[2]) },
+      { value: Number(opt[4]), title: String(label[3]), color: '#95B8D1', label: String(label[3]) },
+      { value: Number(opt[5]), title: String(label[4]), color: '#1C7C54', label: String(label[4]) },
     ];
 
+    // 필터 적용 버튼을 클릭했을 때 호출되는 함수
+    const applyFilters = async () => {
+      // ...
+
+      try {
+        // ...
+
+        // 필터링된 데이터를 저장하고, 그에 따라 pie chart를 다시 그립니다.
+        // setFilteredQuestions(sortedQuestions);
+      } catch (error) {
+        console.error("필터 적용 실패", error);
+      }
+    };
+    const colors = ["#FF6384", "#36A2EB", "#FFCE56", "#8A2BE2", "#3CB371"];
+
     return (
-      <div>
-        <button onClick={handleShowAnswers}>
-          {showAnswers ? '통계 숨기기' : '통계 보기'}
-        </button>
-        {showAnswers && (
-          <div>
-            {options}
-            <div className='piechart'>
-            <PieChart
-            radius={40}
-          data={data}
-          animate={true}
-          animationDuration={500}
-          animationEasing="ease-out"
-          label={({ dataEntry }) => {
-            if (dataEntry.value === 0) {
-              return ''; // value가 0인 경우 빈 문자열 반환하여 라벨을 안 보이게 함
-            }
-            return `${dataEntry.title}: ${dataEntry.value}`}}
-          
-          labelStyle={{
-            fontSize: '6px', // 라벨의 폰트 크기 조절
-            fontWeight: 'bold', // 라벨의 글자 굵기 조절
-          }}
-        />
+      <div className={styles.surveyItem}>
+        <div>
+          <button onClick={handleShowAnswers}>
+            {showAnswers ? '통계 숨기기' : '통계 보기'}
+          </button>
+          {showAnswers && (
+            <div>
+              {options}
+              <div className='piechart'>
+                <PieChart
+                  radius={40}
+                  data={data}
+                  animate={true}
+                  animationDuration={500}
+                  animationEasing="ease-out"
+                  label={({ dataEntry }) => {
+                    if (dataEntry.value === 0) {
+                      return ''; // value가 0인 경우 빈 문자열 반환하여 라벨을 안 보이게 함
+                    }
+                    return `${dataEntry.title} - ${dataEntry.value}명`
+                  }}
+
+                  labelStyle={{
+                    fontSize: '6px', // 라벨의 폰트 크기 조절
+                    fontWeight: 'bold', // 라벨의 글자 굵기 조절
+                  }}
+                />
+              </div>
+            </div>
+          )}
         </div>
-          </div>
-        )}
       </div>
     );
   }
@@ -124,9 +148,10 @@ function StatisticSurveyItem(props) {
     )
   }
 
-  const [showAnswers, setShowAnswers] = useState(false);  // 답변 보기 버튼 -> 보기 or 숨기기 setting
+  const [showAnswers, setShowAnswers] = useState(false);  // 통계 보기 버튼 -> 보기 or 숨기기 setting
 
   const handleShowAnswers = () => {
+    // setFilteredQuestions(sortedQuestions);
     setShowAnswers(!showAnswers);
   };
 
