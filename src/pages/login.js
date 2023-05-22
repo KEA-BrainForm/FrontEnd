@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './css/home.css'
 import logo from '../images/Logo.png';
 import kakaoLogin from '../images/kakao_login.png';
@@ -20,6 +20,22 @@ function ImageButton(props) {
 function Login() {
 
     const [signup, setSignup] = useState(false);
+
+    // useEffect(() => {
+    //   const handleWindowLoad = () => {
+    //     // Move the Login component to the front by modifying its z-index
+    //     const loginCard = document.querySelector('.home-card');
+    //     if (loginCard) {
+    //       loginCard.style.zIndex = '9999';
+    //     }
+    //   };
+  
+    //   window.addEventListener('load', handleWindowLoad);
+    //   return () => {
+    //     window.removeEventListener('load', handleWindowLoad);
+    //   };
+    // }, []);
+  
 
     return (
         <div>

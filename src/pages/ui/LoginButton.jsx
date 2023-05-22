@@ -6,17 +6,21 @@ import '../css/LoginButton.css'; // 스타일 파일 import
 
 const customModalStyles = {
   overlay: {
-    backgroundColor: 'rgba(0, 0, 0, 0.5)'
-  },
-  content: {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    
+    zIndex: '1000', // add a high zIndex value
+},
+content: {
     width: '70%',
     height: '70%',
     margin: 'auto',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+    position: 'relative', // make sure it's a positioned element
+    zIndex: '1001', // it should be higher than overlay's zIndex to appear on top
+}
 };
 
 const LoginButton = () => {
