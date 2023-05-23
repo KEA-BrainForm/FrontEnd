@@ -5,7 +5,6 @@ import './css/managesurvey.css';
 import search from '../images/search.png';
 import filter from '../images/filter.png';
 
-const token = localStorage.getItem("ACCESS_TOKEN");
 
 const createdSurvey = [
     { id: 1, name: "생성한 설문 제목 1", ddate: "2023/04/23 (진행중)" },
@@ -20,6 +19,7 @@ const answeredSurvey = [
 ]
 const ManagementPage = () => {
     const [surveyData, setSurveyData] = useState(null); //
+    const token = localStorage.getItem("ACCESS_TOKEN");
 
     useEffect(() => {
         async function fetchData() {

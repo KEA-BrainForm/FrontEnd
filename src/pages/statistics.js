@@ -4,14 +4,13 @@ import { useState, useEffect } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import StatisticSurveyItem from './ui/StatisticSurveyItem';
 import axios from 'axios';
+
 const token = localStorage.getItem("ACCESS_TOKEN");
 
 const SurveyStatistic = () => {
-
     const { surveyId } = useParams();
     const [surveyData, setSurveyData] = useState(null);
-    // const [sortedQuestions, setSortedQuestions] = useState([]);
-    
+    const [sortedQuestions, setSortedQuestions] = useState([]);
 
     useEffect(() => {
         const fetchSurvey = async () => {
@@ -19,8 +18,6 @@ const SurveyStatistic = () => {
                 const response = await axios.get(`/api/statistic/surveys/${surveyId}`);
                 console.log("response: ", response.data);
                 setSurveyData(response.data);
-
-
             } catch (error) {
                 console.error(error);
             }
@@ -29,12 +26,18 @@ const SurveyStatistic = () => {
         fetchSurvey();
     }, [surveyId]);
 
+    useEffect(() => {
+        if (surveyData) {
+            const questions = [...surveyData.yesOrNoQuestions, ...surveyData.multipleChoiceQuestions, ...surveyData.subjectiveQuestions];
+            const sortedQuestions = questions.sort((a, b) => a.num - b.num);
+            setSortedQuestions(sortedQuestions);
+            console.log("** 1st. surveyData: ", sortedQuestions);
+        }
+    }, [surveyData]);
 
     if (!surveyData) {
         return <div>Loading...</div>; // 데이터가 로딩 중일 때 보여줄 내용
     }
-
-
 
     // 필터 적용 버튼을 클릭했을 때 호출되는 함수
     const applyFilters = async () => {
@@ -56,7 +59,7 @@ const SurveyStatistic = () => {
         }).toString();
 
         try {
-            const response = await axios.post('/api/statistic/surveys/filter', {      //POST로 요청
+            const response = await axios.post('/api/statistic/surveys/filter', {
                 genders: selectedGenders,
                 ages: selectedAges,
                 occupations: selectedOccupations,
@@ -67,44 +70,38 @@ const SurveyStatistic = () => {
                     Authorization: `Bearer ${token}` // JWT 토큰을 헤더에 추가합니다.
                 }
             });
-
-            console.log('** 2nd. 필터 적용 완료 데이터:', response.data);
-
+            console.log("필터 적용 성공", response.data);
         } catch (error) {
             console.error("필터 적용 실패", error);
         }
-    }
-
-    
-    const sortedQuestionsTest = [...surveyData.yesOrNoQuestions, ...surveyData.multipleChoiceQuestions, ...surveyData.subjectiveQuestions];
-    sortedQuestionsTest.sort((a, b) => {
-        return a.num - b.num;   // num 크기 순서대로 정렬
-    });
-    console.log("** 1st. surveyData: ", sortedQuestionsTest);
+    };
 
     return (
         <div className='background-statistic'>
             <div className='left-side'>
                 <h1>제목 : {surveyData.title}</h1>
 
-                {sortedQuestionsTest.map((question) => {
+                {sortedQuestions.map((question) => {
                     let questionType;
+
                     if (surveyData.yesOrNoQuestions.includes(question)) {
                         questionType = "yesOrNoQuestions";
                     } else if (surveyData.multipleChoiceQuestions.includes(question)) {
                         questionType = "multipleChoiceQuestions";
                     } else if (surveyData.subjectiveQuestions.includes(question)) {
                         questionType = "subjectiveQuestions";
+                    } else {
+                        questionType = null;
                     }
                     return (
                         <StatisticSurveyItem
                             key={question.id}
                             question={question}
                             questionType={questionType}
-                            sortedQuestions={sortedQuestionsTest}
+                            sortedQuestions={sortedQuestions}
                         />
                     );
-                })}<br></br>
+                })}<br />
             </div>
             <div className='right-side'>
                 <h2 style={{ marginBottom: '40px' }}>필터</h2>

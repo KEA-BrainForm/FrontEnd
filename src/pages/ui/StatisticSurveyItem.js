@@ -61,7 +61,7 @@ function StatisticSurveyItem(props) {
               <div className='piechart'>
                 <PieChart
                   radius={40}
-                  data={pieChartData}
+                  data={data}
                   animate={true}
                   animationDuration={500}
                   animationEasing="ease-out"
@@ -69,7 +69,7 @@ function StatisticSurveyItem(props) {
                     if (dataEntry.value === 0) {
                       return ''; // value가 0인 경우 빈 문자열 반환하여 라벨을 안 보이게 함
                     }
-                    return `${dataEntry.title} - ${dataEntry.value}명`
+                    return `${dataEntry.title}번 - ${dataEntry.value}명`
                   }}
 
                   labelStyle={{
@@ -140,6 +140,8 @@ function StatisticSurveyItem(props) {
         </div>
       );
     case 'multipleChoiceQuestions':
+      console.log("객관식 파이차트 렌더링")
+      console.log()
       return (
         <div className={styles.surveyItem}>
           <h2 className={styles.questionNumber}>Q.{question.num}</h2>
