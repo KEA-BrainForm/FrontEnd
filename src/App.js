@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
 import Home from './pages/home';
 import Createsurvey from './pages/createsurvey';
 import Managesurvey from './pages/managesurvey';
@@ -16,7 +16,21 @@ import SocialLogin from './pages/SocialLogin';
 import SurveyItem from './pages/ui/SurveyItem';
 import CheckPassword from './pages/CheckPassword';
 
+import { useState, useEffect } from 'react';
+import AuthRoute from './pages/AuthRoute';
+
 function App() {
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+
+  useEffect(() => {
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    setIsAuthenticated(!!token);
+  }, []);
+
+
+  console.log(isAuthenticated);
   return (
     <div>   <Chat />
       <BrowserRouter>
@@ -26,7 +40,7 @@ function App() {
           <Route path='/createsurvey' element={<Createsurvey />} />
           <Route path='/managesurvey' element={<Managesurvey />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/mypage' element={<Mypage />} />
+          <Route path="/mypage" element={ isAuthenticated ? <Mypage /> : <Navigate to="/login" replace={true} />}/>
           <Route path='/signup' element={<Signup />} />
           <Route path='/login' element={<Login />} />
           <Route path='/survey-response' element={<SurveyResponse />} />

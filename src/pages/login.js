@@ -1,42 +1,64 @@
-import React from 'react';
+import React, { useState,useEffect } from 'react';
 import './css/home.css'
 import logo from '../images/Logo.png';
-import googleLoginImg from '../images/google_login.png';
 import kakaoLogin from '../images/kakao_login.png';
 import naverLogin from '../images/naver_login.png';
-
+import googleLogin from '../images/google_login.png';
 
 import { Link } from 'react-router-dom';
 
 function ImageButton(props) {
     return (
         <Link to={props.link}>
-        <button onClick={props.onClick}>
-            <img src={props.src} alt={props.altText} width="300px" height="50px" />
-        </button>
+            <button onClick={props.onClick}>
+                <img src={props.src} alt={props.altText} />
+            </button>
         </Link>
     );
 }
 
+function Login() {
 
-const login = () => {
+    const [signup, setSignup] = useState(false);
 
+    // useEffect(() => {
+    //   const handleWindowLoad = () => {
+    //     // Move the Login component to the front by modifying its z-index
+    //     const loginCard = document.querySelector('.home-card');
+    //     if (loginCard) {
+    //       loginCard.style.zIndex = '9999';
+    //     }
+    //   };
+  
+    //   window.addEventListener('load', handleWindowLoad);
+    //   return () => {
+    //     window.removeEventListener('load', handleWindowLoad);
+    //   };
+    // }, []);
+  
 
     return (
-        <div className='background'>
+        <div>
             <div className="home-card">
-                <div className="cont1">
-                </div>
                 <div>
                     <img src={logo} alt="Logo" /><br />
-                    <h1>Log in</h1>
-                    <h5>회원가입을 통해 더 많은 서비스를 즐겨보세요</h5> <br/>
 
-                    <ImageButton src={googleLoginImg} alt="구글 로그인" link="http://localhost:8080/oauth2/authorization/google"/><br />  {/* link 속성에 이동할 페이지 url 입력하면 됩니다 -> 회원가입 페이지 */} 
-                    <ImageButton src={kakaoLogin} alt="카카오 로그인" link="http://localhost:8080/oauth2/authorization/kakao"/><br /> { /* " */}
-                    <ImageButton src={naverLogin} alt="네이버 로그인" link="http://localhost:8080/oauth2/authorization/naver"/><br />  { /* " */}
+                    <div>회원가입을 통해 더 많은 서비스를 즐겨보세요</div> <br />
+
+                    <div>
+                        <a href='http://localhost:8080/oauth2/authorization/kakao'>
+                            <img width="150px" height="35px" src={kakaoLogin} alt="카카오 로그인" /></a>
+                    </div><br/>
+                    <div>
+                        <a href='http://localhost:8080/oauth2/authorization/naver'>
+                            <img width="150px" height="35px" src={naverLogin} alt="네이버 로그인" /></a>
+                    </div><br/>
+                    <div>
+                        <a href='http://localhost:8080/oauth2/authorization/google'>
+                            <img width="155px" height="35px" src={googleLogin} alt="구글 로그인" /></a>
+                    </div>
                 </div>
-           
+
             </div>
 
         </div>
@@ -45,5 +67,5 @@ const login = () => {
 }
 
 
-export default login;
+export default Login;
 

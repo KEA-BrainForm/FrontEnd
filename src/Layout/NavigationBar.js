@@ -4,6 +4,9 @@ import logo from '../images/Logo.png'
 import Nav from 'react-bootstrap/Nav';
 import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
+
+import LoginButton from '../pages/ui/LoginButton';
+
 function NavigationBar() {
 
   const [hovered, setHovered] = useState(null);
@@ -57,11 +60,8 @@ function NavigationBar() {
               }}>My Page</Nav.Link>
           </Nav>
           <Nav className="ml-auto">
-            <Nav.Link as={Link} to="/login" onMouseEnter={() => handleMouseEnter(3)}
-              onMouseLeave={handleMouseLeave}
-              style={{
-                color: hovered === 3 ? 'blue' : 'inherit',
-              }}>Log In</Nav.Link>
+              <LoginButton />
+
           </Nav>
         </Container>
       </Navbar>
