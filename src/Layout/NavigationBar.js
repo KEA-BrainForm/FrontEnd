@@ -4,7 +4,9 @@ import logo from '../images/Logo.png'
 import Nav from 'react-bootstrap/Nav';
 import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
+
 import LoginButton from '../pages/ui/LoginButton';
+
 function NavigationBar() {
 
   const [hovered, setHovered] = useState(null);
@@ -59,6 +61,7 @@ function NavigationBar() {
           </Nav>
           <Nav className="ml-auto">
               <LoginButton />
+
           </Nav>
         </Container>
       </Navbar>
