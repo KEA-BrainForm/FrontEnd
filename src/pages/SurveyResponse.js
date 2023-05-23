@@ -65,12 +65,8 @@ function SurveyResponse() {
 
   async function handleSubmit() {
     // Just log the values to be sent in the POST request
-    console.log("Survey ID:", surveyId);
     const selectedAnswersJSON = JSON.stringify(selectedAnswers);
-    console.log("Selected Answers JSON:", selectedAnswersJSON);
-    // localStorage.setItem("ACCESS_TOKEN", token);
     const token = localStorage.getItem("ACCESS_TOKEN");
-    console.log("token", token);
     try {
       const response = await axios.post('/api/answer', {
         surveyId: surveyId,
@@ -123,30 +119,6 @@ function SurveyResponse() {
   return (
     <div >
       <h1>제목 : {surveyData.title}</h1>
-      {/* {surveyData.yesOrNoQueQuestions.map((question) => (
-        <ResSurveyItem
-          key={question.id}
-          question={question}
-          questionType="yesOrNoQueQuestions"
-          onSelectedAnswer={(questionNum, answer) => handleSelectedAnswer(question.id, question.num, answer, 'yesOrNoQueQuestions')}
-        />
-      ))}
-      {surveyData.multipleChoiceQuestions.map((question) => (
-        <ResSurveyItem
-          key={question.id}
-          question={question}
-          questionType="multipleChoiceQuestions"
-          onSelectedAnswer={(questionNum, answer) => handleSelectedAnswer(question.id, question.num, answer, 'multipleChoiceQuestions')}
-        />
-      ))}
-      {surveyData.subjectiveQuestions.map((question) => (
-        <ResSurveyItem
-          key={question.id}
-          question={question}
-          questionType="subjectiveQuestions"
-          onSelectedAnswer={(questionNum, answer) => handleSelectedAnswer(question.id, question.num, answer, 'subjectiveQuestions')}
-        />
-      ))} */}
       {sortedQuestions.map((question) => {
         let questionType;
         if (surveyData.yesOrNoQuestions.includes(question)) {
