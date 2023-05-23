@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import 'animate.css';
 import WOW from 'wowjs';
@@ -7,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import logo from '../images/Logo.png';
 import brainhome from '../images/brainhome.png';
 import brain from '../images/brain.png';
+
 import downasset from '../images/caret-down-fill.svg';
 import intro from '../images/intro.png';
 import intro2 from '../images/intro2.png';
