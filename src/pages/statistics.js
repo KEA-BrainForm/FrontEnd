@@ -69,7 +69,9 @@ const SurveyStatistic = () => {
             });
 
             console.log('** 2nd. 필터 적용 완료 데이터:', response.data);
-
+            let responseData = response.data;
+            let multi=responseData.map(data => data.multipleChoiceQuestions);
+            console.log("multi: ", multi);
         } catch (error) {
             console.error("필터 적용 실패", error);
         }
