@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../css/SurveyItem.module.css';
-import { PieChart } from 'react-minimal-pie-chart';
+
+import PieChart from './Piechart';
 
 // 통계 화면에 사용되는 설문 항목 item
 function StatisticSurveyItem(props) {
-  const { question, questionType, onSelectedAnswer, pieChartData } = props;
+  const {question_id, question, questionType, data } = props;
   const [selectedAnswer, setSelectedAnswer] = useState('');
   const [selectedshortAnswer, setonShortAnswer] = useState('');
 
 
-  
   function RenderOptions() {
     let opt = [0, 0, 0, 0, 0, 0]; // (index+1)번을 선택한 인원수
     const options = [];
@@ -19,6 +19,16 @@ function StatisticSurveyItem(props) {
     console.log("questionmultipleChoiceAnswers.id: ", question.multipleChoiceAnswers[0].id);  // ${id}번 보기 출력 (선택한 보기)
     console.log("questionmultipleChoiceAnswers.answer: ", question.multipleChoiceAnswers[0].answer);  // ${id}번 보기 내용 (선택한 보기)
 
+    // const dataTest = [
+    //   ["Task", "Hours per Day"],
+    //   ["Work", 11],
+    //   ["Eat", 2],
+    //   ["Commute", 2],
+    //   ["Watch TV", 2],
+    //   ["Sleep", 7], 
+    // ];
+
+    // 이 반복문을 통해서 위의 dataTest 배열을 작성해야 함.
     for (let i = 1; i <= 5; i++) {
       if (question[`choice${i}`]) {
         label[i] = String(question[`choice${i}`]);
@@ -39,15 +49,22 @@ function StatisticSurveyItem(props) {
       }
     }
 
-    const data = [
-      { value: Number(opt[1]), title: String(label[0]), color: '#E38627', label: String(label[0]) },
-      { value: Number(opt[2]), title: String(label[1]), color: '#C13C37', label: String(label[1]) },
-      { value: Number(opt[3]), title: String(label[2]), color: '#6A2135', label: String(label[2]) },
-      { value: Number(opt[4]), title: String(label[3]), color: '#95B8D1', label: String(label[3]) },
-      { value: Number(opt[5]), title: String(label[4]), color: '#1C7C54', label: String(label[4]) },
-    ];
+    // const data = [  // 필요 없음
+    //   { value: Number(opt[1]), title: String(label[0]), color: '#E38627', label: String(label[0]) },
+    //   { value: Number(opt[2]), title: String(label[1]), color: '#C13C37', label: String(label[1]) },
+    //   { value: Number(opt[3]), title: String(label[2]), color: '#6A2135', label: String(label[2]) },
+    //   { value: Number(opt[4]), title: String(label[3]), color: '#95B8D1', label: String(label[3]) },
+    //   { value: Number(opt[5]), title: String(label[4]), color: '#1C7C54', label: String(label[4]) },
+    // ];
 
-    const colors = ["#FF6384", "#36A2EB", "#FFCE56", "#8A2BE2", "#3CB371"];
+    // const colors = ["#FF6384", "#36A2EB", "#FFCE56", "#8A2BE2", "#3CB371"]; // 필요 없음
+
+
+
+    const optionTest = {
+      title: "My Daily Activities",
+      is3D: true,
+    };
 
     return (
       <div className={styles.surveyItem}>
@@ -60,6 +77,15 @@ function StatisticSurveyItem(props) {
               {options}
               <div className='piechart'>
                 <PieChart
+                  chartType="PieChart"
+                  // data={dataTest}
+                  data = {data}
+                  options={optionTest}
+                  width={"100%"}
+                  height={"100%"}
+                />
+
+                {/* <PieChart
                   radius={40}
                   data={data}
                   animate={true}
@@ -71,12 +97,11 @@ function StatisticSurveyItem(props) {
                     }
                     return `${dataEntry.title}번 - ${dataEntry.value}명`
                   }}
-
                   labelStyle={{
                     fontSize: '6px', // 라벨의 폰트 크기 조절
                     fontWeight: 'bold', // 라벨의 글자 굵기 조절
                   }}
-                />
+                /> */}
               </div>
             </div>
           )}
