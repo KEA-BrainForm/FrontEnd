@@ -15,8 +15,8 @@ const SurveyStatistic = () => {
     // test start ===
     // test data
     const [testData, setTestData] = useState(
-        [   // 서버로 받은 데이터를 이 형식으로 바꿔주어야 파이차트가 그려짐.
-            ["Task", "Hours per Day"],  //  제목
+        [   // 서버로 받은 데이터를 이 형식으로 바꿔주어야 파이차트가 그려짐.  
+            ["Task", "Hours per Day"],  //  구분 (null값이어도 상관없음)
             ["Work", 11],   // [보기1 내용, 답변 개수] 
             ["Eat", 2],     // [보기2 내용, 답변 개수] 
             ["Commute", 2],
@@ -92,7 +92,7 @@ const SurveyStatistic = () => {
                 }
             });
             console.log("필터 적용 성공", response.data);   // 필터 요청을 보냈을 때의 리턴 값
-            setTestData(response.data);
+            setTestData(response.data);  // ** 서버에서 아예 testData 형식으로 보내주면 편함!! **
 
         } catch (error) {
             console.error("필터 적용 실패", error);
