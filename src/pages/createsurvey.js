@@ -19,10 +19,29 @@ const Wrapper = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color : #A0D3F9;
+`;
+
+const Box = styled.div`
+  background-color: white;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 95vw;
+    & > * {
+        :not(:last-child) {
+            margin-bottom: 16px;
+        }
+    }
 `;
 
 const Container = styled.div`
+  background-color: white;
     width: 100%;
+    height: 100vh;
     max-width: 720px;
     & > * {
         :not(:last-child) {
@@ -30,6 +49,8 @@ const Container = styled.div`
         }
     }
 `;
+
+
 const HorizonLine = ({ text }) => {
   return (
     <div
@@ -75,8 +96,9 @@ globalTitle = title;
             onChange={(event) => {
               setTitle(event.target.value);
               globalTitle = event.target.value;
-
-            }} />
+            }}
+            sx={{ width: 720 }}
+            />
         </Grid>
       </Grid>
       <br />
@@ -207,6 +229,7 @@ const Createsurvey = () => {
 
   return (
     <Wrapper>
+      <Box>
       <Container>
         <TitleInput />
         <div className="body">
@@ -228,6 +251,7 @@ const Createsurvey = () => {
           </Grid>
         </Grid>
       </Container>
+      </Box>
     </Wrapper>
   );
 };

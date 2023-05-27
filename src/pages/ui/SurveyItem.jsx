@@ -1,6 +1,6 @@
 
 import React from 'react';
-
+import Button from "./Button";
 import TextInput from './TextInput';
 import Styles from '../css/SurveyItem.module.css';
 
@@ -31,7 +31,7 @@ function SurveyItem(props) {
                     <p className={Styles.questionTitle}>질문: {question.title}</p>
                     <TextInput />
 
-                    <button className={Styles.deleteButton} onClick={handleDeleteClick}>Delete</button>
+                    <Button className={Styles.deleteButton} onClick={handleDeleteClick} title="Delete"></Button>
 
                 </div>
             );
@@ -42,7 +42,7 @@ function SurveyItem(props) {
                     <p className={Styles.questionTitle}>질문: {question.title}</p>
                     {renderOptions()}
 
-                    <button className={Styles.deleteButton} onClick={handleDeleteClick}>Delete</button>
+                    <Button className={Styles.deleteButton} onClick={handleDeleteClick} title="Delete">Delete</Button>
 
                 </div>
             );
@@ -57,7 +57,7 @@ function SurveyItem(props) {
                         <br />
                     </form>
 
-                    <button className={Styles.deleteButton} onClick={handleDeleteClick}>Delete</button>
+                    <Button className={Styles.deleteButton} onClick={handleDeleteClick} title="Delete">Delete</Button>
 
                 </div>
             );

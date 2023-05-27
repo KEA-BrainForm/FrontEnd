@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import logo from '../images/Logo.png';
 import brainhome from '../images/brainhome.png';
 import brain from '../images/brain.png';
-
+import logos from '../images/Logo.png';
 import downasset from '../images/caret-down-fill.svg';
 import intro from '../images/intro.png';
 import intro2 from '../images/intro2.png';
@@ -138,36 +138,33 @@ const Home = () => {
         <div className="row g-5">
           <div className="col-lg-7">
             <div className="section-title position-relative pb-3 mb-5">
-              <h5 className="fw-bold text-primary text-uppercase">About Us</h5>
+              <h5 className="fw-bold text-primary text-uppercase">Our Website</h5>
               <h1 className="mb-0">
-                The Best IT Solution With 10 Years of Experience
+                Brain Form
               </h1>
             </div>
             <p className="mb-4">
-              Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor
-              sit. Aliqu diam amet diam et eos labore. Clita erat ipsum et lorem
-              et sit, sed stet no labore lorem sit. Sanctus clita duo justo et
-              tempor eirmod magna dolore erat amet
+            Many of the people who participate in the survey do not focus on the survey response or answer without thinking properly. Therefore, our website determines the concentration of respondents by measuring brain waves and reflects them in the survey results.
             </p>
             <div className="row g-0 mb-3">
               <div className="col-sm-6 wow zoomIn" data-wow-delay="0.2s">
                 <h5 className="mb-3">
                   <i className="fa fa-check text-primary me-3" />
-                  Award Winning
+                  Reliability
                 </h5>
                 <h5 className="mb-3">
                   <i className="fa fa-check text-primary me-3" />
-                  Professional Staff
+                  Response rate
                 </h5>
               </div>
               <div className="col-sm-6 wow zoomIn" data-wow-delay="0.4s">
                 <h5 className="mb-3">
                   <i className="fa fa-check text-primary me-3" />
-                  24/7 Support
+                  Variety of utilization
                 </h5>
                 <h5 className="mb-3">
                   <i className="fa fa-check text-primary me-3" />
-                  Fair Prices
+                  Easy to use
                 </h5>
               </div>
             </div>
@@ -187,11 +184,11 @@ const Home = () => {
               </div>
             </div>
             <a
-              href="quote.html"
+              href="createsurvey.js"
               className="btn btn-primary py-3 px-5 mt-3 wow zoomIn"
               data-wow-delay="0.9s"
             >
-              Request A Quote
+              Go make your Form
             </a>
           </div>
           <div className="col-lg-5" style={{ minHeight: 500 }}>
@@ -199,7 +196,7 @@ const Home = () => {
               <img
                 className="position-absolute w-100 h-100 rounded wow zoomIn"
                 data-wow-delay="0.9s"
-                src="test/img/about.jpg"
+                src={logos}
                 style={{ objectFit: "cover" }}
               />
             </div>
@@ -409,26 +406,13 @@ const Home = () => {
           <div className="col-lg-7">
             <div className="section-title position-relative pb-3 mb-5">
               <h5 className="fw-bold text-primary text-uppercase">
-                Request A Quote
+                쉬운 설문조사 만들기
               </h5>
               <h1 className="mb-0">
-                Need A Free Quote? Please Feel Free to Contact Us
+                Make a survey easily
               </h1>
             </div>
-            <div className="row gx-3">
-              <div className="col-sm-6 wow zoomIn" data-wow-delay="0.2s">
-                <h5 className="mb-4">
-                  <i className="fa fa-reply text-primary me-3" />
-                  Reply within 24 hours
-                </h5>
-              </div>
-              <div className="col-sm-6 wow zoomIn" data-wow-delay="0.4s">
-                <h5 className="mb-4">
-                  <i className="fa fa-phone-alt text-primary me-3" />
-                  24 hrs telephone support
-                </h5>
-              </div>
-            </div>
+            
             <p className="mb-4">
               Eirmod sed tempor lorem ut dolores. Aliquyam sit sadipscing kasd
               ipsum. Dolor ea et dolore et at sea ea at dolor, justo ipsum duo
@@ -436,21 +420,7 @@ const Home = () => {
               et. Dolores diam duo invidunt lorem. Elitr ut dolores magna sit. Sea
               dolore sanctus sed et. Takimata takimata sanctus sed.
             </p>
-            <div
-              className="d-flex align-items-center mt-2 wow zoomIn"
-              data-wow-delay="0.6s"
-            >
-              <div
-                className="bg-primary d-flex align-items-center justify-content-center rounded"
-                style={{ width: 60, height: 60 }}
-              >
-                <i className="fa fa-phone-alt text-white" />
-              </div>
-              <div className="ps-4">
-                <h5 className="mb-2">Call to ask any question</h5>
-                <h4 className="text-primary mb-0">+012 345 6789</h4>
-              </div>
-            </div>
+           
           </div>
           <div className="col-lg-5">
             <div

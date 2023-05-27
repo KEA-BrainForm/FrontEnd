@@ -22,7 +22,7 @@ function YesOrNo(props) {
                 <h5>질문</h5>  <TextField placeholder="질문을 입력하세요" fullWidth value={title}
                         onChange={(event) => {
                             setTitle(event.target.value);
-                        }} />
+                        }} sx={{ width: 720 }} />
                 </Grid>
             </Grid>
             <br />
