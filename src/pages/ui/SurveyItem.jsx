@@ -17,7 +17,7 @@ function SurveyItem(props) {
 
     function renderOptions() {
         return question.options.map((option) => (
-            <div key={option}>
+            <div key={option} className={Styles.slideIn}>
                 <input type="radio" name="myCheckbox" value="true" required /> {option.text}
             </div>
         ));
@@ -29,7 +29,7 @@ function SurveyItem(props) {
                 <div className={Styles.surveyItem}>
                     <h2 className={Styles.questionNumber}>Q.{question.id}</h2>
                     <p className={Styles.questionTitle}>질문: {question.title}</p>
-                    <TextInput />
+                    <TextInput  />
 
                     <Button className={Styles.deleteButton} onClick={handleDeleteClick} title="Delete"></Button>
 
@@ -53,6 +53,7 @@ function SurveyItem(props) {
                     <p className={Styles.questionTitle}>질문: {question.title}</p>
                     <form>
                         <input type="radio" name="myCheckbox" value="true" required /> 참
+                        <br/>
                         <input type="radio" name="myCheckbox" value="false" required /> 거짓
                         <br />
                     </form>

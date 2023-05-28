@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import logo from '../images/Logo.png';
+import './css/home.css'
 
 const Mypage = () => {
   const [member, setMember] = useState(null);
@@ -97,7 +98,7 @@ useEffect(() => {
       <p>성별: {member.gender}</p>
       <p>직업: {member.job}</p>
       <p>나이:{member.age}</p> */}
-       <div className="background">
+      <div className="background">
       <div className="signup-card">
       <img className="logeSignup" src={logo} alt="logo" /><br />
           <h1>Sign up</h1><br />
@@ -150,6 +151,7 @@ useEffect(() => {
                     onChange={handleAgeOptionChange} required/>
                   30대
                 </label>
+             
                 <label></label>
                 <label>
                   <input type="radio"
