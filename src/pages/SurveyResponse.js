@@ -7,7 +7,7 @@ import SurveyComplete from './SurveyComplete';
 import Styles from '../pages/css/SurveyItem.module.css';
 import SockJS from 'sockjs-client';
 // import SockJsClient from 'react-stomp';
-import {Stomp} from '@stomp/stompjs';
+import { Stomp } from '@stomp/stompjs';
 
 function SurveyResponse() {
   const token = localStorage.getItem("ACCESS_TOKEN");
@@ -19,8 +19,12 @@ function SurveyResponse() {
   const { surveyId } = useParams();
   const location = useLocation(); // Add this line
   const password = location.state.password; // Add this line
+  const [finishedAnswer, setFinishedAnser] = useState(false);
+
   let stompClient = null;
-  
+
+  let testUserId = 12;
+
   const handleAfterSubmit = async (event) => {
     event.preventDefault();
     // 서버로 데이터를 보내는 로직 작성
@@ -31,12 +35,11 @@ function SurveyResponse() {
 
   useEffect(() => {
     // socket 연결 설정
-    const sock = new SockJS('http://127.0.0.1:8080/ws');  // 소켓 연결할 서버 주소
-    const stomp = Stomp.over(sock);
-    stompClient = stomp;
-    console.log("소켓 연결함!");
+    const sock = new SockJS(`http://127.0.0.1:8080/ws`);  // 소켓 연결할 서버 주소
+    stompClient = Stomp.over(sock);
     stompClient.connect({}, onConnected, onError);
-    
+
+
     const fetchData = async () => {
       try {
         console.log(`${surveyId} !!!`);
@@ -57,25 +60,34 @@ function SurveyResponse() {
 
     }
   }, [surveyId]);
-  
+
   function onConnected() {
     // Subscribe to the Public Topic
-    stompClient.subscribe('/topic/public', (message)=>{
-      console.log("Received Message: ", message.body);
+    stompClient.subscribe('/topic/public', (message) => {
+
+      if (message.body === "finished") {
+        setFinishedAnser(true);
+      }
     });
 
     // Tell your username to the server
     stompClient.send("/app/chat.addUser",
-        {},
-        JSON.stringify({sender: "username", type: 'JOIN'})
+      {},
+      JSON.stringify({ sender: testUserId, type: 'JOIN' })
     )
-}
+  }
 
-function onError(error) {   // 소켓 연결 실패 시 호출되는 콜백 메소드
-  console.log("소켓 연결 실패");
-  console.log("'Could not connect to WebSocket server. Please refresh this page to try again!';");
-}
+  function onError(error) {   // 소켓 연결 실패 시 호출되는 콜백 메소드
+    console.log("소켓 연결 실패");
+    console.log("'Could not connect to WebSocket server. Please refresh this page to try again!';");
+  }
 
+  useEffect(() => {
+    if (finishedAnswer) {
+      handleSubmit();
+      navigate("/response-success");
+    }
+  }, [finishedAnswer]);
 
   function handleSelectedAnswer(questionId, questionNum, answer, questionType) {
     const newAnswerObj = {
@@ -97,6 +109,7 @@ function onError(error) {   // 소켓 연결 실패 시 호출되는 콜백 메�
     });
   }
 
+  // 응답 제출 요청 메소드
   async function handleSubmit() {
     // Just log the values to be sent in the POST request
     const selectedAnswersJSON = JSON.stringify(selectedAnswers);
