@@ -66,22 +66,24 @@ function MultipleChoice(props) {
                 <Grid xs={11} md={11} item style={{ paddingRight: 16 }}>
                     <h5>질문</h5>  <TextField placeholder="질문을 입력하세요" fullWidth value={title}  
                             onChange={(event) => {
-                            setTitle(event.target.value);  }} sx={{ width: 720 }} />
+                            setTitle(event.target.value);  }} InputProps={{
+              style: {
+                width:720,
+                borderRadius: "10px",
+              }
+            }} />
                 </Grid>
             </Grid>
             <br />
-            <div>
-                <Button onClick={addOption} title={"Add Option"}>Add Option</Button>
-               
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Button onClick={addOption} title="Add Option">Add Option</Button>
+            <Button
+            title="질문 추가"
+            onClick={handleAddClick}
+            />
             </div>
-            {renderOptions()}
 
-            <div><br></br><br></br>
-                <Button
-                    title="질문 추가"
-                    onClick={handleAddClick}
-                /><br></br><br></br>
-            </div>
+            {renderOptions()}
         </div>
     );
 }

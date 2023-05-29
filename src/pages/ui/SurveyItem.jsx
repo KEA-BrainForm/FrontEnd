@@ -65,4 +65,3 @@ function SurveyItem(props) {
 }
 
 export default SurveyItem;
-

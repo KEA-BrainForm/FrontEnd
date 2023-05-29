@@ -1,7 +1,7 @@
 import './css/pages.css';
 
 import Dropdown from "./ui/Dropdown";
-import { questionList } from "./ui/Dropdown";
+import DropdownExampleClearable, { questionList } from "./ui/Dropdown";
 
 import Axios from 'axios';
 import styled from "styled-components";
@@ -10,46 +10,59 @@ import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import Button from "./ui/Button";
 import { Grid, TextField } from "@mui/material";
-
+//import { Form, Radio } from 'semantic-ui-react'
+import TextInput from './ui/TextInput';
 
 const Wrapper = styled.div`
     padding: 16px;
-    width: calc(100% - 32px);
-    display: flex;
+    width: 100%;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
     background-color : #A0D3F9;
+    overflow:hidden;
+    height:auto;
+    min-height:100vh;
+    margin: auto;
+    flex-grow: 1;
 `;
 
 const Box = styled.div`
-  background-color: white;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  background-color: #A0D3F9;
+    margin: auto;
     justify-content: center;
-    max-width: 95vw;
+    width: 100%;
+    flex-grow: 1;
+    overflow: hidden;
+    height:auto;
+    padding-bottom:100px;
+    min-width: 780px;
+    max-width: 780px;  
     & > * {
         :not(:last-child) {
             margin-bottom: 16px;
         }
     }
 `;
+
 
 const Container = styled.div`
   background-color: white;
     width: 100%;
-    height: 100vh;
-    max-width: 720px;
-    & > * {
-        :not(:last-child) {
-            margin-bottom: 16px;
-        }
-    }
+    margin: auto;
+    height: auto;
+    padding-bottom:10px;
+    justify-content: center;
+    align-items:center;
+    max-width: 780px;
 `;
 
+const Card = styled.div`
+  background-color: white;
+  margin-bottom: 10px;
+  padding: 16px;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+`;
 
 const HorizonLine = ({ text }) => {
   return (
@@ -89,7 +102,7 @@ globalTitle = title;
         onChange={handleTitleChange}
       /> */}
 
-      <Grid container style={{ marginTop: 20 }}>
+      <Grid container style={{ marginTop: 10 }}>
         <h3 htmlFor="title-input">설문 제목</h3>
         <Grid xs={11} md={11} item style={{ paddingRight: 16 }}>
           <TextField placeholder="제목을 입력하세요" fullWidth value={title}
@@ -97,12 +110,15 @@ globalTitle = title;
               setTitle(event.target.value);
               globalTitle = event.target.value;
             }}
-            sx={{ width: 720 }}
+            InputProps={{
+              style: {
+                width:720,
+                borderRadius: "10px",
+              }
+            }}
             />
         </Grid>
       </Grid>
-      <br />
-      <HorizonLine text="질문을 추가해주세요" />
     </div>
   );
 }
@@ -119,7 +135,7 @@ function VisibilitySelector() { //  공개 여부
     <div>
       <p> [공개 여부]</p>
       <label>
-        공개
+        공개 <span> </span> 
         <input
           type="radio"
           value="public"
@@ -129,15 +145,15 @@ function VisibilitySelector() { //  공개 여부
 
       </label>
       <label>
-        비공개
+        비공개<span> </span> 
         <input
           type="radio"
           value="private"
           checked={visibility === "private"}
           onChange={handleVisibilityChange}
         />
-
       </label>
+      
     </div>
   );
 }
@@ -154,7 +170,7 @@ function WearableSelector() { // 기기 착용 여부
     <div>
       <p> [기기 착용 필수 여부]</p>
       <label>
-        착용
+        착용<span> </span> 
         <input
           type="radio"
           value="worn"
@@ -163,7 +179,7 @@ function WearableSelector() { // 기기 착용 여부
         />
       </label>
       <label>
-        미착용
+        미착용<span> </span> 
         <input
           type="radio"
           value="not-worn"
@@ -230,13 +246,16 @@ const Createsurvey = () => {
   return (
     <Wrapper>
       <Box>
-      <Container>
+        <Card>
+        <Container>
         <TitleInput />
-        <div className="body">
-          <Dropdown />
-        </div>
-        <br />
-        <HorizonLine text="완료 설정" />
+        </Container>
+        </Card>
+        <Dropdown />
+        <Card>
+        <Container>
+        <h3 htmlFor="title-input">완료 설정</h3>
+        <br/>
         <Grid container>
           <Grid item xs={12} md={4}>
             <VisibilitySelector />
@@ -244,13 +263,14 @@ const Createsurvey = () => {
           <Grid item xs={12} md={4}>
             <WearableSelector />
           </Grid>
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} md={4} style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 'auto' }}>
             <form onSubmit={handleSubmit}>
               <Button type="submit" title="설문 생성 완료"></Button>
             </form>
           </Grid>
         </Grid>
-      </Container>
+        </Container>
+        </Card>
       </Box>
     </Wrapper>
   );

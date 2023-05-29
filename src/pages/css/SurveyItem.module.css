@@ -1,15 +1,14 @@
 
 .surveyItem {
-  padding: 1rem;
-  margin: 1rem 0; /* 수정된 부분: 상하 마진 1rem, 좌우 마진 0 */
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #f8f8f8;
+  border-radius: 20px;
+  background-color: white;
   width: 100%;
   max-width: 1200px; /* 수정된 부분: 최대 너비를 600px로 설정 */
   box-sizing: border-box; /* 수정된 부분: 박스 크기 계산 방식 변경 */
-  margin-left: auto; /* 수정된 부분: 좌측 자동 마진 */
-  margin-right: auto; /* 수정된 부분: 우측 자동 마진 */
+  border-width: 20px;
+  margin-bottom: 10px;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
   
@@ -29,7 +28,6 @@
   }
   
   .deleteButton {
-    background-color: #363cf4;
     color: white;
     border: none;
     padding: 5px 10px;
@@ -47,4 +45,30 @@
   display: flex;
   justify-content: center;
   margin-top: 1rem;
+}
+
+/* Slide 애니메이션 효과 정의 */
+@keyframes slideIn {
+  0% {
+      opacity: 0;
+      transform: translateY(-40px);
+  }
+  50% {
+      opacity: 0.8;
+      transform: translateY(-10px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* Slide 애니메이션 효과 적용 */
+.surveyItem div {
+  animation: slideIn 1s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.questionNumber,
+.questionTitle {
+    animation: slideIn 1s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
