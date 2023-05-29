@@ -31,3 +31,57 @@ th, td {
 .col5 { width: 5%; }
 .col6 { width: 5%; }
 .col7 { width: 10%}
+
+.card-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
+  }
+
+.card-content {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    border: #F8F9FA;
+  }
+
+  .ellipsis-icon {
+    color: rgb(49, 46, 46);
+    border: #F8F9FA;
+  }
+
+  .dropdown-toggle {
+   
+    
+    margin-top: -50px;
+    margin-left: 80%;
+    border: #F8F9FA;
+    background-color:#F8F9FA ;
+  }
+
+  .custom-dropdown-menu {
+    width: 50px; /* Adjust the width as needed */
+    font-size: 15px; /* Adjust the font size as needed */
+    height: 100px;
+    margin-bottom: 50px;
+  }
+
+  .custom-dropdown-item {
+    margin-bottom: -0.1rem; /* Adjust the margin value as needed */
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10%;
+  }
+  
+  .pagination .page-link {
+    font-size: 16px;
+    padding: 10px;
+    width: 500px;
+    height: 50px;
+  }
+ 
