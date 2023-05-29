@@ -28,7 +28,9 @@ const SurveyStatistic = () => {
 
     useEffect(() => {
         if (surveyData) {
+            console.log("필터링 된 surveydata1", surveyData);
             const questions = [...surveyData.yesOrNoQuestions, ...surveyData.multipleChoiceQuestions, ...surveyData.subjectiveQuestions];
+            console.log("필터링 된 questions", questions);
             const sortedQuestions = questions.sort((a, b) => a.num - b.num);
             setSortedQuestions(sortedQuestions);
             console.log("** 1st. surveyData: ", sortedQuestions);
@@ -38,6 +40,7 @@ const SurveyStatistic = () => {
     if (!surveyData) {
         return <div>Loading...</div>; // 데이터가 로딩 중일 때 보여줄 내용
     }
+
 
     // 필터 적용 버튼을 클릭했을 때 호출되는 함수
     const applyFilters = async () => {
@@ -52,25 +55,24 @@ const SurveyStatistic = () => {
         const selectedOccupations = Array.from(occupationCheckboxes).map((checkbox) => checkbox.value);
 
         const queryString = new URLSearchParams({
-            genders: selectedGenders,
-            ages: selectedAges,
-            occupations: selectedOccupations,
-            surveyId: surveyId,
+            id: surveyId,
+            gender: selectedGenders,
+            age: selectedAges,
+            job: selectedOccupations,
         }).toString();
 
+        console.log(queryString);
+    
         try {
-            const response = await axios.post('/api/statistic/surveys/filter', {
-                genders: selectedGenders,
-                ages: selectedAges,
-                occupations: selectedOccupations,
-                surveyId: surveyId
+            const response = await axios.get('/api/statistic/surveys/filter?' + queryString, {
             }, {
                 headers: {
                     'Content-Type': 'application/json', // 요청 본문의 타입을 지정합니다.
                     Authorization: `Bearer ${token}` // JWT 토큰을 헤더에 추가합니다.
                 }
             });
-            console.log("필터 적용 성공", response.data);
+            setSurveyData(response.data);
+            console.log("필터 적용 성공", surveyData);
         } catch (error) {
             console.error("필터 적용 실패", error);
         }
