@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import 'animate.css';
 import WOW from 'wowjs';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -22,11 +22,16 @@ const Home = () => {
   useEffect(() => {
     new WOW.WOW().init();
   }, []);
-  const movePage = useNavigate();
 
-  function gohome(){
-     movePage('/user/mypage');
-   }
+  const how = useRef(); 
+  const contact = useRef(); 
+  const onMoveToForm = () => {
+    how.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+  const onMoveToForm2 = () => {
+    contact.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   return (
     <>
     <meta charSet="utf-8" />
@@ -80,14 +85,14 @@ const Home = () => {
                 BRAIN FORM
                 </h1>
                 <a
-                  href="quote.html"
                   className="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft"
+                  onClick={onMoveToForm}
                 >
                   How To Use? 
                 </a>
                 <a
-                  href=""
                   className="btn btn-outline-light py-md-3 px-md-5 animated slideInRight"
+                  onClick={onMoveToForm2}
                 >
                   Contact Us
                 </a>
@@ -291,7 +296,7 @@ const Home = () => {
     {/* Service End */}
 
    {/* Quote Start */}
-   <div className="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+   <div className="container-fluid py-5 wow fadeInUp" ref= {how} data-wow-delay="0.1s">
       <div className="container py-5">
         <div className="row g-5">
         <div className="col-lg-5" style={{ minHeight: 500 }}>
@@ -373,7 +378,7 @@ const Home = () => {
     
 
     {/* Team Start */}
-    <div className="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+    <div className="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s" ref={contact}>
       <div className="container py-5">
         <div
           className="section-title text-center position-relative pb-3 mb-5 mx-auto"
