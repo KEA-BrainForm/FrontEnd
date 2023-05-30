@@ -20,13 +20,14 @@ function StatisticSurveyItem(props) {
     console.log("questionmultipleChoiceAnswers.answer: ", question.multipleChoiceAnswers[0].answer);  // ${id}번 보기 내용 (선택한 보기)
 
     // const dataTest = [
-    //   ["Task", "Hours per Day"],
+    //   [question.type, question.num],
     //   ["Work", 11],
     //   ["Eat", 2],
     //   ["Commute", 2],
     //   ["Watch TV", 2],
     //   ["Sleep", 7], 
     // ];
+
 
     // 이 반복문을 통해서 위의 dataTest 배열을 작성해야 함.
     for (let i = 1; i <= 5; i++) {

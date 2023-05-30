@@ -19,14 +19,16 @@ const answeredSurvey = [
 ]
 const ManagementPage = () => {
     const [surveyData, setSurveyData] = useState(null); //
+    const [surveyDataAnswered, setSurveyDataAnswered] = useState(null);
     const token = localStorage.getItem("ACCESS_TOKEN");
 
     useEffect(() => {
         async function fetchData() {
+            //   생성한 설문 가져오는 요청
             try {
                 console.log("ACCESS-Token: ", token);
                 // 페이지가 마운트된 후에 서버로 GET 요청 보내기
-                const response = await axios.get('/api/data', {
+                const response = await axios.get('/api/data', { //   생성한 설문 가져오는 요청
                     headers: {
                         Authorization: `Bearer ${token}` // JWT 토큰을 헤더에 추가합니다.
                     }
@@ -38,25 +40,44 @@ const ManagementPage = () => {
             } catch (error) {
                 console.error(error);
             }
+
+            //   응답한 설문 가져오는 요청
+            try {
+                console.log("ACCESS-Token: ", token);
+                // 페이지가 마운트된 후에 서버로 GET 요청 보내기
+                const response2 = await axios.get('/api/data/answered', { //   생성한 설문 가져오는 요청
+                    headers: {
+                        Authorization: `Bearer ${token}` // JWT 토큰을 헤더에 추가합니다.
+                    }
+                });
+
+                console.log("result2: ", response2);
+                setSurveyDataAnswered(response2.data); // 데이터를 상태로 설정합니다.
+                console.log("응답한 설문 response.data: ", response2.data);
+            } catch (error) {
+                console.error(error);
+            }
         }
 
         fetchData();
     }, []);
 
     return (
-        <Managesurvey surveyData={surveyData} />
+        <Managesurvey surveyData={surveyData} surveyDataAnswered = {surveyDataAnswered}/>
     )
 }
 
-const Managesurvey = ({ surveyData }) => {
+const Managesurvey = ({ surveyData, surveyDataAnswered }) => {
     const [selectedSurvey, setSelectedSurvey] = useState('');
 
-    
+
 
     if (!surveyData) {
         return <div>Loading...</div>; // 데이터가 로딩 중일 때 보여줄 내용
     }
-
+    if (!surveyDataAnswered) {
+        return <div>Loading...</div>; // 데이터가 로딩 중일 때 보여줄 내용
+    }
     const handleStatisticsClick = (surveyData) => {
         setSelectedSurvey(surveyData);
     };
@@ -100,8 +121,6 @@ const Managesurvey = ({ surveyData }) => {
                             <td>{survey.ddate}</td>
                         </tr>
                     ))}
-
-
                 </tbody>
             </table>
 
@@ -122,14 +141,13 @@ const Managesurvey = ({ surveyData }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {answeredSurvey.map((survey, index) => (
+                    {surveyDataAnswered.map((survey, index) => (
+                        // {createdSurvey.map((survey) => (
                         <tr key={survey.id}>
-                            <td>Q{index + 1}</td>
+                            <td>Q{index + 1}</td>   {/* 이 id가 1부터 survey.length가 되어야 함.*/}
                             <td>{survey.title}</td>
                             <td>
-
-                                <button onClick={() => setSelectedSurvey(survey.title)}>통계</button>
-
+                                <Link to={`/managesurvey/survey/${encodeURIComponent(survey.id)}/statistic`}><button>통계</button></Link>
                             </td>
                             <td>
                                 <button>수정</button>
@@ -145,7 +163,6 @@ const Managesurvey = ({ surveyData }) => {
                     ))}
                 </tbody>
             </table>
-
         </div>
     );
 }
