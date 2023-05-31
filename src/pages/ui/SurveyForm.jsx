@@ -3,10 +3,13 @@ import SurveyItem from './SurveyItem';
 
 // function SurveyForm(props) {
 
+
+
 export const SurveyForm = (props) => {
 // export const SurveyForm = (props) => {
     const {questions, setQuestions} = props;
-    console.log(questions);
+   
+    console.log("퀘스천",questions);
 
     function handleDeleteQuestion(id) {
       const newQuestions = questions.filter((question) => question.id !== id);
@@ -16,7 +19,7 @@ export const SurveyForm = (props) => {
         return { ...question, id: index+1 };
       });
     
-      console.log(updatedQuestions);
+      
       setQuestions(updatedQuestions);
     }
 
@@ -24,9 +27,33 @@ export const SurveyForm = (props) => {
 
   return (
     <div>
-    {questions.map((question, index) => {
-        return <SurveyItem key={question.id} question={question} onDelete={handleDeleteQuestion}/>;
+
+{questions.map((question) => {
+  let questionType;
+  if (question.hasOwnProperty('yesOrNoAnswer')) {
+    questionType = "yesOrNo";
+    question['types'] = 'yesOrNo'; // add type key with value 'yesOrNo'
+  } else if (question.hasOwnProperty('subjectiveAnswers')) {
+    questionType = "shortAnswer";
+    question['types'] = 'shortAnswer'
+  } else if (question.hasOwnProperty('multipleChoiceAnswers')) {
+    questionType = "multipleChoice";
+    question['types'] = 'multipleChoice'
+    
+  }
+
+      return (
+        <SurveyItem
+          key={question.id}
+          question={question}
+          questionType={questionType}
+          onDelete = {handleDeleteQuestion}
+        />
+      );
     })}
+  
+
+   
     </div>
   )
 }

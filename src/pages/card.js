@@ -24,7 +24,12 @@ const Card = ({ key, itemId, id, title }) => (
               <ReactBootstrapDropdown.Item  className="custom-dropdown-item" as={Link} to={`/managesurvey/survey/${encodeURIComponent(id)}/statistic`}>
                 통계
               </ReactBootstrapDropdown.Item>
-              <ReactBootstrapDropdown.Item  className="custom-dropdown-item">수정</ReactBootstrapDropdown.Item>
+              <ReactBootstrapDropdown.Item  className="custom-dropdown-item"  as={Link} to={{
+    pathname: `/modifysurvey/${encodeURIComponent(id)}`,
+    state: { surveyId: id }
+}}>
+    수정
+</ReactBootstrapDropdown.Item>
               <ReactBootstrapDropdown.Item  className="custom-dropdown-item">삭제</ReactBootstrapDropdown.Item>
             </ReactBootstrapDropdown.Menu>
           </ReactBootstrapDropdown>

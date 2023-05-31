@@ -5,6 +5,7 @@ import YesOrNo from '../Survey/YesOrNo';
 import Button from '../ui/Button';
 import SurveyForm from './SurveyForm';
 import styled from "styled-components";
+import SurveyModify from '../SurveyModify';
 // import questions from '../questions';
 
 export let questionList;
@@ -39,19 +40,25 @@ const CustomSelect = styled.select`
 `;
 
 
-function Dropdown() {
+function Dropdown(props) {
 
   const [selectedComponent, setSelectedComponent] = useState('MultipleChoice');
+  const {pushlist} = props;
 
-  const [questions, setQuestions] = useState([]);
+ 
 
+  const [questions, setQuestions] = useState(pushlist||[]);
+  questionList = questions;
   const handleAddQuestions = (newQuestion) => {
     // const newQuestions = [...questions];
     // newQuestions.push({id:questions.length+1, type: questions.type,options})
       setQuestions([...questions, newQuestion]);
       // test = questions;
+      console.log("질문",questions);
   };
 
+  
+ 
 
   const handleChange = (event) => {
     setSelectedComponent(event.target.value);
@@ -59,7 +66,8 @@ function Dropdown() {
   };
 
   const renderComponent = () => {
-    questionList = questions;
+   
+    console.log("퀘스천 리스트",questionList)
     switch (selectedComponent) {
       case 'MultipleChoice':
         return <MultipleChoice onAddQuestions={handleAddQuestions} questionsLen={questions.length}/>;
@@ -72,9 +80,12 @@ function Dropdown() {
     }
   };
 
+  
+
   return (
     
     <div>
+
       <Card>
       <h3 htmlFor="title-input">질문 생성</h3>
       <CustomSelect class="custom-select" value={selectedComponent} onChange={handleChange}>
