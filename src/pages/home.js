@@ -81,7 +81,6 @@ const Home = () => {
                 More Reliable Digital Survey Solution
                 </h5>
                 <h1 className="display-1 text-white mb-md-4 animated zoomIn">
-               
                 BRAIN FORM
                 </h1>
                 <a
@@ -126,9 +125,7 @@ const Home = () => {
           </div>
         </div>
       
-      </div>
-  
-   
+      </div>  
    
     {/* About Start */}
     <div className="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
@@ -553,7 +550,7 @@ const Home = () => {
                   <i className="fa fa-user-tie me-2" />
                   BrainForm
                 </h1>
-              </a>
+              </a>```
               <p className="mt-3 mb-4">
                 Brainform: Surveying platform using brainwave by Team KAKAO99%
               </p>
