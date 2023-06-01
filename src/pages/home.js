@@ -18,6 +18,10 @@ import downasset from '../images/caret-down-fill.svg';
 import intro from '../images/intro.png';
 import intro2 from '../images/intro2.png';
 import intro3 from '../images/intro3.png';
+import mindwave from '../images/mindwave.jpg';
+import createSurvey from '../images/createSurvey.png'
+
+
 const Home = () => {
   useEffect(() => {
     new WOW.WOW().init();
@@ -81,6 +85,7 @@ const Home = () => {
                 More Reliable Digital Survey Solution
                 </h5>
                 <h1 className="display-1 text-white mb-md-4 animated zoomIn">
+               
                 BRAIN FORM
                 </h1>
                 <a
@@ -125,7 +130,9 @@ const Home = () => {
           </div>
         </div>
       
-      </div>  
+      </div>
+  
+   
    
     {/* About Start */}
     <div className="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
@@ -205,12 +212,11 @@ const Home = () => {
           <div className="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.3s">
             <div className="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center">
               <div className="service-icon">
-                <i className="fa fa-shield-alt text-white" />
+                <i className="fa fa-brain text-white" />
               </div>
-              <h4 className="mb-3">Cyber Security</h4>
+              <h4 className="mb-3">Electroencephalogram measurement</h4>
               <p className="m-0">
-                Amet justo dolor lorem kasd amet magna sea stet eos vero lorem
-                ipsum dolore sed
+                More accurate and analyzed results can be obtained through EEG measurements during the survey.
               </p>
               <a className="btn btn-lg btn-primary rounded" href="">
                 <i className="bi bi-arrow-right" />
@@ -224,8 +230,7 @@ const Home = () => {
               </div>
               <h4 className="mb-3">Data Analytics</h4>
               <p className="m-0">
-                Amet justo dolor lorem kasd amet magna sea stet eos vero lorem
-                ipsum dolore sed
+                The survey results and EEG measurement results are not only visualized and shown, but also analyzed in connection with EEG measurement results.
               </p>
               <a className="btn btn-lg btn-primary rounded" href="">
                 <i className="bi bi-arrow-right" />
@@ -235,56 +240,15 @@ const Home = () => {
           <div className="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.9s">
             <div className="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center">
               <div className="service-icon">
-                <i className="fa fa-code text-white" />
+                <i className="fa fa-face-smile text-white" />
               </div>
-              <h4 className="mb-3">Web Development</h4>
+              <h4 className="mb-3">Easy to use</h4>
               <p className="m-0">
-                Amet justo dolor lorem kasd amet magna sea stet eos vero lorem
-                ipsum dolore sed
+              It provides a simple and easy UI for users to use. Anyone can easily participate in the EEG survey if they have an EEG measurement device, and even if they don't, they can participate too.
               </p>
               <a className="btn btn-lg btn-primary rounded" href="">
                 <i className="bi bi-arrow-right" />
               </a>
-            </div>
-          </div>
-          <div className="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.3s">
-            <div className="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center">
-              <div className="service-icon">
-                <i className="fab fa-android text-white" />
-              </div>
-              <h4 className="mb-3">Apps Development</h4>
-              <p className="m-0">
-                Amet justo dolor lorem kasd amet magna sea stet eos vero lorem
-                ipsum dolore sed
-              </p>
-              <a className="btn btn-lg btn-primary rounded" href="">
-                <i className="bi bi-arrow-right" />
-              </a>
-            </div>
-          </div>
-          <div className="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.6s">
-            <div className="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center">
-              <div className="service-icon">
-                <i className="fa fa-search text-white" />
-              </div>
-              <h4 className="mb-3">SEO Optimization</h4>
-              <p className="m-0">
-                Amet justo dolor lorem kasd amet magna sea stet eos vero lorem
-                ipsum dolore sed
-              </p>
-              <a className="btn btn-lg btn-primary rounded" href="">
-                <i className="bi bi-arrow-right" />
-              </a>
-            </div>
-          </div>
-          <div className="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.9s">
-            <div className="position-relative bg-primary rounded h-100 d-flex flex-column align-items-center justify-content-center text-center p-5">
-              <h3 className="text-white mb-3">Call Us For Quote</h3>
-              <p className="text-white mb-3">
-                Clita ipsum magna kasd rebum at ipsum amet dolor justo dolor est
-                magna stet eirmod
-              </p>
-              <h2 className="text-white mb-0">+012 345 6789</h2>
             </div>
           </div>
         </div>
@@ -301,7 +265,7 @@ const Home = () => {
               <img
                 className="position-absolute w-100 h-100 rounded wow zoomIn"
                 data-wow-delay="0.9s"
-                src={logos}
+                src={createSurvey}
                 style={{ objectFit: "cover" }}
               />
             </div>
@@ -317,11 +281,8 @@ const Home = () => {
             </div>
             
             <p className="mb-4">
-              Eirmod sed tempor lorem ut dolores. Aliquyam sit sadipscing kasd
-              ipsum. Dolor ea et dolore et at sea ea at dolor, justo ipsum duo
-              rebum sea invidunt voluptua. Eos vero eos vero ea et dolore eirmod
-              et. Dolores diam duo invidunt lorem. Elitr ut dolores magna sit. Sea
-              dolore sanctus sed et. Takimata takimata sanctus sed.
+              Anyone can easily create and distribute surveys. It supports the generation of multiple-choice, pros and cons, and subjective questions, and determines whether the EEG measurement function is used when participating in the survey.
+After the survey is created, a participation link is created for easy sharing.
             </p>
            
           </div>
@@ -340,19 +301,16 @@ const Home = () => {
           <div className="col-lg-7">
             <div className="section-title position-relative pb-3 mb-5">
               <h5 className="fw-bold text-primary text-uppercase">
-                쉬운 설문조사 만들기
+                BrainForm의 Identity, 뇌파 측정
               </h5>
               <h1 className="mb-0">
-                Make a survey easily
+                EEG measurements during the survey
               </h1>
             </div>
             
             <p className="mb-4">
-              Eirmod sed tempor lorem ut dolores. Aliquyam sit sadipscing kasd
-              ipsum. Dolor ea et dolore et at sea ea at dolor, justo ipsum duo
-              rebum sea invidunt voluptua. Eos vero eos vero ea et dolore eirmod
-              et. Dolores diam duo invidunt lorem. Elitr ut dolores magna sit. Sea
-              dolore sanctus sed et. Takimata takimata sanctus sed.
+            Participants can measure brain waves while participating in the survey. The survey creator can check the participants' EEG graphs along with the survey results, and exclude questionnaires with less than a certain concentration. Participants can view their own EEG measurements, visualized as graphs. In addition, you can easily end the survey by blinking your eyes more than three times quickly after completing the survey.
+            {/* 참여자는 설문에 참여하면서 뇌파를 측정할 수 있습니다. 설문 생성자는 설문 결과와 함께 참여자들의 뇌파 그래프를 확인할 수 있으며, 집중도가 일정 이하인 설문지는 배제할 수 있습니다. 참여자는 그래프로 시각화된 자신의 뇌파 측정 결과를 확인할 수 있습니다. 또한, 설문 완료 후 눈을 빠르게 3회 이상 깜빡임으로써 설문을 간편하게 종료할 수 있습니다. */}
             </p>
            
           </div>
@@ -361,7 +319,7 @@ const Home = () => {
               <img
                 className="position-absolute w-100 h-100 rounded wow zoomIn"
                 data-wow-delay="0.9s"
-                src={logos}
+                src={mindwave}
                 style={{ objectFit: "cover" }}
               />
             </div>
@@ -550,7 +508,7 @@ const Home = () => {
                   <i className="fa fa-user-tie me-2" />
                   BrainForm
                 </h1>
-              </a>```
+              </a>
               <p className="mt-3 mb-4">
                 Brainform: Surveying platform using brainwave by Team KAKAO99%
               </p>
