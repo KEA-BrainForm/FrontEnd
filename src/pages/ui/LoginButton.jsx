@@ -17,6 +17,7 @@ content: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
+    borderRadius:20,
     alignItems: 'center',
     position: 'relative', // make sure it's a positioned element
     zIndex: '1001', // it should be higher than overlay's zIndex to appear on top

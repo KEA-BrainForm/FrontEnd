@@ -3,6 +3,7 @@ import { Grid, TextField } from "@mui/material";
 import Button from "../ui/Button";
 import { useNavigate } from "react-router-dom";
 import questions from "../ui/Dropdown";
+import { withStyles } from "@material-ui/core/styles";
 
 
 function MultipleChoice(props) {
@@ -44,15 +45,25 @@ function MultipleChoice(props) {
 
     function renderOptions() {
       return options.map((option, index) => (
-        <div key={index}>
+        <div key={index} >
           <label>
             Option {index + 1}:{' '}
             <br></br>
             <input
-              type="text"
-              value={option.text}
-              onChange={(event) => handleChangeOptionText(index, event)}
-            />
+            type="text"
+            value={option.text}
+            placeholder="보기를 입력하세요" 
+            onChange={(event) => handleChangeOptionText(index, event)}
+            style={{
+              borderRadius: "10px",
+              border: "1px solid #e0e0e0", // 연한 색상의 보더
+              padding: "10px",
+              "::placeholder": {
+                color: "#a9a9a9", // 연한 색상의 placeholder 색상
+              },
+            }}
+          />
+
             &nbsp;
             <Button onClick={() => handleDeleteOption(index)} title={"Delete Option"}>Delete Option</Button>
           </label>
@@ -68,7 +79,7 @@ function MultipleChoice(props) {
                             onChange={(event) => {
                             setTitle(event.target.value);  }} InputProps={{
               style: {
-                width:720,
+                width: "110%",
                 borderRadius: "10px",
               }
             }} />

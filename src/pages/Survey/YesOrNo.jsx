@@ -34,7 +34,7 @@ function YesOrNo(props) {
             }}
             InputProps={{
               style: {
-                width: 720,
+                width: "110%",
                 borderRadius: "10px",
               },
             }}

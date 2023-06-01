@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import logo from '../images/Logo.png';
+import './css/signup.css';
+import Button from "./ui/Button";
 
 const Mypage = () => {
   const [member, setMember] = useState(null);
@@ -79,8 +81,7 @@ useEffect(() => {
   };
 
   return (
-    <div>
-{/* 
+/* 
       
       <p>id:{member.id}</p>
       <p>생성일: {member.createdAt}</p>
@@ -90,18 +91,17 @@ useEffect(() => {
       <p>업데이트 날짜: {member.updatedAt}</p>
       <p>사용자 이름: {member.username}</p>
 
-      <p>=========</p> */}
+      <p>=========</p> */
 
-      {/* <p
+      /* <p
       >별명: {member.nickname}</p>
       <p>성별: {member.gender}</p>
       <p>직업: {member.job}</p>
-      <p>나이:{member.age}</p> */}
-       <div className="background">
-      <div className="signup-card">
+      <p>나이:{member.age}</p> */
+      <div className="background">
+        <div className="signup-card">
       <img className="logeSignup" src={logo} alt="logo" /><br />
-          <h1>Sign up</h1><br />
-        <div className="content-center"></div>
+          <h1>My Page</h1><br />
       
       <form className="signuptext" onSubmit={handleSubmit}>
       생성일: {member.createdAt}<br/>
@@ -204,16 +204,15 @@ useEffect(() => {
                 <input type="radio" value="job-unavailable" checked={job === 'job-unavailable'} onChange={handleJobOptionChange} />
                 무직
               </label>
-            </div>
-          <div ><br /><br /><br /><br />
-          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<button className="signupbutton" type="submit">수정하기</button>
-
+          <br /><br /><br /><br />
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
         </div>
-       
+        <div className='submitButtonContainer'>
+          <Button className="signupbutton" type="submit">수정하기</Button>
+          </div>
         </form>
+        </div>
     </div>
-    </div>
-    </div >
 
     
 
