@@ -16,7 +16,7 @@ function SuryeyForm(props) {
   return (
     <div>
     {questions.map((question, index) => {
-        return <SurveyItem key={question.id} question={question} deleteItem={deleteItem}/>;
+        return <SurveyItem key={question.num} question={question} deleteItem={deleteItem}/>;
     })}
     </div>
   )
