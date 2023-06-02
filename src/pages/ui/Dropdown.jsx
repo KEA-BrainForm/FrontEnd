@@ -54,9 +54,10 @@ function Dropdown(props) {
     // newQuestions.push({id:questions.length+1, type: questions.type,options})
       setQuestions([...questions, newQuestion]);
       // test = questions;
-      console.log("질문",questions);
+     
   };
 
+  console.log("질문",questions);
   
  
 

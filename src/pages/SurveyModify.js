@@ -8,6 +8,7 @@ import Styles from '../pages/css/SurveyItem.module.css';
 import Dropdown from "./ui/Dropdown";
 import { Grid, TextField } from "@mui/material";
 import  { questionList } from "./ui/Dropdown";
+import  { NumDeleteList } from "./ui/SurveyForm";
 import styled from "styled-components";
 
 
@@ -67,45 +68,46 @@ const Card = styled.div`
 `;
 
 
-function SurveyModify() {
+function SurveyModify(props) {
   const { surveyId } = useParams();
   const [surveyData, setSurveyData] = useState("");
   const navigate = useNavigate();
-
-  
-  
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        console.log(`${surveyId} !!!`);
-        const response = await axios.get(`/api/ques/${surveyId}`);
-        setSurveyData(response.data);
-        console.log("response",response.data);
-      } catch (error) {
-        console.error('Error fetching survey questions:', error);
-      }
-    };
-    fetchData();
-  }, [surveyId]);
-  
-
-  console.log("시벌"+surveyData);
-
-  const handleAfterSubmit = async (event) => {
-    event.preventDefault();
-    
-    // 서버로 데이터를 보내는 로직 작성
-
-    // 설문 관리 페이지로 이동
-    navigate("/managesurvey");
-  }
+  const {numDeleteList} = props
 
  
+  
+  
 
- 
+useEffect(() => {
+  const fetchData = async () => {
+    try {
 
-  // const history = useHistory();
+      const response = await axios.get(`/api/ques/${surveyId}`);
+      // array로 가정하고 아래와 같이 처리해 보았습니다. 
+      const reshapedData = response.data.multipleChoiceQuestions.map(item => {
+        const reshapedItem = { ...item };
+        const options = [];
+        for (let i = 1; i <= 5; i++) {
+          const key = `choice${i}`;
+          if (reshapedItem.hasOwnProperty(key)) {
+            options.push({ ["text"]: reshapedItem[key] });
+            delete reshapedItem[key];
+          }
+        }
+        reshapedItem.options = options;
+        return reshapedItem;
+      });
+      response.data.multipleChoiceQuestions = reshapedData;
+      setSurveyData(response.data);
+      console.log("response", response.data);
+    } catch (error) {
+      console.error('Error fetching survey questions:', error);
+    }
+  };
+  fetchData();
+}, [surveyId]);
+  
+
 
 
 
@@ -113,33 +115,31 @@ function SurveyModify() {
     event.preventDefault();
     // 서버로 데이터를 보내는 로직 작성
     // ...
-    console.log(globalTitle);
+   // console.log(globalTitle);
     //console.log(savedquestion);
 
     let savedquestion = questionList ? questionList.filter(item => 'num' in item) : [];
     let newquestion = questionList ? questionList.filter(item => !('num' in item)) : [];
     
-    console.log("합", questionList);
-    console.log("원래 있던거", savedquestion);
-    console.log("새로 만든거", newquestion);
+
 
     console.log("visibility: ", visibilityTemp);
     console.log("wearable: ", wearableTemp);
 
-    const min = 1;
-    const max = 1000;
-    var randomInt = Math.floor(Math.random() * (max - min + 1)) + min;
+    
     
     const token = localStorage.getItem("ACCESS_TOKEN");
     console.log("token", token);
 
-    let result = await axios.patch("/api/patchQuestion", {
-      title: globalTitle,
-      questionList: questionList,
-     //newquestionList : newquestion,
+    let result = await axios.patch(`/api/patchQuestion/${surveyId}`, {
+      title: surveyData.title,
+      questionList: newquestion,
+      savedquestionList : savedquestion,
+      visibility: surveyData.isOpen,
+      wearable: surveyData.isBrainwave,
+      numDeleteList : NumDeleteList,
+     
 
-      visibility: visibilityTemp,
-      wearable: wearableTemp,
       // surveyId : randomInt
     }, {
       headers: {
@@ -167,14 +167,13 @@ function SurveyModify() {
   if (!surveyData) {
     return <div>Loading...</div>;
   }
+
+
  const sortedQuestions = [...surveyData.yesOrNoQuestions, ...surveyData.multipleChoiceQuestions, ...surveyData.subjectiveQuestions].sort((a, b) => a.num - b.num);
 
 
-  console.log("sortedQuestions: ", sortedQuestions);
 
-
-
-
+ 
   
   return (
     <Wrapper>
@@ -193,10 +192,10 @@ function SurveyModify() {
         <br/>
         <Grid container>
           <Grid item xs={12} md={4}>
-            <VisibilitySelector />
+            <VisibilitySelector isOpen= {surveyData.isOpen}/>
           </Grid>
           <Grid item xs={12} md={4}>
-            <WearableSelector />
+            <WearableSelector isBrainwave={surveyData.isBrainwave} />
           </Grid>
           <Grid item xs={12} md={4} style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 'auto' }}>
             <form onSubmit={handleSubmit}>
@@ -206,7 +205,7 @@ function SurveyModify() {
         </Grid>
         </Container>
         </Card>
-        {console.log("왜?",questionList)}
+   
       </Box>
     </Wrapper>
   );
@@ -231,11 +230,11 @@ const HorizonLine = ({ text }) => {
   );
 };
 
-let globalTitle ;
+//let globalTitle ;
 
 
 function TitleInput(props) { // 제목
-  console.log(props.title);
+
   const [title, setTitle] = useState(String(props.title));
 
   //console.log(surveyData.title + "제목이다");
@@ -261,7 +260,7 @@ function TitleInput(props) { // 제목
           <TextField placeholder="제목을 입력하세요" fullWidth value={title}
             onChange={(event) => {
               setTitle(event.target.value);
-              globalTitle = event.target.value;
+            //  globalTitle = event.target.value;
             }}
             InputProps={{
               style: {
@@ -277,8 +276,8 @@ function TitleInput(props) { // 제목
 }
 
 let visibilityTemp = null;
-function VisibilitySelector() { //  공개 여부
-  const [visibility, setVisibility] = useState("public");
+function VisibilitySelector(isOpen) { //  공개 여부
+  const [visibility, setVisibility] = useState(isOpen == [] ? "public": isOpen);
 
   const handleVisibilityChange = (event) => {
     setVisibility(event.target.value);
@@ -292,7 +291,7 @@ function VisibilitySelector() { //  공개 여부
         <input
           type="radio"
           value="public"
-          checked={visibility === "public"}
+          checked={visibility.isOpen === "public"}
           onChange={handleVisibilityChange}
         />
 
@@ -302,7 +301,7 @@ function VisibilitySelector() { //  공개 여부
         <input
           type="radio"
           value="private"
-          checked={visibility === "private"}
+          checked={visibility.isOpen === "private"}
           onChange={handleVisibilityChange}
         />
       </label>
@@ -312,8 +311,8 @@ function VisibilitySelector() { //  공개 여부
 }
 let wearableTemp = null;
 
-function WearableSelector() { // 기기 착용 여부
-  const [wearable, setWearable] = useState("worn");
+function WearableSelector(isBrainwave) { // 기기 착용 여부
+  const [wearable, setWearable] = useState(isBrainwave == [] ? "worn" : isBrainwave);
 
   const handleWearableChange = (event) => {
     setWearable(event.target.value);
@@ -327,7 +326,7 @@ function WearableSelector() { // 기기 착용 여부
         <input
           type="radio"
           value="worn"
-          checked={wearable === "worn"}
+          checked={wearable.isBrainwave === "worn"}
           onChange={handleWearableChange}
         />
       </label>
@@ -336,7 +335,7 @@ function WearableSelector() { // 기기 착용 여부
         <input
           type="radio"
           value="not-worn"
-          checked={wearable === "not-worn"}
+          checked={wearable.isBrainwave === "not-worn"}
           onChange={handleWearableChange}
         />
       </label>
