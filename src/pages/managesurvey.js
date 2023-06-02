@@ -10,8 +10,6 @@ import Card from '../pages/card';
 import './css/pages.css';
 import Pagination from 'react-bootstrap/Pagination';
 
-
-
 const PAGE_SIZE = 1; // You can adjust this to change how many surveys are shown per page
 
 const answeredSurvey = [
@@ -21,10 +19,6 @@ const answeredSurvey = [
 ]
 
 const ManagementPage = () => {
-    
-   
-
-
   const [surveyData, setSurveyData] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const token = localStorage.getItem('ACCESS_TOKEN');
@@ -32,18 +26,18 @@ const ManagementPage = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        console.log('ACCESS-Token: ', token);
+      
         const response = await axios.get('/api/data', {
           headers: {
             Authorization: `Bearer ${token}`
           }
         });
 
-        console.log('result: ', response);
+     
         setSurveyData(response.data);
-        console.log('response.data: ', response.data);
+     
       } catch (error) {
-        console.error(error);
+       
       }
     }
 
@@ -56,7 +50,6 @@ const ManagementPage = () => {
 const Managesurvey = ({ surveyData, currentPage, setCurrentPage }) => {
   const [selectedSurvey, setSelectedSurvey] = useState('');
 
-
   if (!surveyData) {
     return <div>Loading...</div>;
   }
@@ -66,8 +59,6 @@ const Managesurvey = ({ surveyData, currentPage, setCurrentPage }) => {
   };
 
   return (
-
-    
     <div className="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
       <div className="container py-5 grid-margin wow fadeInUp">
         <div className="section-title text-center position-relative pb-3 mb-5 mx-auto" style={{ maxWidth: 600 }}>
@@ -97,9 +88,9 @@ const Managesurvey = ({ surveyData, currentPage, setCurrentPage }) => {
 
         {currentPage === 1 && (
           <div className="row g-3">
-            {surveyData.map((survey) => (
+            {surveyData.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)).map((survey) => (
               <div className="col-lg-3" key={survey.id}>
-                <Card itemId={survey.id.toString()} id={survey.id} title={survey.title} />
+                <Card itemId={survey.member.nickname} id={survey.id} title={survey.title} date={survey.updatedAt.slice(0, 10)} />
               </div>
             ))}
           </div>

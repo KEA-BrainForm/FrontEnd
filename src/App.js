@@ -15,6 +15,7 @@ import Chat from './pages/chat';
 import SocialLogin from './pages/SocialLogin';
 import SurveyItem from './pages/ui/SurveyItem';
 import CheckPassword from './pages/CheckPassword';
+import SurveyModify from './pages/SurveyModify';
 
 import { useState, useEffect } from 'react';
 import AuthRoute from './pages/AuthRoute';
@@ -43,6 +44,7 @@ function App() {
           <Route path="/mypage" element={ isAuthenticated ? <Mypage /> : <Navigate to="/login" replace={true} />}/>
           <Route path='/signup' element={<Signup />} />
           <Route path='/login' element={<Login />} />
+
           <Route path='/survey-response' element={ isAuthenticated ? <SurveyResponse /> : <Navigate to="/login" replace={true} />} />
           <Route path='/survey-gen-complete' element={ isAuthenticated ? <SurveyGenComplete /> : <Navigate to="/login" replace={true} />} />
           <Route path='/managesurvey/survey/:surveyId/statistic' element={ isAuthenticated ? <SurveyStatistics /> : <Navigate to="/login" replace={true} />} />

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import brain from '../images/brainhome.png';
 import 'animate.css';
 
-const Card = ({ key, itemId, id, title }) => (
+const Card = ({ key, itemId, id, title,date }) => (
   <div className="col-lg-3A wow slideInUp" data-wow-delay="0.2s" >
   
       
@@ -24,7 +24,12 @@ const Card = ({ key, itemId, id, title }) => (
               <ReactBootstrapDropdown.Item  className="custom-dropdown-item" as={Link} to={`/managesurvey/survey/${encodeURIComponent(id)}/statistic`}>
                 통계
               </ReactBootstrapDropdown.Item>
-              <ReactBootstrapDropdown.Item  className="custom-dropdown-item">수정</ReactBootstrapDropdown.Item>
+              <ReactBootstrapDropdown.Item  className="custom-dropdown-item"  as={Link} to={{
+    pathname: `/modifysurvey/${encodeURIComponent(id)}`,
+    state: { surveyId: id }
+}}>
+    수정
+</ReactBootstrapDropdown.Item>
               <ReactBootstrapDropdown.Item  className="custom-dropdown-item">삭제</ReactBootstrapDropdown.Item>
             </ReactBootstrapDropdown.Menu>
           </ReactBootstrapDropdown>
@@ -35,11 +40,11 @@ const Card = ({ key, itemId, id, title }) => (
           <small className="me-3">
         
             <i className="far fa-user text-primary me-2" />
-            user{itemId}
+            {itemId}
           </small>
           <small>
             <i className=" far fa-calendar-alt text-primary me-2" />
-            date{key}
+            {date}
           </small>
          
         </div>

@@ -12,6 +12,9 @@ const SurveyStatistic = () => {
     const [surveyData, setSurveyData] = useState(null);
     const [sortedQuestions, setSortedQuestions] = useState([]);
 
+
+
+    
     useEffect(() => {
         const fetchSurvey = async () => {
             try {
