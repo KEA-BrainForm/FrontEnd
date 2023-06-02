@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import logo from '../images/Logo.png';
 import './css/signup.css'
-
 import queryString from 'query-string';
 import Axios from "axios";
-
+import Button from "./ui/Button";
 
 
 function SignUp() {
@@ -155,10 +154,12 @@ function SignUp() {
                 무직
               </label>
             </div>
-          <div ><br /><br /><br /><br />
-          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<button className="signupbutton" type="submit">회원가입</button>
+          <br /><br /><br /><br />
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 
-        </div>
+          <div className="submitButtonContainer" >
+          <Button className="signupbutton" type="submit">회원가입</Button>
+          </div>
         </form>
       </div>
     </div >

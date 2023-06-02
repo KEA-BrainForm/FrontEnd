@@ -22,11 +22,10 @@ const StyledButton = styled.button`
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  border-radius: 4px; /* Make the button round */
+  border-radius: 10px; /* Make the button round */
   animation: ${hoverAnimation} 1s infinite;
   animation-fill-mode: both;
   animation-play-state: paused;
-
   &:hover {
     animation-play-state: running;
   }

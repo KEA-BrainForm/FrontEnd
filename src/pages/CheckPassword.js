@@ -109,7 +109,7 @@ function handleKeyDown(e, inputIndex) {
       {inputPassword.map((value, index) => (
         <input
           key={index}
-          type="password"
+          type="input"
           maxLength={1}
           ref={(el) => (inputsRef.current[index] = el)}
           value={value}
