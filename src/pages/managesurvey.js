@@ -10,45 +10,75 @@ import Card from '../pages/card';
 import './css/pages.css';
 import Pagination from 'react-bootstrap/Pagination';
 
+
+
 const PAGE_SIZE = 1; // You can adjust this to change how many surveys are shown per page
 
-const answeredSurvey = [
-  { id: 1, title: "응답한 설문 제목 1", ddate: "2023/04/25 (진행중)" },
-  { id: 2, title: "응답한 설문 제목 2", ddate: "2023/05/02 (진행중)" },
-  { id: 3, title: "응답한 설문 제목 3", ddate: "2023/02/11 (마감)" }
-]
 
 const ManagementPage = () => {
+    
+   
+
+
   const [surveyData, setSurveyData] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [surveyDataAnswered, setSurveyDataAnswered] = useState([]);
   const token = localStorage.getItem('ACCESS_TOKEN');
-
+  
   useEffect(() => {
     async function fetchData() {
-      try {
-      
-        const response = await axios.get('/api/data', {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
+        //   생성한 설문 가져오는 요청
+        try {
+            console.log("ACCESS-Token: ", token);
+            // 페이지가 마운트된 후에 서버로 GET 요청 보내기
+            const response = await axios.get('/api/data', { //   생성한 설문 가져오는 요청
+                headers: {
+                    Authorization: `Bearer ${token}` // JWT 토큰을 헤더에 추가합니다.
+                }
+            });
+            console.log("response.data", response.data);
+            if (response.data.length === 0) {
+                setSurveyData([]);
+            } else {
+                setSurveyData(response.data); // 데이터를 상태로 설정합니다.
+                console.log("response.data: ", response.data);
+            }
 
-     
-        setSurveyData(response.data);
-     
-      } catch (error) {
-       
-      }
+        } catch (error) {
+            console.error(error);
+        }
+
+        //   응답한 설문 가져오는 요청
+        try {
+            // 페이지가 마운트된 후에 서버로 GET 요청 보내기
+            const response2 = await axios.get('/api/data/answered', { //   생성한 설문 가져오는 요청
+                headers: {
+                    Authorization: `Bearer ${token}` // JWT 토큰을 헤더에 추가합니다.
+                }
+            });
+            console.log("response2.data", response2.data);
+            if (response2.data.length === 0) {
+                setSurveyDataAnswered([]);
+            } else {
+                setSurveyDataAnswered(response2.data); // 데이터를 상태로 설정합니다.
+                console.log("응답한 설문 response.data: ", response2.data);
+            }
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     fetchData();
-  }, []);
+}, []);
 
-  return <Managesurvey surveyData={surveyData} currentPage={currentPage} setCurrentPage={setCurrentPage} />;
+return (
+    <Managesurvey surveyData={surveyData} surveyDataAnswered={surveyDataAnswered} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+)
 };
 
-const Managesurvey = ({ surveyData, currentPage, setCurrentPage }) => {
+const Managesurvey = ({ surveyData, surveyDataAnswered, currentPage, setCurrentPage }) => {
   const [selectedSurvey, setSelectedSurvey] = useState('');
+
 
   if (!surveyData) {
     return <div>Loading...</div>;
@@ -59,6 +89,8 @@ const Managesurvey = ({ surveyData, currentPage, setCurrentPage }) => {
   };
 
   return (
+
+    
     <div className="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
       <div className="container py-5 grid-margin wow fadeInUp">
         <div className="section-title text-center position-relative pb-3 mb-5 mx-auto" style={{ maxWidth: 600 }}>
@@ -88,7 +120,7 @@ const Managesurvey = ({ surveyData, currentPage, setCurrentPage }) => {
 
         {currentPage === 1 && (
           <div className="row g-3">
-            {surveyData.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)).map((survey) => (
+           {surveyData.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)).map((survey) => (
               <div className="col-lg-3" key={survey.id}>
                 <Card itemId={survey.member.nickname} id={survey.id} title={survey.title} date={survey.updatedAt.slice(0, 10)} />
               </div>
@@ -98,9 +130,9 @@ const Managesurvey = ({ surveyData, currentPage, setCurrentPage }) => {
 
         {currentPage === 2 && (
           <div className="row g-3">
-            {answeredSurvey.map((survey) => (
+          {surveyDataAnswered.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)).map((survey) => (
               <div className="col-lg-3" key={survey.id}>
-                <Card itemId={survey.id.toString()} id={survey.id} title={survey.title} />
+                <Card itemId={survey.member.nickname} id={survey.id} title={survey.title} date={survey.updatedAt.slice(0, 10)} />
               </div>
             ))}
           </div>

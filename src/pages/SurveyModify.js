@@ -151,10 +151,10 @@ useEffect(() => {
     //console.log(result);
   
     if (result.status === 200) {
-      alert("success to create new question");
+      alert("설문 수정이 완료되었습니다!");
       const baseUrl = "http://localhost:3000/check-password/";
       const uniqueUrl = `${baseUrl}${result.data}`;
-      navigate("/survey-gen-complete", { state: { uniqueUrl } });
+      navigate("/managesurvey");
       
     } else {
       alert("failed to create new Car");
