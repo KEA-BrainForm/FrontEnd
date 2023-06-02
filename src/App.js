@@ -48,13 +48,12 @@ function App() {
           <Route path='/survey-gen-complete' element={ isAuthenticated ? <SurveyGenComplete /> : <Navigate to="/login" replace={true} />} />
           <Route path='/managesurvey/survey/:surveyId/statistic' element={ isAuthenticated ? <SurveyStatistics /> : <Navigate to="/login" replace={true} />} />
           <Route path='/my-response' element={ isAuthenticated ? <MyResponse /> : <Navigate to="/login" replace={true} />} />
-
-          <Route path='/survey-response' element={<SurveyResponse />} />
-          <Route path='/survey-gen-complete' element={<SurveyGenComplete />} />
-          <Route path='/modifysurvey/:surveyId' element={<SurveyModify />} />
-          <Route path='/managesurvey/survey/:surveyId/statistic' element={<SurveyStatistics />} />
-          <Route path='/my-response' element={<MyResponse />} />
-
+          <Route path='/modifysurvey/:surveyId' element={<SurveyModify />}/>
+          <Route path='/social-login' element={<SocialLogin />} />
+          <Route path='/surveyitem' element={ isAuthenticated ? <SurveyItem /> : <Navigate to="/login" replace={true} />} />
+          <Route path="/survey-response/:surveyId" element={ isAuthenticated ? <SurveyResponse /> : <Navigate to="/login" replace={true} />} />
+          <Route path="/response-success" element={ isAuthenticated ? <SurveyComplete /> : <Navigate to="/login" replace={true} />} />
+          <Route path="/check-password/:surveyId" element={<CheckPassword />} />
         </Routes>
       </BrowserRouter>
       <Chat />
