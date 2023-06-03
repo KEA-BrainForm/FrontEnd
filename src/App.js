@@ -16,6 +16,7 @@ import SocialLogin from './pages/SocialLogin';
 import SurveyItem from './pages/ui/SurveyItem';
 import CheckPassword from './pages/CheckPassword';
 import SurveyModify from './pages/SurveyModify';
+import ResponseLookup from './pages/ResponseLookup';
 
 import { useState, useEffect } from 'react';
 import AuthRoute from './pages/AuthRoute';
@@ -51,6 +52,7 @@ function App() {
           <Route path='/modifysurvey/:surveyId' element={<SurveyModify />}/>
           <Route path='/social-login' element={<SocialLogin />} />
           <Route path='/surveyitem' element={ isAuthenticated ? <SurveyItem /> : <Navigate to="/login" replace={true} />} />
+          <Route path="/survey-response-lookup/:surveyId" element={ isAuthenticated ? <ResponseLookup /> : <Navigate to="/login" replace={true} />} />
           <Route path="/survey-response/:surveyId" element={ isAuthenticated ? <SurveyResponse /> : <Navigate to="/login" replace={true} />} />
           <Route path="/response-success" element={ isAuthenticated ? <SurveyComplete /> : <Navigate to="/login" replace={true} />} />
           <Route path="/check-password/:surveyId" element={<CheckPassword />} />

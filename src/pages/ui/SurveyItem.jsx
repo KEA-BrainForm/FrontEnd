@@ -55,7 +55,16 @@ function SurveyItem(props) {
         setEditedTitle(e.target.value);
     }
 
+
+
+    function renderOptions() {
+      // Create a copy of editedOptions and add new options if necessary
+      const optionsToRender = [...question.options];
+      while (optionsToRender.length < 5) {
+        optionsToRender.push({ text: "" });
+      }
     
+<<<<<<< HEAD
   function renderOptions() {
   // editedOptions가 5개 이상의 옵션을 가지고 있지 않은 경우, 필요한 수만큼 빈 옵션을 추가
   while (editedOptions.length < 5) {
@@ -101,6 +110,39 @@ function SurveyItem(props) {
 }
 
     // eslint-disable-next-line default-case
+=======
+      return optionsToRender.map((option, index) => {
+        return (
+          <div key={index}>
+            {editMode && (
+              <div>
+                <label>
+                  <input type="radio" name="myCheckbox" value="true" required />
+                  &nbsp;Option {index + 1}:{' '}
+                  <input
+                    type="text"
+                    value={option.text}
+                    onChange={handleOptionChange(index)}
+                  />
+                  {optionsToRender.length > 1 && <Button onClick={handleOptionDelete(index)} title="Delete option" />}
+                </label>
+              </div>
+            )}
+            {!editMode && option.text && (
+              <div>
+                <input type="radio" name="myCheckbox" value="true" required />
+                {option.text}
+              </div>
+            )}
+          </div>
+        );
+      });
+    }
+    
+
+
+
+>>>>>>> surveylookup
     switch (question.type) {
         case "shortAnswer":
           return (
