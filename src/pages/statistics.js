@@ -113,45 +113,45 @@ const SurveyStatistic = () => {
                 <div className='filters'>
                     <h3>성별</h3>
                     <label>
-                        <input type='checkbox' name='gender' value='male' />남성
+                        <input type='checkbox' name='gender' value='male' /> 남성
                     </label>
                     <label>
-                        <input type='checkbox' name='gender' value='female' />여성
+                        <input type='checkbox' name='gender' value='female' /> 여성
                     </label>
                     <h3 style={{ marginTop: '40px' }}>연령대</h3>
                     <label>
-                        <input type='checkbox' name='age' value='10대' />10대
+                        <input type='checkbox' name='age' value='10대' /> 10대
                     </label>
                     <label>
-                        <input type='checkbox' name='age' value='20대' />20대
+                        <input type='checkbox' name='age' value='20대' /> 20대
                     </label>
                     <label>
-                        <input type='checkbox' name='age' value='30대' />30대
+                        <input type='checkbox' name='age' value='30대' /> 30대
                     </label>
                     <label>
-                        <input type='checkbox' name='age' value='40대' />40대
+                        <input type='checkbox' name='age' value='40대' /> 40대
                     </label>
                     <label>
-                        <input type='checkbox' name='age' value='50대' />50대 이상
+                        <input type='checkbox' name='age' value='50대' /> 50대 이상
                     </label>
                     <h3 style={{ marginTop: '40px' }}>직업</h3>
                     <label>
-                        <input type='checkbox' name='occupation' value='student' />학생
+                        <input type='checkbox' name='occupation' value='student' /> 학생
                     </label>
                     <label>
-                        <input type='checkbox' name='occupation' value='office' />사무직
+                        <input type='checkbox' name='occupation' value='office' /> 사무직
                     </label>
                     <label>
-                        <input type='checkbox' name='occupation' value='professional' />전문직
+                        <input type='checkbox' name='occupation' value='professional' /> 전문직
                     </label>
                     <label>
-                        <input type='checkbox' name='occupation' value='civil-servant' />공무원
+                        <input type='checkbox' name='occupation' value='civil-servant' /> 공무원
                     </label>
                     <label>
-                        <input type='checkbox' name='occupation' value='research' />연구직
+                        <input type='checkbox' name='occupation' value='research' /> 연구직
                     </label>
                     <label>
-                        <input type='checkbox' name='occupation' value='job-unavailable' />무직
+                        <input type='checkbox' name='occupation' value='job-unavailable' /> 무직
                     </label>
 
                     <button className="apply-filter-button" onClick={applyFilters}>필터 적용</button>
