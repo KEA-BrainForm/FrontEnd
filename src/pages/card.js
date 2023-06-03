@@ -3,7 +3,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import React from 'react';
 import { Dropdown as ReactBootstrapDropdown } from 'react-bootstrap';
 import { Link, Navigate } from 'react-router-dom';
-import brain from '../images/brainhome.png';
+import brain from '../images/survey.png';
 import axios from 'axios';
 import 'animate.css';
 
