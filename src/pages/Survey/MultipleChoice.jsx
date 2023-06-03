@@ -48,7 +48,6 @@ function MultipleChoice(props) {
         <div key={index} >
           <label>
             Option {index + 1}:{' '}
-            <br></br>
             <input
             type="text"
             value={option.text}
@@ -61,6 +60,7 @@ function MultipleChoice(props) {
               "::placeholder": {
                 color: "#a9a9a9", // 연한 색상의 placeholder 색상
               },
+              marginTop:"10px",
             }}
           />
 

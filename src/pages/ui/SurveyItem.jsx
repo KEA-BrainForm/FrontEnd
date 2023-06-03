@@ -74,6 +74,13 @@ function SurveyItem(props) {
                 type="text"
                 value={option.text}
                 onChange={handleOptionChange(index)}
+                style={{
+                  borderRadius: "10px",
+                  border: "1px solid #e0e0e0", // 연한 색상의 보더
+                  padding: "10px",
+                  marginBottom: "10px",
+                  marginRight:"10px",   
+                }}
               />
               {editedOptions.length > 1 && <Button onClick={handleOptionDelete(index)} title="Delete option" />}
             </label>
@@ -81,8 +88,11 @@ function SurveyItem(props) {
         )}
         {!editMode && option.text && (
           <div>
-            <input type="radio" name="myCheckbox" value="true" required />
-            {option.text}
+            <input type="radio" name="myCheckbox" value="true" required 
+            style={{
+                  marginBottom: "10px", 
+                }}/>
+            &nbsp;{option.text}
           </div>
         )}
       </div>
@@ -90,9 +100,7 @@ function SurveyItem(props) {
   });
 }
 
-
-
-
+    // eslint-disable-next-line default-case
     switch (question.type) {
         case "shortAnswer":
           return (
@@ -161,9 +169,14 @@ function SurveyItem(props) {
                         }
                     </p>
                     <form>
-                        <input type="radio" name="myCheckbox" value="true" required /> 참
-                        <input type="radio" name="myCheckbox" value="false" required /> 거짓
-                        <br />
+                        <input type="radio" name="myCheckbox" value="true" required style={{
+                         marginBottom: "10px", 
+                          }}/> 참
+                         <br/>
+                        <input type="radio" name="myCheckbox" value="false" required style={{
+                        marginBottom: "10px", 
+                         }}/> 거짓
+                        <br/>
                     </form>
 
                     <Button className={Styles.editButton} onClick={handleEditClick} title={editMode ? "Apply" : "Edit"}></Button>

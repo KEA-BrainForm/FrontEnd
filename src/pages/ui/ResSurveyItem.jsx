@@ -30,6 +30,9 @@ function ResSurveyItem(props) {
               value={question[`choice${i}`]}
               onChange={handleRadioOptionChange}
               required
+              style={{
+                marginBottom: "10px", 
+              }}
             />
             {question[`choice${i}`]}
           </div>
@@ -48,14 +51,21 @@ function ResSurveyItem(props) {
           value="true"
           onChange={handleRadioOptionChange}
           required
+          style={{
+            marginBottom: "10px", 
+          }}
         />
         참
+        <br/>
         <input
           type="radio"
           name={`question-${question.num}`}
           value="false"
           onChange={handleRadioOptionChange}
           required
+          style={{
+            marginBottom: "10px", 
+          }}
         />
         거짓
       </form>
