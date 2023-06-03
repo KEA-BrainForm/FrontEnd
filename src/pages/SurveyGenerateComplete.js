@@ -9,6 +9,7 @@ import brainwaves from "../images/brainwaves.png";
 import { Link } from "react-router-dom";
 import { Grid, TextField } from "@mui/material";
 import { useLocation } from "react-router-dom";
+import Button from "./ui/Button";
 
 function SurveyGenerateComplete() {
   const location = useLocation();
@@ -47,7 +48,7 @@ function SurveyGenerateComplete() {
                   style: { color: "black", textAlign: "center" },
                 }}
               />
-              <CopyToClipboard text={uniqueUrl} onCopy={handleCopy}>
+              <CopyToClipboard text={uniqueUrl} onCopy={handleCopy} >
                 <img
                   src={urlShare}
                   width="70px"
@@ -55,21 +56,17 @@ function SurveyGenerateComplete() {
                   style={{ marginLeft: "10px", cursor: "pointer" }}
                 />
               </CopyToClipboard>
-            </div>
-            {copied ? (
-              <div style={{ color: "red" }}>Copied to clipboard</div>
+              {copied ? (             
+              <div><br/>Copied to clipboard</div>
             ) : null}
-          </div>
-          <div class="con2">
-            <img
-              src={kakaoShare}
-              class="shareImg"
-              style={{ marginBottom: "50px" }}
-            />
-          </div>
+              </div>
+            </div>          
+          <div>
           <Link to="/">
-            <button className="completebutton">닫기</button>
+            <Button className="completebutton" title="닫기">닫기</Button>
           </Link>
+          </div>
+          
         </div>
       </div>
     </div>
