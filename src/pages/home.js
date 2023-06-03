@@ -255,44 +255,6 @@ const Home = () => {
       </div>
     </div>
     {/* Service End */}
-
-   {/* Quote Start */}
-   <div className="container-fluid py-5 wow fadeInUp" ref= {how} data-wow-delay="0.1s">
-      <div className="container py-5">
-        <div className="row g-5">
-        <div className="col-lg-5" style={{ minHeight: 500 }}>
-            <div className="position-relative h-100">
-              <img
-                className="position-absolute w-100 h-100 rounded wow zoomIn"
-                data-wow-delay="0.9s"
-                src={createSurvey}
-                style={{ objectFit: "cover" }}
-              />
-            </div>
-          </div>
-          <div className="col-lg-7">
-            <div className="section-title position-relative pb-3 mb-5">
-              <h5 className="fw-bold text-primary text-uppercase">
-                쉬운 설문조사 만들기
-              </h5>
-              <h1 className="mb-0">
-                Make a survey easily
-              </h1>
-            </div>
-            
-            <p className="mb-4">
-              Anyone can easily create and distribute surveys. It supports the generation of multiple-choice, pros and cons, and subjective questions, and determines whether the EEG measurement function is used when participating in the survey.
-After the survey is created, a participation link is created for easy sharing.
-            </p>
-           
-          </div>
-          
-          
-        </div>
-      </div>
-    </div>
-    {/* Quote End */}
-
     
     {/* Quote Start */}
     <div className="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
@@ -329,7 +291,40 @@ After the survey is created, a participation link is created for easy sharing.
     </div>
     {/* Quote End */}
 
-    
+    {/* Quote Start */}
+   <div className="container-fluid py-5 wow fadeInUp" ref= {how} data-wow-delay="0.1s">
+      <div className="container py-5">
+        <div className="row g-5">
+        <div className="col-lg-5" style={{ minHeight: 500 }}>
+            <div className="position-relative h-100">
+              <img
+                className="position-absolute w-100 h-100 rounded wow zoomIn"
+                data-wow-delay="0.9s"
+                src={createSurvey}
+                style={{ objectFit: "cover" }}
+              />
+            </div>
+          </div>
+          <div className="col-lg-7">
+            <div className="section-title position-relative pb-3 mb-5">
+              <h5 className="fw-bold text-primary text-uppercase">
+                쉬운 설문조사 만들기
+              </h5>
+              <h1 className="mb-0">
+                Make a survey easily
+              </h1>
+            </div>
+            
+            <p className="mb-4">
+              Anyone can easily create and distribute surveys. It supports the generation of multiple-choice, pros and cons, and subjective questions, and determines whether the EEG measurement function is used when participating in the survey.
+After the survey is created, a participation link is created for easy sharing.
+            </p>
+           
+          </div>
+        </div>
+      </div>
+    </div>
+    {/* Quote End */}
     
 
     {/* Team Start */}
