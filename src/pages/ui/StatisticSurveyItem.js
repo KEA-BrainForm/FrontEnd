@@ -47,6 +47,7 @@ function StatisticSurveyItem(props) {
           <button onClick={handleShowAnswers}>
             {showAnswers ? '통계 숨기기' : '통계 보기'}
           </button>
+          <br></br><br></br>
           {showAnswers && (
             <div>
               {options}
@@ -105,6 +106,7 @@ function StatisticSurveyItem(props) {
           <button onClick={handleShowAnswers}>
             {showAnswers ? '통계 숨기기' : '통계 보기'}
           </button>
+          <br><br></br></br>
           {showAnswers && (
             <div>
               {options}
@@ -141,6 +143,7 @@ function StatisticSurveyItem(props) {
         <button onClick={handleShowAnswers}>
           {showAnswers ? '답변 숨기기' : '답변 보기'}
         </button>
+        <br><br></br></br>
         {showAnswers && (
           question.subjectiveAnswers.map((answer) => (
             <p>{answer.answer}</p>
@@ -165,6 +168,7 @@ function StatisticSurveyItem(props) {
           <h2 className={styles.questionNumber}>Q.{question.num}</h2>
           <h5>주관식</h5>
           <p className={styles.questionTitle}>질문: {question.question}</p>
+
           {renderShortAnswer()}
 
         </div>
