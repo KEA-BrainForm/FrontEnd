@@ -55,6 +55,8 @@ function SurveyItem(props) {
         setEditedTitle(e.target.value);
     }
 
+
+
     
   function renderOptions() {
   // editedOptions가 5개 이상의 옵션을 가지고 있지 않은 경우, 필요한 수만큼 빈 옵션을 추가
@@ -100,7 +102,7 @@ function SurveyItem(props) {
   });
 }
 
-    // eslint-disable-next-line default-case
+
     switch (question.type) {
         case "shortAnswer":
           return (
