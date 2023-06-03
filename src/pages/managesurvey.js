@@ -6,7 +6,8 @@ import './css/managesurvey.css';
 import search from '../images/search.png';
 import filter from '../images/filter.png';
 
-import Card from '../pages/card';
+import Card from './card';
+import CardResponse from './CardResponse';
 import './css/pages.css';
 import Pagination from 'react-bootstrap/Pagination';
 
@@ -132,7 +133,7 @@ const Managesurvey = ({ surveyData, surveyDataAnswered, currentPage, setCurrentP
           <div className="row g-3">
           {surveyDataAnswered.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)).map((survey) => (
               <div className="col-lg-3" key={survey.id}>
-                <Card itemId={survey.member.nickname} id={survey.id} title={survey.title} date={survey.updatedAt.slice(0, 10)} />
+                <CardResponse itemId={survey.member.nickname} id={survey.id} title={survey.title} date={survey.updatedAt.slice(0, 10)} />
               </div>
             ))}
           </div>
