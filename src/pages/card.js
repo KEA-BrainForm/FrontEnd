@@ -1,6 +1,8 @@
+
+import React, { useState } from 'react';
 import './css/managesurvey.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import React from 'react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { Dropdown as ReactBootstrapDropdown } from 'react-bootstrap';
 import { Link, Navigate } from 'react-router-dom';
 import brain from '../images/survey.png';
@@ -10,6 +12,7 @@ import 'animate.css';
 
 const Card = ({ key, itemId, id, title, date }) => {
 
+  const [isCopied, setIsCopied] = useState(false);
   const token = localStorage.getItem('ACCESS_TOKEN');
   const handleDelete = () => {
     console.log(`/api/survey/${encodeURIComponent(id)}`)
@@ -28,12 +31,37 @@ const Card = ({ key, itemId, id, title, date }) => {
       });
   };
 
+  const handleCopy = () => {
+    setIsCopied(true);
+    setTimeout(() => setIsCopied(false), 3000); // Hide after 3 seconds
+  };
+
+
+
   return (
     <div className="col-lg-3A wow slideInUp" data-wow-delay="0.2s" >
-
-
+     
+     <div style={{ position: 'relative' }}>
+        {isCopied && (
+          <div
+            style={{
+              position: 'absolute',
+              top: '40%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              zIndex: '999',
+              background: '#000',
+              color: '#fff',
+              padding: '10px',
+              borderRadius: '5px'
+            }}
+          >
+            클립보드 복사완료
+          </div>
+        )}
       <img className="img-fluid" src={brain} alt="" style={{ width: '100%' }} />
-      <div className="p-5" style={{ height: '185px', backgroundColor: '#F8F9FA', boxShadow: '0 0 20px 5px rgba(0, 0, 0, 0.2)' }}>
+    
+      <div className="p-5" style={{ height: '200px', backgroundColor: '#F8F9FA', boxShadow: '0 0 20px 5px rgba(0, 0, 0, 0.2)' }}>
 
         <h5 className="fw-bold  card-title">{title}</h5>
         <ReactBootstrapDropdown>
@@ -58,6 +86,15 @@ const Card = ({ key, itemId, id, title, date }) => {
             </ReactBootstrapDropdown.Item>
             <ReactBootstrapDropdown.Item className="custom-dropdown-item" onClick={handleDelete}>삭제</ReactBootstrapDropdown.Item>
 
+            <ReactBootstrapDropdown.Item className="custom-dropdown-item" >
+             <CopyToClipboard text={`http://localhost:3000/check-password/${id}`}>
+            <div onClick={handleCopy}>URL 복사하기</div>
+            </CopyToClipboard>
+            </ReactBootstrapDropdown.Item>  
+            
+
+
+
           </ReactBootstrapDropdown.Menu>
         </ReactBootstrapDropdown>
         <br />
@@ -73,7 +110,7 @@ const Card = ({ key, itemId, id, title, date }) => {
           </small>
 
         </div>
-
+        </div>
       </div>
     </div>
   );
