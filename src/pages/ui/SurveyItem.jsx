@@ -134,7 +134,7 @@ function SurveyItem(props) {
             return (
                 <div className={Styles.surveyItem}>
                     <h2 className={Styles.questionNumber}>Q.{Index}</h2>
-                    <p className={Styles.questionTitle}>질문: 
+                    <p className={Styles.questionTitle}>질문:&nbsp;
                         {editMode ? 
                             <TextInput value={editedTitle} onChange={handleTitleChange} /> 
                             : 
