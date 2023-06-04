@@ -1,5 +1,5 @@
 import React from "react";
-import logo from '../images/Logo.png';
+import logo from '../images/Logo2.png';
 
 import './css/surveycomplete.css'
 import brainwaves from '../images/brainwaves.png';
