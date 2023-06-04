@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logo from "../images/Logo.png";
+import logo from "../images/Logo2.png";
 import kakaoShare from "../images/kakao_share.png";
 import urlShare from "../images/url_share.png";
 import CopyToClipboard from "react-copy-to-clipboard";
