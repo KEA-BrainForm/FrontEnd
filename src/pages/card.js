@@ -18,13 +18,13 @@ const Card = ({ key, itemId, id, title, date }) => {
     console.log(`/api/survey/${encodeURIComponent(id)}`)
     axios.delete(`/api/survey/${encodeURIComponent(id)}`, { //   생성한 설문 가져오는 요청
       headers: {
-          Authorization: `Bearer ${token}` // JWT 토큰을 헤더에 추가합니다.
+        Authorization: `Bearer ${token}` // JWT 토큰을 헤더에 추가합니다.
       }
-  }).then(response => {
-        // 삭제 성공 후 실행할 코드를 작성합니다.
-        console.log('삭제 성공');
-        window.location.reload();
-      })
+    }).then(response => {
+      // 삭제 성공 후 실행할 코드를 작성합니다.
+      console.log('삭제 성공');
+      window.location.reload();
+    })
       .catch(error => {
         // 삭제 실패 후 실행할 코드를 작성합니다.
         console.error('삭제 실패', error);
@@ -64,13 +64,17 @@ const Card = ({ key, itemId, id, title, date }) => {
       <div className="p-5" style={{ height: '200px', backgroundColor: '#F8F9FA', boxShadow: '0 0 20px 5px rgba(0, 0, 0, 0.2)' }}>
 
         <h5 className="fw-bold  card-title">{title}</h5>
-
         <ReactBootstrapDropdown>
           <ReactBootstrapDropdown.Toggle variant="secondary" id="dropdown-basic" className="dropdown-toggle">
             <span className="fas fa-ellipsis-v ellipsis-icon"></span>
           </ReactBootstrapDropdown.Toggle>
-          <ReactBootstrapDropdown.Menu className="custom-dropdown-menu">
-
+          <ReactBootstrapDropdown.Menu  style={{ maxHeight: '300px', overflowY: 'no' }}>
+            <ReactBootstrapDropdown.Item className="custom-dropdown-item" as={Link} to={{
+              pathname: `/surveyURL/${encodeURIComponent(id)}`,
+              state: { surveyId: id }
+            }}>
+              공유
+            </ReactBootstrapDropdown.Item>
             <ReactBootstrapDropdown.Item className="custom-dropdown-item" as={Link} to={`/managesurvey/survey/${encodeURIComponent(id)}/statistic`}>
               통계
             </ReactBootstrapDropdown.Item>
@@ -81,15 +85,18 @@ const Card = ({ key, itemId, id, title, date }) => {
               수정
             </ReactBootstrapDropdown.Item>
             <ReactBootstrapDropdown.Item className="custom-dropdown-item" onClick={handleDelete}>삭제</ReactBootstrapDropdown.Item>
+
             <ReactBootstrapDropdown.Item className="custom-dropdown-item" >
-  <CopyToClipboard text={`http://localhost:3000/check-password/${id}`}>
-  <div onClick={handleCopy}>URL 복사하기</div>
-  </CopyToClipboard>
-</ReactBootstrapDropdown.Item>  
+             <CopyToClipboard text={`http://localhost:3000/check-password/${id}`}>
+            <div onClick={handleCopy}>URL 복사하기</div>
+            </CopyToClipboard>
+            </ReactBootstrapDropdown.Item>  
             
+
+
+
           </ReactBootstrapDropdown.Menu>
         </ReactBootstrapDropdown>
-        <br />
         <br />
         <div className="card-content mb-5">
 
@@ -97,8 +104,7 @@ const Card = ({ key, itemId, id, title, date }) => {
 
             <i className="far fa-user text-primary me-2" />
             {itemId}
-          </small>
-          <small>
+            <br></br>
             <i className=" far fa-calendar-alt text-primary me-2" />
             {date}
           </small>

@@ -1,20 +1,18 @@
 import React, { useState } from "react";
+import { useLocation, useParams } from 'react-router-dom';
 import logo from "../images/Logo2.png";
-import kakaoShare from "../images/kakao_share.png";
 import urlShare from "../images/url_share.png";
 import CopyToClipboard from "react-copy-to-clipboard";
 
 import "./css/surveycomplete.css";
-import brainwaves from "../images/brainwaves.png";
 import { Link } from "react-router-dom";
 import { Grid, TextField } from "@mui/material";
-import { useLocation } from "react-router-dom";
 import Button from "./ui/Button";
 
 function SurveyGenerateComplete() {
-  const location = useLocation();
-  const uniqueUrl = location.state.uniqueUrl;
-  console.log(uniqueUrl);
+  const { surveyId } = useParams();
+  const baseUrl = "http://localhost:3000/check-password/";
+  const uniqueUrl = `${baseUrl}${surveyId}`;
 
   const [copied, setCopied] = useState(false);
 
@@ -25,13 +23,13 @@ function SurveyGenerateComplete() {
 
   return (
     <div className="background">
-      <img src={logo} alt="Logo" className="img" />
+      <img src={logo} alt="Logo" className="img" width={300}/>
       <div className="home-card">
         <div className="complete-card">
           <div class="container2">
             <div class="item2 itemmerge">
               <h2>
-                <strong>설문 생성이 완료되었습니다.</strong>
+                <strong>설문 참여 링크 확인</strong>
               </h2>
             </div>
             <div class="item2 itemmerge2">
@@ -57,7 +55,7 @@ function SurveyGenerateComplete() {
                 />
               </CopyToClipboard>
               {copied ? (             
-              <div><br/>Copied to clipboard</div>
+              <div><br></br>설문 참여 주소가 클립보드에 복사되었습니다!</div>
             ) : null}
               </div>
             </div>          
