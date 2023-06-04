@@ -336,7 +336,7 @@ After the survey is created, a participation link is created for easy sharing.
         >
           <h5 className="fw-bold text-primary text-uppercase">Team Members</h5>
           <h1 className="mb-0">
-            Professional Stuffs Ready to Help Your Business
+            Team KAKAO99%
           </h1>
         </div>
         <div className="row g-5">
