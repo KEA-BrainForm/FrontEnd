@@ -90,9 +90,10 @@ const Home = () => {
                 </h1>
                 <a
                   className="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft"
-                  onClick={onMoveToForm}
+                  href={"https://drive.google.com/file/d/1fGpd4qOjD3rrap8cViqZaOxKdj9V1HQT/view?usp=sharing"}
+                  target='_blank'
                 >
-                  How To Use? 
+                  BrainForm program download
                 </a>
                 <a
                   className="btn btn-outline-light py-md-3 px-md-5 animated slideInRight"
