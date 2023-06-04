@@ -3,6 +3,7 @@ import { Grid, TextField } from "@mui/material";
 import Button from "../ui/Button";
 import { useNavigate } from "react-router-dom";
 import questions from "../ui/Dropdown";
+import { withStyles } from "@material-ui/core/styles";
 
 
 function MultipleChoice(props) {
@@ -44,15 +45,25 @@ function MultipleChoice(props) {
 
     function renderOptions() {
       return options.map((option, index) => (
-        <div key={index}>
+        <div key={index} >
           <label>
             Option {index + 1}:{' '}
-            <br></br>
             <input
-              type="text"
-              value={option.text}
-              onChange={(event) => handleChangeOptionText(index, event)}
-            />
+            type="text"
+            value={option.text}
+            placeholder="보기를 입력하세요" 
+            onChange={(event) => handleChangeOptionText(index, event)}
+            style={{
+              borderRadius: "10px",
+              border: "1px solid #e0e0e0", // 연한 색상의 보더
+              padding: "10px",
+              "::placeholder": {
+                color: "#a9a9a9", // 연한 색상의 placeholder 색상
+              },
+              marginTop:"10px",
+            }}
+          />
+
             &nbsp;
             <Button onClick={() => handleDeleteOption(index)} title={"Delete Option"}>Delete Option</Button>
           </label>
@@ -66,22 +77,24 @@ function MultipleChoice(props) {
                 <Grid xs={11} md={11} item style={{ paddingRight: 16 }}>
                     <h5>질문</h5>  <TextField placeholder="질문을 입력하세요" fullWidth value={title}  
                             onChange={(event) => {
-                            setTitle(event.target.value);  }}  />
+                            setTitle(event.target.value);  }} InputProps={{
+              style: {
+                width: "110%",
+                borderRadius: "10px",
+              }
+            }} />
                 </Grid>
             </Grid>
             <br />
-            <div>
-                <Button onClick={addOption} title={"Add Option"}>Add Option</Button>
-               
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Button onClick={addOption} title="Add Option">Add Option</Button>
+            <Button
+            title="질문 추가"
+            onClick={handleAddClick}
+            />
             </div>
-            {renderOptions()}
 
-            <div><br></br><br></br>
-                <Button
-                    title="질문 추가"
-                    onClick={handleAddClick}
-                /><br></br><br></br>
-            </div>
+            {renderOptions()}
         </div>
     );
 }

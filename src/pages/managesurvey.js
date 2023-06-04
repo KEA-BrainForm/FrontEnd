@@ -1,25 +1,30 @@
 import React, { useState, useEffect } from 'react';
+
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import './css/managesurvey.css';
 import search from '../images/search.png';
 import filter from '../images/filter.png';
 
-// const createdSurvey = [
-//     { id: 1, name: "생성한 설문 제목 1", ddate: "2023/04/23 (진행중)" },
-//     { id: 2, name: "생성한 설문 제목 2", ddate: "2023/05/04 (진행중)" },
-//     { id: 3, name: "생성한 설문 제목 3", ddate: "2023/02/24 (마감)" }
-// ];
+import Card from './card';
+import CardResponse from './CardResponse';
+import './css/pages.css';
+import Pagination from 'react-bootstrap/Pagination';
 
-// const answeredSurvey = [
-//     { id: 1, name: "응답한 설문 제목 1", ddate: "2023/04/25 (진행중)" },
-//     { id: 2, name: "응답한 설문 제목 2", ddate: "2023/05/02 (진행중)" },
-//     { id: 3, name: "응답한 설문 제목 3", ddate: "2023/02/11 (마감)" }
-// ]
+
+
+const PAGE_SIZE = 1; // You can adjust this to change how many surveys are shown per page
+
+
 const ManagementPage = () => {
-    const [surveyData, setSurveyData] = useState([]); //
+
+
+
+
+    const [surveyData, setSurveyData] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
     const [surveyDataAnswered, setSurveyDataAnswered] = useState([]);
-    const token = localStorage.getItem("ACCESS_TOKEN");
+    const token = localStorage.getItem('ACCESS_TOKEN');
 
     useEffect(() => {
         async function fetchData() {
@@ -68,111 +73,74 @@ const ManagementPage = () => {
     }, []);
 
     return (
-        <Managesurvey surveyData={surveyData} surveyDataAnswered={surveyDataAnswered} />
+        <Managesurvey surveyData={surveyData} surveyDataAnswered={surveyDataAnswered} currentPage={currentPage} setCurrentPage={setCurrentPage} />
     )
-}
+};
 
-const Managesurvey = ({ surveyData, surveyDataAnswered }) => {
+const Managesurvey = ({ surveyData, surveyDataAnswered, currentPage, setCurrentPage }) => {
     const [selectedSurvey, setSelectedSurvey] = useState('');
 
-    // if (!surveyData || !surveyDataAnswered) {
-    //     // { id: 1, name: "생성한 설문 제목 1", ddate: "2023/04/23 (진행중)" }
-    //     return <div>Loading...</div>; // 데이터가 로딩 중일 때 보여줄 내용
-    // }
 
+    if (!surveyData) {
+        return <div>Loading...</div>;
+    }
+
+    const handleStatisticsClick = (surveyData) => {
+        setSelectedSurvey(surveyData);
+    };
 
     return (
-        <div className='background1'>
-            <h2>생성한 설문 목록</h2><br />
-            <table>
-                <colgroup>
-                    <col className="col1" />
-                    <col className="col2" />
-                    <col className="col3" />
-                    <col className="col4" />
-                    <col className="col5" />
-                    <col className="col6" />
-                    <col className="col7" />
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th style={{ textAlign: 'left' }}><img src={search} alt="돋보기" /><button>검색</button>&nbsp;&nbsp;&nbsp;<img src={filter} alt="필터" /><button>필터</button></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        surveyData.length === 0 ? (
-                            <td colSpan="7">생성한 설문이 없습니다.</td>
-                        ) :
-                            surveyData.map((survey, index) => (
-                                <tr key={survey.id}>
-                                    <td>Q{index + 1}</td>   {/* 이 id가 1부터 survey.length가 되어야 함.*/}
-                                    <td>{survey.title}</td>
 
-                                    <td>
-                                        <Link to={`/managesurvey/survey/${encodeURIComponent(survey.id)}/statistic`}><button>통계</button></Link>
-                                    </td>
-                                    <td>
-                                        <button>수정</button>
-                                    </td>
-                                    <td>
-                                        <button>삭제</button>
-                                    </td>
-                                    <td>
-                                        <button>공유</button>
-                                    </td>
-                                    <td>{survey.ddate}</td>
-                                </tr>
-                            ))}
-                </tbody>
-            </table>
 
-            <h2><br /><br />응답한 설문 목록</h2><br />
-            <table>
-                <colgroup>
-                    <col className="col1" />
-                    <col className="col2" />
-                    <col className="col3" />
-                    <col className="col4" />
-                    <col className="col5" />
-                    <col className="col6" />
-                    <col className="col7" />
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th style={{ textAlign: 'left' }}><img src={search} alt="돋보기" /><button>검색</button>&nbsp;&nbsp;&nbsp;<img src={filter} alt="필터" /><button>필터</button></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        surveyDataAnswered.length === 0 ? (
-                            <td colSpan="7">응답한 설문이 없습니다.</td>
-                        ) :
-                            surveyDataAnswered.map((survey, index) => (
-                                <tr key={survey.id}>
-                                    <td>Q{index + 1}</td>   {/* 이 id가 1부터 survey.length가 되어야 함.*/}
-                                    <td>{survey.title}</td>
+        <div className="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+            <div className="container py-5 grid-margin wow fadeInUp">
+                <div className="section-title text-center position-relative pb-3 mb-5 mx-auto" style={{ maxWidth: 600 }}>
+                    <Pagination className='pagination'>
+                        <Pagination.Item active={currentPage === 1} onClick={() => setCurrentPage(1)}>
+                            내가 생성한 설문
+                        </Pagination.Item>
+                        <Pagination.Item active={currentPage === 2} onClick={() => setCurrentPage(2)}>
+                            내가 응답한 설문
+                        </Pagination.Item>
+                    </Pagination>
 
-                                    <td>
-                                        <Link to={`/managesurvey/survey/${encodeURIComponent(survey.id)}/statistic`}><button>통계</button></Link>
-                                    </td>
-                                    <td>
-                                        <button>수정</button>
-                                    </td>
-                                    <td>
-                                        <button>삭제</button>
-                                    </td>
-                                    <td>
-                                        <button>공유</button>
-                                    </td>
-                                    <td>{survey.ddate}</td>
-                                </tr>
-                            ))}
-                </tbody>
-            </table>
+                    {currentPage === 1 && (
+                        <>
+                            <h5 className="fw-bold text-primary  text-uppercase wow">Manage Survey</h5>
+                            <h1 className="mb-0">Created by me</h1>
+                        </>
+                    )}
+
+                    {currentPage === 2 && (
+                        <>
+                            <h5 className="fw-bold text-primary text-uppercase">Manage Survey</h5>
+                            <h1 className="mb-0">Responsed by me</h1>
+                        </>
+                    )}
+                </div>
+
+                {currentPage === 1 && (
+                    <div className="row g-3">
+                        {surveyData.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)).map((survey) => (
+                            <div className="col-lg-3" key={survey.id}>
+                                <Card itemId={survey.member.nickname} id={survey.id} title={survey.title} date={survey.updatedAt.slice(0, 10)} />
+                            </div>
+                        ))}
+                    </div>
+                )}
+
+                {currentPage === 2 && (
+                    <div className="row g-3">
+                        {surveyDataAnswered.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)).map((survey) => (
+                            <div className="col-lg-3" key={survey.id}>
+                                <CardResponse itemId={survey.member.nickname} id={survey.id} title={survey.title} date={survey.updatedAt.slice(0, 10)} />
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
         </div>
     );
-}
+};
 
-// export default Managesurvey;
 export default ManagementPage;

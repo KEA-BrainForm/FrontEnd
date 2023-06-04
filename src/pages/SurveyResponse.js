@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import styled from "styled-components";
 import axios from 'axios';
 import Button from "./ui/Button";
 import ResSurveyItem from './ui/ResSurveyItem';
@@ -9,8 +10,61 @@ import SockJS from 'sockjs-client';
 // import SockJsClient from 'react-stomp';
 import { Stomp } from '@stomp/stompjs';
 
+const token = localStorage.getItem("ACCESS_TOKEN");
+
+const Wrapper = styled.div`
+    padding: 16px;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    background-color : #A0D3F9;
+    overflow:hidden;
+    height:auto;
+    min-height:100vh;
+    margin: auto;
+    flex-grow: 1;
+`;
+
+const Box = styled.div`
+  background-color: #A0D3F9;
+    margin: auto;
+    justify-content: center;
+    width: 100%;
+    flex-grow: 1;
+    overflow: hidden;
+    height:auto;
+    padding-bottom:100px;
+    min-width: 780px;
+    max-width: 780px;  
+    & > * {
+        :not(:last-child) {
+            margin-bottom: 16px;
+        }
+    }
+`;
+
+
+const Container = styled.div`
+  background-color: white;
+    width: 100%;
+    margin: auto;
+    height: auto;
+    padding-bottom:10px;
+    justify-content: center;
+    align-items:center;
+    max-width: 780px;
+`;
+
+const Card = styled.div`
+  background-color: white;
+  margin-bottom: 10px;
+  padding: 16px;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+`;
+
+
 function SurveyResponse() {
-  const token = localStorage.getItem("ACCESS_TOKEN");
 
   const [surveyData, setSurveyData] = useState(null);
   const [selectedAnswers, setSelectedAnswers] = useState([]);
@@ -164,8 +218,13 @@ function SurveyResponse() {
 
 
   return (
-    <div >
+    <Wrapper >
+      <Box>
+      <Card>
+      <Container>
       <h1>제목 : {surveyData.title}</h1>
+      </Container>
+        </Card>
       {sortedQuestions.map((question) => {
         let questionType;
         if (surveyData.yesOrNoQuestions.includes(question)) {
@@ -199,7 +258,8 @@ function SurveyResponse() {
         <Button type="submit" title="설문 응답 제출" onClick={(e) => { handleSubmit(e); handleStop(e); }}></Button>
 
       </form>
-    </div>
+      </Box>
+    </Wrapper>
   );
 }
 

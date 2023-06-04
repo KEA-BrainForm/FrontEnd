@@ -38,7 +38,7 @@ function Login() {
   
 
     return (
-        <div>
+        <div className='logincontainer'>
             <div className="home-card">
                 <div>
                     <img src={logo} alt="Logo" /><br />
