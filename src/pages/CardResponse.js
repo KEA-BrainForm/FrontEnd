@@ -19,7 +19,7 @@ const Card = ({ key, itemId, id, title,date }) => (
           <ReactBootstrapDropdown.Toggle variant="secondary" id="dropdown-basic" className="dropdown-toggle">
           <span className="fas fa-ellipsis-v ellipsis-icon"></span>
           </ReactBootstrapDropdown.Toggle>
-          <ReactBootstrapDropdown.Menu className="custom-dropdown-menu">
+          <ReactBootstrapDropdown.Menu>
 
               <ReactBootstrapDropdown.Item  className="custom-dropdown-item" as={Link} to={`/survey-response-lookup/${encodeURIComponent(id)}`}>
                 조회
