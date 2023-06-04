@@ -79,7 +79,7 @@ const SurveyStatistic = () => {
   return (
     <div className='background-statistic'>
       <div className='left-side'>
-        <h1 style={{ color: '#007bff', marginBottom: "30px" }}><b>제목 : {surveyData.title}</b></h1>
+        <h1 style={{marginBottom: "30px" }}><b>제목 : {surveyData.title}</b></h1>
 
         {sortedQuestions.map((question) => {
           let questionType;
@@ -104,52 +104,58 @@ const SurveyStatistic = () => {
         })}<br />
       </div>
       <div className='right-side'>
-        <h2 style={{ color: '#007bff', marginBottom: '40px', marginLeft: '-10px' }}><b>필터</b></h2>
-        <div className='filters'>
-          <h3 style={{ color: '#007bff', marginLeft: '-10px' }}>성별</h3>
-          <label>
-            <input type='checkbox' name='gender' value='male' /> 남성
-          </label>
-          <label>
-            <input type='checkbox' name='gender' value='female' /> 여성
-          </label>
-          <h3 style={{ color: '#007bff', marginTop: '40px', marginLeft: '-10px' }}>연령대</h3>
-          <label>
-            <input type='checkbox' name='age' value='10대' /> 10대
-          </label>
-          <label>
-            <input type='checkbox' name='age' value='20대' /> 20대
-          </label>
-          <label>
-            <input type='checkbox' name='age' value='30대' /> 30대
-          </label>
-          <label>
-            <input type='checkbox' name='age' value='40대' /> 40대
-          </label>
-          <label>
-            <input type='checkbox' name='age' value='50대' /> 50대 이상
-          </label>
-          <h3 style={{ color: '#007bff', marginTop: '40px', marginLeft: '-10px'}}>직업</h3>
-          <label>
-            <input type='checkbox' name='occupation' value='student' /> 학생
-          </label>
-          <label>
-            <input type='checkbox' name='occupation' value='office' /> 사무직
-          </label>
-          <label>
-            <input type='checkbox' name='occupation' value='professional' /> 전문직
-          </label>
-          <label>
-            <input type='checkbox' name='occupation' value='civil-servant' /> 공무원
-          </label>
-          <label>
-            <input type='checkbox' name='occupation' value='research' /> 연구직
-          </label>
-          <label>
-            <input type='checkbox' name='occupation' value='job-unavailable' /> 무직
-          </label>
-
-          <button className="apply-filter-button" onClick={applyFilters} style={{ backgroundColor: '#007bff', color: '#fff' }}>필터 적용</button>
+        <div className='right-card'>
+          <h2 style={{ marginBottom: '40px', marginLeft: '-10px' }}><b>필터</b></h2>
+          <div className='filters'>
+            <h3 style={{ marginLeft: '-10px' }}>성별</h3>
+            <label>
+              <input type='checkbox' name='gender' value='male' /> 남성
+            </label>
+            <label>
+              <input type='checkbox' name='gender' value='female' /> 여성
+            </label>
+            <h3 style={{ marginTop: '40px', marginLeft: '-10px' }}>연령대</h3>
+            <label>
+              <input type='checkbox' name='age' value='10대' /> 10대
+            </label>
+            <label>
+              <input type='checkbox' name='age' value='20대' /> 20대
+            </label>
+            <label>
+              <input type='checkbox' name='age' value='30대' /> 30대
+            </label>
+            <label>
+              <input type='checkbox' name='age' value='40대' /> 40대
+            </label>
+            <label>
+              <input type='checkbox' name='age' value='50대' /> 50대 이상
+            </label>
+            <h3 style={{ marginTop: '40px', marginLeft: '-10px' }}>직업</h3>
+            <label>
+              <input type='checkbox' name='occupation' value='student' /> 학생
+            </label>
+            <label>
+              <input type='checkbox' name='occupation' value='office' /> 사무직
+            </label>
+            <label>
+              <input type='checkbox' name='occupation' value='professional' /> 전문직
+            </label>
+            <label>
+              <input type='checkbox' name='occupation' value='civil-servant' /> 공무원
+            </label>
+            <label>
+              <input type='checkbox' name='occupation' value='research' /> 연구직
+            </label>
+            <label>
+              <input type='checkbox' name='occupation' value='job-unavailable' /> 무직
+            </label>
+            <h3 style={{ marginTop: '40px', marginLeft: '-10px' }}>뇌파 결과 적용</h3>
+            <label>
+              <input type='checkbox' name='brainwave' value='active' /> 활성화
+            </label>
+            <br/><br/>
+            <button className="apply-filter-button" onClick={applyFilters}>필터 적용</button>
+          </div>
         </div>
       </div>
     </div>

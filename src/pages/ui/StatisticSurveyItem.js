@@ -10,7 +10,7 @@ function StatisticSurveyItem(props) {
     let opt = [0, 0, 0, 0, 0, 0]; // (index+1)번을 선택한 인원수
     const options = [];
     const label = [];
-    
+
     for (let i = 1; i <= 5; i++) {
       if (question[`choice${i}`]) {
         label[i] = String(question[`choice${i}`]);
@@ -44,7 +44,16 @@ function StatisticSurveyItem(props) {
     return (
       <div className={styles.surveyItem}>
         <div>
-          <button onClick={handleShowAnswers}>
+          <button
+            onClick={handleShowAnswers}
+            style={{
+              border: "1px solid skyblue",
+              backgroundColor: "rgba(135,206,250)",
+              color: 'black',
+              padding: "5px",
+              borderRadius: "5px"
+            }}
+          >
             {showAnswers ? '통계 숨기기' : '통계 보기'}
           </button>
           <br></br><br></br>
@@ -82,7 +91,7 @@ function StatisticSurveyItem(props) {
     let opt = [0, 0]; // opt[0] True, opt[1]은 False 값
     const options = [];
     const label = ["참", "거짓"];
-    
+
     question.yesOrNoAnswer.forEach((answer) => {
 
       if (answer.answer) {
@@ -92,7 +101,7 @@ function StatisticSurveyItem(props) {
       }
     });
 
-    
+
     const data = [
       { value: Number(opt[0]), title: String(label[0]), color: '#E38627', label: String(label[0]) },
       { value: Number(opt[1]), title: String(label[1]), color: '#C13C37', label: String(label[1]) }
@@ -152,7 +161,7 @@ function StatisticSurveyItem(props) {
       </div>
     );
   }
-  
+
 
   const [showAnswers, setShowAnswers] = useState(false);  // 통계 보기 버튼 -> 보기 or 숨기기 setting
 
