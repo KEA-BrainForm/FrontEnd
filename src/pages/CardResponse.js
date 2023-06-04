@@ -3,7 +3,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import React from 'react';
 import { Dropdown as ReactBootstrapDropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import brain from '../images/brainhome.png';
+import brain from '../images/survey.png';
 import 'animate.css';
 
 const Card = ({ key, itemId, id, title,date }) => (
