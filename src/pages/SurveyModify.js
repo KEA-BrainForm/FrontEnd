@@ -179,6 +179,9 @@ useEffect(() => {
     <Wrapper>
       <Box>
         <Card>
+        <div>
+          <h5 className="fw-bold text-primary text-uppercase">설문 수정</h5>
+        </div>
         <Container>
         {surveyData && <TitleInput title={surveyData.title} />}
        
@@ -199,7 +202,7 @@ useEffect(() => {
           </Grid>
           <Grid item xs={12} md={4} style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 'auto' }}>
             <form onSubmit={handleSubmit}>
-              <Button type="submit" title="설문 생성 완료"></Button>
+              <Button type="submit" title="설문 수정 제출"></Button>
             </form>
           </Grid>
         </Grid>

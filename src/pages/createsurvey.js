@@ -246,8 +246,14 @@ const Createsurvey = () => {
 
   return (
     <Wrapper>
+    
+       
       <Box>
+        
         <Card>
+           <div>
+          <h5 className="fw-bold text-primary text-uppercase">설문 생성</h5>
+        </div>
         <Container>
         <TitleInput />
         </Container>
