@@ -6,6 +6,10 @@ import ResSurveyItem from './ui/ResSurveyItem';
 import { useParams, useNavigate, useLocation } from 'react-router-dom'; // Add useLocation
 import SurveyComplete from './SurveyComplete';
 import Styles from '../pages/css/SurveyItem.module.css';
+import SockJS from 'sockjs-client';
+// import SockJsClient from 'react-stomp';
+import { Stomp } from '@stomp/stompjs';
+
 const token = localStorage.getItem("ACCESS_TOKEN");
 
 const Wrapper = styled.div`
@@ -62,7 +66,6 @@ const Card = styled.div`
 
 function SurveyResponse() {
 
- 
   const [surveyData, setSurveyData] = useState(null);
   const [selectedAnswers, setSelectedAnswers] = useState([]);
   const navigate = useNavigate();
@@ -70,10 +73,14 @@ function SurveyResponse() {
   const { surveyId } = useParams();
   const location = useLocation(); // Add this line
   const password = location.state.password; // Add this line
+  const [finishedAnswer, setFinishedAnser] = useState(false);
+
+  let stompClient = null;
+
+  let testUserId = 12;
 
   const handleAfterSubmit = async (event) => {
     event.preventDefault();
-    
     // 서버로 데이터를 보내는 로직 작성
 
     // 다른 페이지로 이동
@@ -81,6 +88,12 @@ function SurveyResponse() {
   };
 
   useEffect(() => {
+    // socket 연결 설정
+    const sock = new SockJS(`http://127.0.0.1:8080/ws`);  // 소켓 연결할 서버 주소
+    stompClient = Stomp.over(sock);
+    stompClient.connect({}, onConnected, onError);
+
+
     const fetchData = async () => {
       try {
         console.log(`${surveyId} !!!`);
@@ -93,7 +106,42 @@ function SurveyResponse() {
     };
 
     fetchData();
+
+    return () => {
+      // 컴포넌트가 언마운트 될 때 socket 연결 종료
+      stompClient.disconnect();
+      console.log("소켓 연결이 종료됨.");
+
+    }
   }, [surveyId]);
+
+  function onConnected() {
+    // Subscribe to the Public Topic
+    stompClient.subscribe('/topic/public', (message) => {
+
+      if (message.body === "finished") {
+        setFinishedAnser(true);
+      }
+    });
+
+    // Tell your username to the server
+    stompClient.send("/app/chat.addUser",
+      {},
+      JSON.stringify({ sender: testUserId, type: 'JOIN' })
+    )
+  }
+
+  function onError(error) {   // 소켓 연결 실패 시 호출되는 콜백 메소드
+    console.log("소켓 연결 실패");
+    console.log("'Could not connect to WebSocket server. Please refresh this page to try again!';");
+  }
+
+  useEffect(() => {
+    if (finishedAnswer) {
+      handleSubmit();
+      navigate("/response-success");
+    }
+  }, [finishedAnswer]);
 
   function handleSelectedAnswer(questionId, questionNum, answer, questionType) {
     const newAnswerObj = {
@@ -115,8 +163,7 @@ function SurveyResponse() {
     });
   }
 
-
-
+  // 응답 제출 요청 메소드
   async function handleSubmit() {
     // Just log the values to be sent in the POST request
     const selectedAnswersJSON = JSON.stringify(selectedAnswers);
@@ -149,7 +196,7 @@ function SurveyResponse() {
           Authorization: `Bearer ${token}` // JWT 토큰을 헤더에 추가합니다.
         }
       });
-  
+
       if (response.status === 200) {
         window.alert("설문 종료"); // Show an alert when the survey is stopped
         // Perform any other actions needed after stopping the survey
@@ -158,9 +205,9 @@ function SurveyResponse() {
       console.error('Error stopping the survey:', error);
     }
   };
-  
 
-  
+
+
   if (!surveyData) {
     return <div>Loading...</div>;
   }
@@ -203,12 +250,12 @@ function SurveyResponse() {
           />
         );
       })}<br></br>
-    <form onSubmit={handleAfterSubmit}>
-    
-   
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <Button type="submit" title="설문 응답 제출" onClick={(e) => { handleSubmit(e); handleStop(e); }}></Button>
+      <form onSubmit={handleAfterSubmit}>
+
+
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <Button type="submit" title="설문 응답 제출" onClick={(e) => { handleSubmit(e); handleStop(e); }}></Button>
 
       </form>
       </Box>
