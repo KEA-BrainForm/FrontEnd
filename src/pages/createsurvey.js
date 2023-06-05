@@ -7,9 +7,11 @@ import DropdownExampleClearable, { questionList } from "./ui/Dropdown";
 import Axios from 'axios';
 import styled from "styled-components";
 
-import React, { useState } from 'react';
+import React, { useState, forwardRef } from 'react';
 import { useNavigate } from "react-router-dom";
 import Button from "./ui/Button";
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 //import { Form, Radio } from 'semantic-ui-react'
 import TextInput from './ui/TextInput';
@@ -192,6 +194,50 @@ function WearableSelector() { // 기기 착용 여부
   );
 }
 
+function Calendar() {
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
+    <button className="example-custom-input" onClick={onClick} ref={ref}>
+      {value}
+    </button>
+  ));
+  const handleStartDateChange = (date) => {
+    setStartDate(date);
+  };
+
+  const handleEndDateChange = (date) => {
+    setEndDate(date);
+  };
+
+  return (
+    <div>
+      <p>[설문 기간 설정]</p>
+        <label>시작일:</label>
+        <DatePicker
+          selected={startDate}
+          onChange={handleStartDateChange}
+          selectsStart
+          dateFormat="yyyy-MM-dd"
+          startDate={startDate}
+          endDate={endDate}
+          customInput={<ExampleCustomInput />}
+        />
+        <label>종료일:</label>
+        <DatePicker
+          selected={endDate}
+          onChange={handleEndDateChange}
+          dateFormat="yyyy-MM-dd"
+          selectsEnd
+          startDate={startDate}
+          endDate={endDate}
+          minDate={startDate}
+          customInput={<ExampleCustomInput />}
+        />
+    </div>
+  );
+}
+
 const Createsurvey = () => {
   const navigate = useNavigate();
   // const history = useHistory();
@@ -266,9 +312,11 @@ const Createsurvey = () => {
         <Grid container>
           <Grid item xs={12} md={4}>
             <VisibilitySelector />
+            <br/>
+            <WearableSelector />
           </Grid>
           <Grid item xs={12} md={4}>
-            <WearableSelector />
+            <Calendar/>
           </Grid>
           <Grid item xs={12} md={4} style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 'auto' }}>
             <form onSubmit={handleSubmit}>

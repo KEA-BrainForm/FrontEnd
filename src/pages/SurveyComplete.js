@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 function SurveyComplete() {
   return (
     <div className='background'>
-      <img src={logo} alt="Logo" className="img"/>
       <div className="home-card">
         <div className="complete-card">
           <div class="container">
