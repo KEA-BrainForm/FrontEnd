@@ -195,8 +195,6 @@ function WearableSelector() { // 기기 착용 여부
 }
 
 function Calendar() {
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
   const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
     <button className="example-custom-input" onClick={onClick} ref={ref}>
       {value}
@@ -209,6 +207,12 @@ function Calendar() {
   const handleEndDateChange = (date) => {
     setEndDate(date);
   };
+  const today = new Date();
+  const threeDaysLater = new Date();
+  threeDaysLater.setDate(today.getDate() + 7);
+
+  const [startDate, setStartDate] = useState(today);
+  const [endDate, setEndDate] = useState(threeDaysLater);
 
   return (
     <div>
