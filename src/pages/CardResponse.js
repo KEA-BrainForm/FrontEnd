@@ -41,8 +41,7 @@ const Card = ({ key, itemId, id, title,date }) => (
         
             <i className="far fa-user text-primary me-2" />
             {itemId}
-          </small>
-          <small>
+          <br/>    
             <i className=" far fa-calendar-alt text-primary me-2" />
             {date}
           </small>
