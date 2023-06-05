@@ -188,8 +188,8 @@ useEffect(() => {
       title: surveyData.title,
       questionList: newquestion,
       savedquestionList : savedquestion,
-      visibility: surveyData.isOpen,
-      wearable: surveyData.isBrainwave,
+      visibility: visibilityTemp,
+      wearable: wearableTemp,
       numDeleteList : NumDeleteList,
       startDate: startDate,
       endDate : endDate,
@@ -334,13 +334,15 @@ function TitleInput(props) { // 제목
   );
 }
 
+
 let visibilityTemp = null;
-function VisibilitySelector(isOpen) { //  공개 여부
-  const [visibility, setVisibility] = useState(isOpen == [] ? "public": isOpen);
+function VisibilitySelector({isOpen}) { //  공개 여부
+  const [visibility, setVisibility] = useState(isOpen);
 
   const handleVisibilityChange = (event) => {
     setVisibility(event.target.value);
   };
+
   visibilityTemp = visibility;  // **
   return (
     <div>
@@ -350,7 +352,7 @@ function VisibilitySelector(isOpen) { //  공개 여부
         <input
           type="radio"
           value="public"
-          checked={visibility.isOpen === "public"}
+          checked={visibility === "public" }
           onChange={handleVisibilityChange}
         />
 
@@ -360,7 +362,7 @@ function VisibilitySelector(isOpen) { //  공개 여부
         <input
           type="radio"
           value="private"
-          checked={visibility.isOpen === "private"}
+          checked={visibility === "private"}
           onChange={handleVisibilityChange}
         />
       </label>
@@ -369,9 +371,8 @@ function VisibilitySelector(isOpen) { //  공개 여부
   );
 }
 let wearableTemp = null;
-
-function WearableSelector(isBrainwave) { // 기기 착용 여부
-  const [wearable, setWearable] = useState(isBrainwave == [] ? "worn" : isBrainwave);
+function WearableSelector({isBrainwave}) { // 기기 착용 여부
+  const [wearable, setWearable] = useState(isBrainwave);
 
   const handleWearableChange = (event) => {
     setWearable(event.target.value);
@@ -385,7 +386,7 @@ function WearableSelector(isBrainwave) { // 기기 착용 여부
         <input
           type="radio"
           value="worn"
-          checked={wearable.isBrainwave === "worn"}
+          checked={wearable === "worn"}
           onChange={handleWearableChange}
         />
       </label>
@@ -394,13 +395,18 @@ function WearableSelector(isBrainwave) { // 기기 착용 여부
         <input
           type="radio"
           value="not-worn"
-          checked={wearable.isBrainwave === "not-worn"}
+          checked={wearable === "not-worn"}
           onChange={handleWearableChange}
         />
       </label>
     </div>
   );
 }
+
+
+
+
+
 
 
 

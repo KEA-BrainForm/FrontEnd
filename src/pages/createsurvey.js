@@ -218,8 +218,7 @@ function Calendar() {
   startDateTemp = startDate1;
   endDateTemp = endDate1;
 
-  const [startDate, setStartDate] = useState(today);
-  const [endDate, setEndDate] = useState(threeDaysLater);
+
 
   return (
     <div>
