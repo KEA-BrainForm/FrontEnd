@@ -21,26 +21,28 @@ import SurveyURL from './pages/SurveyURL';
 
 import { useState, useEffect } from 'react';
 import AuthRoute from './pages/AuthRoute';
-
 function App() {
-
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-
+  const [isAuthChecked, setIsAuthChecked] = useState(false); // New state
 
   useEffect(() => {
     const token = localStorage.getItem("ACCESS_TOKEN");
     setIsAuthenticated(!!token);
+    setIsAuthChecked(true); // Set to true after checking
   }, []);
 
 
+  
   console.log(isAuthenticated);
   return (
-    <div>   <Chat />
-      <BrowserRouter>
-        <NavigationBar />
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/createsurvey' element={ isAuthenticated ? <Createsurvey /> : <Navigate to="/login" replace={true} />} />
+    isAuthChecked ? ( // Only render the routes after the auth check
+      <div>   
+        <Chat />
+        <BrowserRouter>
+          <NavigationBar />
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/createsurvey' element={ isAuthenticated ? <Createsurvey /> : <Navigate to="/login" replace={true} />} />
           <Route path='/managesurvey' element={ isAuthenticated ? <Managesurvey /> : <Navigate to="/login" replace={true} />}/>
           <Route path='/login' element={<Login />} />
           <Route path="/mypage" element={ isAuthenticated ? <Mypage /> : <Navigate to="/login" replace={true} />}/>
@@ -61,7 +63,8 @@ function App() {
         </Routes>
       </BrowserRouter>
       <Chat />
-    </div>
+      </div>
+    ) : null // Render nothing while the auth check is not completed
   );
 }
 

@@ -7,11 +7,13 @@ import { Dropdown as ReactBootstrapDropdown } from 'react-bootstrap';
 import { Link, Navigate } from 'react-router-dom';
 import brain from '../images/survey.png';
 import axios from 'axios';
+import Badge from 'react-bootstrap/Badge';
 import 'animate.css';
 
 
-const Card = ({ key, itemId, id, title, date }) => {
 
+const Card = ({ key, itemId, id, title, date ,startdate, enddate, currentdate}) => {
+  console.log("시작일",startdate);
   const [isCopied, setIsCopied] = useState(false);
   const token = localStorage.getItem('ACCESS_TOKEN');
   const handleDelete = () => {
@@ -31,16 +33,16 @@ const Card = ({ key, itemId, id, title, date }) => {
       });
   };
 
+
   const handleCopy = () => {
     setIsCopied(true);
     setTimeout(() => setIsCopied(false), 3000); // Hide after 3 seconds
   };
-
-
+ 
 
   return (
     <div className="col-lg-3A wow slideInUp" data-wow-delay="0.2s" >
-     
+        
      <div style={{ position: 'relative' }}>
         {isCopied && (
           <div
@@ -59,11 +61,16 @@ const Card = ({ key, itemId, id, title, date }) => {
             클립보드 복사완료
           </div>
         )}
-      <img className="img-fluid" src={brain} alt="" style={{ width: '100%' }} />
-    
-      <div className="p-5" style={{ height: '200px', backgroundColor: '#F8F9FA', boxShadow: '0 0 20px 5px rgba(0, 0, 0, 0.2)' }}>
+         <Link to={`/modifysurvey/${encodeURIComponent(id)}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+      <img className="img-fluid" src={brain} alt="" style={{ width: '100%' }} /></Link>
 
-        <h5 className="fw-bold  card-title">{title}</h5>
+      
+      <div className="p-5" style={{ height: '200px', backgroundColor: '#F8F9FA', boxShadow: '0 0 20px 5px rgba(0, 0, 0, 0.2)' }}>
+      {surveyStatus(startdate,enddate,currentdate)}<br></br>
+        <h5 className="fw-bold  card-title">
+        <Link to={`/modifysurvey/${encodeURIComponent(id)}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+          {title}</Link> </h5>
+        
         <ReactBootstrapDropdown>
           <ReactBootstrapDropdown.Toggle variant="secondary" id="dropdown-basic" className="dropdown-toggle">
             <span className="fas fa-ellipsis-v ellipsis-icon"></span>
@@ -103,17 +110,37 @@ const Card = ({ key, itemId, id, title, date }) => {
           <small className="me-3">
 
             <i className="far fa-user text-primary me-2" />
-            {itemId}
-            <br/>
+            {itemId} &nbsp;
+          
+            
             <i className=" far fa-calendar-alt text-primary me-2" />
-            {date}
+            {date}       
           </small>
+          
+      
 
         </div>
         </div>
       </div>
     </div>
+  
   );
 };
+
+function surveyStatus(startdate, enddate, currentdate) {
+  // parse startdate and enddate to ensure they are in correct format
+  let parsedStart = new Date(startdate);
+  let parsedEnd = new Date(enddate);
+
+  if(currentdate >= parsedStart && currentdate <= parsedEnd) {
+    return ( <Badge bg="primary" style={{ fontSize: '12px' }}>
+   '진행중'
+    </Badge>);
+  } else {
+    return (<Badge bg="danger" style={{ fontSize: '12px' }}>
+    '종료'
+     </Badge>);
+  }
+}
 
 export default Card;
