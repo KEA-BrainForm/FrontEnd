@@ -194,6 +194,8 @@ function WearableSelector() { // 기기 착용 여부
   );
 }
 
+let startDateTemp = null;
+let endDateTemp = null;
 function Calendar() {
   const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
     <button className="example-custom-input" onClick={onClick} ref={ref}>
@@ -211,6 +213,11 @@ function Calendar() {
   const threeDaysLater = new Date();
   threeDaysLater.setDate(today.getDate() + 7);
 
+  const [startDate1, setStartDate] = useState(today);
+  const [endDate1, setEndDate] = useState(threeDaysLater);
+  startDateTemp = startDate1;
+  endDateTemp = endDate1;
+
   const [startDate, setStartDate] = useState(today);
   const [endDate, setEndDate] = useState(threeDaysLater);
 
@@ -219,23 +226,23 @@ function Calendar() {
       <p>[설문 기간 설정]</p>
         <label>시작일:</label>
         <DatePicker
-          selected={startDate}
+          selected={startDate1}
           onChange={handleStartDateChange}
           selectsStart
           dateFormat="yyyy-MM-dd"
-          startDate={startDate}
-          endDate={endDate}
+          startDate={startDate1}
+          endDate={endDate1}
           customInput={<ExampleCustomInput />}
         />
         <label>종료일:</label>
         <DatePicker
-          selected={endDate}
+          selected={endDate1}
           onChange={handleEndDateChange}
           dateFormat="yyyy-MM-dd"
           selectsEnd
-          startDate={startDate}
-          endDate={endDate}
-          minDate={startDate}
+          startDate={startDate1}
+          endDate={endDate1}
+          minDate={startDate1}
           customInput={<ExampleCustomInput />}
         />
     </div>
@@ -257,6 +264,8 @@ const Createsurvey = () => {
     console.log(typeof questionList);
     console.log("visibility: ", visibilityTemp);
     console.log("wearable: ", wearableTemp);
+    console.log(startDateTemp);
+    console.log(endDateTemp);
 
     const min = 1;
     const max = 1000;
@@ -270,6 +279,8 @@ const Createsurvey = () => {
       questionList: questionList,
       visibility: visibilityTemp,
       wearable: wearableTemp,
+      startDate: startDateTemp,
+      endDate : endDateTemp,
       // surveyId : randomInt
     }, {
       headers: {
