@@ -48,16 +48,20 @@ const SurveyStatistic = () => {
     const ageCheckboxes = document.querySelectorAll('input[name="age"]:checked');
     const occupationCheckboxes = document.querySelectorAll('input[name="occupation"]:checked');
 
+    const activeCheckboxes = document.querySelectorAll('input[name="brainwave"]:checked');
+
     // 선택된 체크박스 값을 배열로 변환합니다.
     const selectedGenders = Array.from(genderCheckboxes).map((checkbox) => checkbox.value);
     const selectedAges = Array.from(ageCheckboxes).map((checkbox) => checkbox.value);
     const selectedOccupations = Array.from(occupationCheckboxes).map((checkbox) => checkbox.value);
+    const selectActive = Array.from(activeCheckboxes).map((checkbox) => checkbox.value);
 
     const queryString = new URLSearchParams({
       id: surveyId,
       gender: selectedGenders,
       age: selectedAges,
       job: selectedOccupations,
+      isActive: selectActive
     }).toString();
 
     console.log(queryString);
