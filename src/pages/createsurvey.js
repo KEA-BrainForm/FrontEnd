@@ -217,10 +217,6 @@ function Calendar() {
   const [endDate1, setEndDate] = useState(threeDaysLater);
   startDateTemp = startDate1;
   endDateTemp = endDate1;
-
-  const [startDate, setStartDate] = useState(today);
-  const [endDate, setEndDate] = useState(threeDaysLater);
-
   return (
     <div>
       <p>[설문 기간 설정]</p>

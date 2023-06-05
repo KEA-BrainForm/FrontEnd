@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../css/SurveyItem.module.css';
-
-import PieChart from './Piechart';
+import { PieChart } from 'react-minimal-pie-chart';
 
 // 통계 화면에 사용되는 설문 항목 item
 function StatisticSurveyItem(props) {
@@ -80,16 +79,16 @@ function StatisticSurveyItem(props) {
             <div>
               {options}
               <div className='piechart'>
-                <PieChart
+                {/* <PieChart
                   chartType="PieChart"
                   // data={dataTest}
                   data = {data}
                   options={optionTest}
                   width={"100%"}
                   height={"100%"}
-                />
+                /> */}
 
-                {/* <PieChart
+                <PieChart
                   radius={40}
                   data={data}
                   animate={true}
@@ -105,7 +104,7 @@ function StatisticSurveyItem(props) {
                     fontSize: '6px', // 라벨의 폰트 크기 조절
                     fontWeight: 'bold', // 라벨의 글자 굵기 조절
                   }}
-                /> */}
+                />
               </div>
             </div>
           )}
