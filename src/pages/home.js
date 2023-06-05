@@ -219,9 +219,6 @@ const Home = () => {
               <p className="m-0">
                 More accurate and analyzed results can be obtained through EEG measurements during the survey.
               </p>
-              <a className="btn btn-lg btn-primary rounded" href="">
-                <i className="bi bi-arrow-right" />
-              </a>
             </div>
           </div>
           <div className="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.6s">
@@ -233,9 +230,6 @@ const Home = () => {
               <p className="m-0">
                 The survey results and EEG measurement results are not only visualized and shown, but also analyzed in connection with EEG measurement results.
               </p>
-              <a className="btn btn-lg btn-primary rounded" href="">
-                <i className="bi bi-arrow-right" />
-              </a>
             </div>
           </div>
           <div className="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.9s">
@@ -247,9 +241,6 @@ const Home = () => {
               <p className="m-0">
               It provides a simple and easy UI for users to use. Anyone can easily participate in the EEG survey if they have an EEG measurement device, and even if they don't, they can participate too.
               </p>
-              <a className="btn btn-lg btn-primary rounded" href="">
-                <i className="bi bi-arrow-right" />
-              </a>
             </div>
           </div>
         </div>

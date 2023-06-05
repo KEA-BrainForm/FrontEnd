@@ -53,7 +53,7 @@ function SignUp() {
   return (
     <div className="background">
       <div className="signup-card">
-      <img className="logeSignup" src={logo} alt="logo" /><br />
+      <img className="logeSignup" src={logo} alt="logo" height="300"/><br />
           <h1>Sign up</h1><br />
         <div className="content-center">
         
@@ -154,7 +154,7 @@ function SignUp() {
                 무직
               </label>
             </div>
-          <br /><br /><br /><br />
+          <br />
           &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 
           <div className="submitButtonContainer" >

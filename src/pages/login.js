@@ -41,7 +41,7 @@ function Login() {
         <div className='logincontainer'>
             <div className="home-card">
                 <div>
-                    <img src={logo} alt="Logo" /><br />
+                    <img src={logo} alt="Logo" width="200" /><br />
 
                     <div>회원가입을 통해 더 많은 서비스를 즐겨보세요</div> <br />
 
