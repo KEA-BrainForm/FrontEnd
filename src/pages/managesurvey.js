@@ -25,6 +25,8 @@ const ManagementPage = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [surveyDataAnswered, setSurveyDataAnswered] = useState([]);
     const token = localStorage.getItem('ACCESS_TOKEN');
+    
+
 
     useEffect(() => {
         async function fetchData() {
@@ -77,10 +79,14 @@ const ManagementPage = () => {
     )
 };
 
+
+
 const Managesurvey = ({ surveyData, surveyDataAnswered, currentPage, setCurrentPage }) => {
     const [selectedSurvey, setSelectedSurvey] = useState('');
 
-
+    console.log("das",surveyData);
+    const currentdate = new Date();
+    console.log("현재시간",currentdate);
     if (!surveyData) {
         return <div>Loading...</div>;
     }
@@ -89,6 +95,7 @@ const Managesurvey = ({ surveyData, surveyDataAnswered, currentPage, setCurrentP
         setSelectedSurvey(surveyData);
     };
 
+    console.log(surveyData);
     return (
 
 
@@ -123,7 +130,7 @@ const Managesurvey = ({ surveyData, surveyDataAnswered, currentPage, setCurrentP
                     <div className="row g-3">
                         {surveyData.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)).map((survey) => (
                             <div className="col-lg-3" key={survey.id}>
-                                <Card itemId={survey.member.nickname} id={survey.id} title={survey.title} date={survey.updatedAt.slice(0, 10)} />
+                                <Card itemId={survey.member.nickname} id={survey.id} title={survey.title} date={survey.updatedAt.slice(0, 10)} startdate={survey.startDate.slice(0, 10)} enddate={survey.endDate.slice(0, 10)} currentdate = {currentdate} />
                             </div>
                         ))}
                     </div>
@@ -133,7 +140,7 @@ const Managesurvey = ({ surveyData, surveyDataAnswered, currentPage, setCurrentP
                     <div className="row g-3">
                         {surveyDataAnswered.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)).map((survey) => (
                             <div className="col-lg-3" key={survey.id}>
-                                <CardResponse itemId={survey.member.nickname} id={survey.id} title={survey.title} date={survey.updatedAt.slice(0, 10)} />
+                                <CardResponse itemId={survey.member.nickname} id={survey.id} title={survey.title} date={survey.updatedAt.slice(0, 10)} startdate={survey.startDate.slice(0, 10)} enddate={survey.endDate.slice(0, 10)} currentdate = {currentdate} />
                             </div>
                         ))}
                     </div>

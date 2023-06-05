@@ -227,7 +227,6 @@ useEffect(() => {
 
 
 
- 
   
   return (
     <Wrapper>
@@ -370,6 +369,7 @@ function VisibilitySelector({isOpen}) { //  공개 여부
     </div>
   );
 }
+
 let wearableTemp = null;
 function WearableSelector({isBrainwave}) { // 기기 착용 여부
   const [wearable, setWearable] = useState(isBrainwave);
