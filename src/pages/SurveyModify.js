@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, forwardRef } from 'react';
 import axios from 'axios';
 import Button from "./ui/Button";
 import {SurveyItem} from './ui/SurveyItem';
@@ -10,6 +10,8 @@ import { Grid, TextField } from "@mui/material";
 import  { questionList } from "./ui/Dropdown";
 import  { NumDeleteList } from "./ui/SurveyForm";
 import styled from "styled-components";
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 
 const token = localStorage.getItem("ACCESS_TOKEN");
@@ -68,12 +70,63 @@ const Card = styled.div`
 `;
 
 
+let startDate = null;
+let endDate = null;
+function Calendar() {
+  const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
+    <button className="example-custom-input" onClick={onClick} ref={ref}>
+      {value}
+    </button>
+  ));
+  const handleStartDateChange = (date) => {
+    setStartDate(date);
+  };
+
+  const handleEndDateChange = (date) => {
+    setEndDate(date);
+  };
+  const start = new Date(surveyDataglob.startDate);
+  const end = new Date(surveyDataglob.endDate);
+  const [startDate1, setStartDate] = useState(start);
+  const [endDate1, setEndDate] = useState(end);
+  console.log("sfsdfsd", start);
+  console.log("sfsdfsd", end);
+  startDate = startDate1;
+  endDate = endDate1;
+  return (
+    <div>
+      <p>[설문 기간 설정]</p>
+        <label>시작일:</label>
+        <DatePicker
+          selected={startDate1}
+          onChange={handleStartDateChange}
+          selectsStart
+          dateFormat="yyyy-MM-dd"
+          startDate={startDate1}
+          endDate={endDate}
+          customInput={<ExampleCustomInput />}
+        />
+        <label>종료일:</label>
+        <DatePicker
+          selected={endDate1}
+          onChange={handleEndDateChange}
+          dateFormat="yyyy-MM-dd"
+          selectsEnd
+          startDate={startDate1}
+          endDate={endDate1}
+          minDate={startDate1}
+          customInput={<ExampleCustomInput />}
+        />
+    </div>
+  );
+}
+let surveyDataglob =null;
 function SurveyModify(props) {
   const { surveyId } = useParams();
   const [surveyData, setSurveyData] = useState("");
   const navigate = useNavigate();
   const {numDeleteList} = props
-
+  surveyDataglob = surveyData;
  
   
   
@@ -138,7 +191,8 @@ useEffect(() => {
       visibility: surveyData.isOpen,
       wearable: surveyData.isBrainwave,
       numDeleteList : NumDeleteList,
-     
+      startDate: startDate,
+      endDate : endDate,
 
       // surveyId : randomInt
     }, {
@@ -194,15 +248,17 @@ useEffect(() => {
         <h3 htmlFor="title-input">완료 설정</h3>
         <br/>
         <Grid container>
-          <Grid item xs={12} md={4}>
-            <VisibilitySelector isOpen= {surveyData.isOpen}/>
+        <Grid item xs={12} md={4}>
+            <VisibilitySelector isOpen = {surveyData.isOpen} />
+            <br/>
+            <WearableSelector isBrainwave = {surveyData.isBrainwave}/>
           </Grid>
           <Grid item xs={12} md={4}>
-            <WearableSelector isBrainwave={surveyData.isBrainwave} />
+            <Calendar/>
           </Grid>
           <Grid item xs={12} md={4} style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 'auto' }}>
             <form onSubmit={handleSubmit}>
-              <Button type="submit" title="설문 수정 제출"></Button>
+              <Button type="submit" title="설문 생성 완료"></Button>
             </form>
           </Grid>
         </Grid>
