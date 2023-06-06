@@ -86,7 +86,7 @@ function ResSurveyItem(props) {
       return (
         <div className={styles.surveyItem}>
           <h2 className={styles.questionNumber}>Q.{question.num}</h2>
-          <p className={styles.questionTitle}>질문: {question.question}</p>
+          <p className={styles.questionTitle}>질문: {question.title}</p>
           {renderShortAnswer()}
         </div>
       );
@@ -94,7 +94,7 @@ function ResSurveyItem(props) {
       return (
         <div className={styles.surveyItem}>
           <h2 className={styles.questionNumber}>Q.{question.num}</h2>
-          <p className={styles.questionTitle}>질문: {question.question}</p>
+          <p className={styles.questionTitle}>질문: {question.title}</p>
           {renderOptions()}
         </div>
       );
@@ -102,7 +102,7 @@ function ResSurveyItem(props) {
       return (
         <div className={styles.surveyItem}>
           <h2 className={styles.questionNumber}>Q.{question.num}</h2>
-          <p className={styles.questionTitle}>질문: {question.question}</p>
+          <p className={styles.questionTitle}>질문: {question.title}</p>
           {renderYesNo()}
         </div>
       );

@@ -244,7 +244,7 @@ function Calendar() {
   );
 }
 
-const Createsurvey = () => {
+const CreateSurvey  = () => {
   const navigate = useNavigate();
   // const history = useHistory();
 
@@ -341,4 +341,4 @@ const Createsurvey = () => {
   );
 };
 
-export default Createsurvey;
+export default CreateSurvey;
