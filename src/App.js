@@ -17,6 +17,7 @@ import CheckPassword from './components/Survey/CheckPassword';
 import SurveyModify from './pages/SurveyModify';
 import ResponseLookup from './pages/ResponseLookup';
 import SurveyURL from './pages/SurveyURL';
+import Tutorial from './pages/tutorial';
 
 import { useState, useEffect } from 'react';
 import AuthRoute from './routes/AuthRoute';
@@ -30,25 +31,32 @@ function App() {
     setIsAuthChecked(true); // Set to true after checking
   }, []);
 
-
   
-  console.log(isAuthenticated);
+  if (isAuthenticated === null) {
+    return null;
+  }
+
+
+  console.log(isAuthChecked);
   return (
-    isAuthChecked ? ( // Only render the routes after the auth check
+     // Only render the routes after the auth check
       <div>   
         <Chat />
         <BrowserRouter>
           <NavigationBar />
           <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/createsurvey' element={ isAuthenticated ? <Createsurvey /> : <Navigate to="/login" replace={true} />} />
+           <Route path='/' element={<Home />} />
+          <Route path='/createsurvey' element={ isAuthenticated ? <Createsurvey /> : <Navigate to="/login" replace={true} />} />
+          {isAuthChecked ? (
           <Route path='/managesurvey' element={ isAuthenticated ? <Managesurvey /> : <Navigate to="/login" replace={true} />}/>
+          ) : null}
           <Route path='/login' element={<Login />} />
           <Route path="/mypage" element={ isAuthenticated ? <Mypage /> : <Navigate to="/login" replace={true} />}/>
           <Route path='/signup' element={<Signup />} />
           <Route path='/login' element={<Login />} />
           <Route path='/survey-response' element={ isAuthenticated ? <SurveyResponse /> : <Navigate to="/login" replace={true} />} />
           <Route path='/survey-gen-complete' element={ isAuthenticated ? <SurveyGenComplete /> : <Navigate to="/login" replace={true} />} />
+  
           <Route path='/managesurvey/survey/:surveyId/statistic' element={ isAuthenticated ? <SurveyStatistics /> : <Navigate to="/login" replace={true} />} />
           <Route path='/modifysurvey/:surveyId' element={<SurveyModify />}/>
           <Route path='/social-login' element={<SocialLogin />} />
@@ -62,7 +70,7 @@ function App() {
       </BrowserRouter>
       <Chat />
       </div>
-    ) : null // Render nothing while the auth check is not completed
+ // Render nothing while the auth check is not completed
   );
 }
 
