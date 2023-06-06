@@ -82,7 +82,7 @@ function SurveyResponse() {
     // 서버로 데이터를 보내는 로직 작성
 
     // 다른 페이지로 이동
-    navigate("/response-success");
+    navigate("/response-success", {state :{surveyId: surveyId}});
   };
 
   useEffect(() => {
