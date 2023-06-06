@@ -74,7 +74,8 @@ function StatisticSurveyItem(props) {
           >
             {showAnswers ? '통계 숨기기' : '통계 보기'}
           </button>
-          <br></br><br></br>
+          <br></br>
+          <br></br>
           {showAnswers && (
             <div>
               {options}
@@ -141,7 +142,7 @@ function StatisticSurveyItem(props) {
           <button onClick={handleShowAnswers}>
             {showAnswers ? '통계 숨기기' : '통계 보기'}
           </button>
-          <br><br></br></br>
+          <br></br> <br></br>
           {showAnswers && (
             <div>
               {options}
@@ -178,7 +179,7 @@ function StatisticSurveyItem(props) {
         <button onClick={handleShowAnswers}>
           {showAnswers ? '답변 숨기기' : '답변 보기'}
         </button>
-        <br><br></br></br>
+        <br></br> <br></br>
         {showAnswers && (
           question.subjectiveAnswers.map((answer) => (
             <p>{answer.answer}</p>
@@ -202,7 +203,7 @@ function StatisticSurveyItem(props) {
         <div className={styles.surveyItem}>
           <h2 className={styles.questionNumber}>Q.{question.num}</h2>
           <h5>주관식</h5>
-          <p className={styles.questionTitle}>질문: {question.question}</p>
+          <p className={styles.questionTitle}>질문: {question.title}</p>
 
           {renderShortAnswer()}
 
@@ -213,7 +214,7 @@ function StatisticSurveyItem(props) {
         <div className={styles.surveyItem}>
           <h2 className={styles.questionNumber}>Q.{question.num}</h2>
           <h5>객관식</h5>
-          <p className={styles.questionTitle}>질문: {question.question}</p>
+          <p className={styles.questionTitle}>질문: {question.title}</p>
           {RenderOptions()}
         </div>
       );
@@ -222,7 +223,7 @@ function StatisticSurveyItem(props) {
         <div className={styles.surveyItem}>
           <h2 className={styles.questionNumber}>Q.{question.num}</h2>
           <h5>찬부식</h5>
-          <p className={styles.questionTitle}>질문: {question.question}</p>
+          <p className={styles.questionTitle}>질문: {question.title}</p>
           {RenderTrueFalse()}
         </div>
       );
