@@ -1,7 +1,6 @@
-
 import React, { useState, useEffect } from "react";
-import './css/surveycomplete.css'
-import brainwaves from '../images/brainwaves.png';
+import '../../styles/css/surveycomplete.css'
+import brainwaves from '../../assets/images/brainwaves.png';
 import { Link, useLocation } from 'react-router-dom';
 import axios from "axios";
 
