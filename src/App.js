@@ -3,24 +3,23 @@ import Home from './pages/home';
 import Createsurvey from './pages/createsurvey';
 import Managesurvey from './pages/managesurvey';
 import Mypage from './pages/mypage';
-import NavigationBar from './Layout/NavigationBar';
+import NavigationBar from './components/NavigationBar/NavigationBar';
 import Signup from './pages/signup';
 import Login from './pages/login';
 import SurveyResponse from './pages/SurveyResponse';
-import MyResponse from './pages/MyResponse';
-import SurveyComplete from './pages/SurveyComplete';
+import SurveyComplete from './components/Survey/SurveyComplete';
 import SurveyGenComplete from './pages/SurveyGenerateComplete';
 import SurveyStatistics from './pages/statistics';
-import Chat from './pages/chat';
-import SocialLogin from './pages/SocialLogin';
-import SurveyItem from './pages/ui/SurveyItem';
-import CheckPassword from './pages/CheckPassword';
+import Chat from './components/Chat/chat';
+import SocialLogin from './components/Login/SocialLogin';
+import SurveyItem from './components/Survey/SurveyItem';
+import CheckPassword from './components/Survey/CheckPassword';
 import SurveyModify from './pages/SurveyModify';
 import ResponseLookup from './pages/ResponseLookup';
 import SurveyURL from './pages/SurveyURL';
 
 import { useState, useEffect } from 'react';
-import AuthRoute from './pages/AuthRoute';
+import AuthRoute from './routes/AuthRoute';
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isAuthChecked, setIsAuthChecked] = useState(false); // New state
@@ -51,7 +50,6 @@ function App() {
           <Route path='/survey-response' element={ isAuthenticated ? <SurveyResponse /> : <Navigate to="/login" replace={true} />} />
           <Route path='/survey-gen-complete' element={ isAuthenticated ? <SurveyGenComplete /> : <Navigate to="/login" replace={true} />} />
           <Route path='/managesurvey/survey/:surveyId/statistic' element={ isAuthenticated ? <SurveyStatistics /> : <Navigate to="/login" replace={true} />} />
-          <Route path='/my-response' element={ isAuthenticated ? <MyResponse /> : <Navigate to="/login" replace={true} />} />
           <Route path='/modifysurvey/:surveyId' element={<SurveyModify />}/>
           <Route path='/social-login' element={<SocialLogin />} />
           <Route path='/surveyitem' element={ isAuthenticated ? <SurveyItem /> : <Navigate to="/login" replace={true} />} />
