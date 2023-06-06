@@ -46,27 +46,47 @@ function App() {
           <NavigationBar />
           <Routes>
            <Route path='/' element={<Home />} />
-          <Route path='/createsurvey' element={ isAuthenticated ? <Createsurvey /> : <Navigate to="/login" replace={true} />} />
+           {isAuthChecked ? (<Route path='/createsurvey' element={ isAuthenticated ? <Createsurvey /> : <Navigate to="/login" replace={true} />} />
+          ) : null}
           {isAuthChecked ? (
           <Route path='/managesurvey' element={ isAuthenticated ? <Managesurvey /> : <Navigate to="/login" replace={true} />}/>
           ) : null}
           <Route path='/login' element={<Login />} />
+          {isAuthChecked ? (
           <Route path="/mypage" element={ isAuthenticated ? <Mypage /> : <Navigate to="/login" replace={true} />}/>
+          ) : null}
           <Route path='/signup' element={<Signup />} />
           <Route path='/login' element={<Login />} />
+          {isAuthChecked ? (
           <Route path='/survey-response' element={ isAuthenticated ? <SurveyResponse /> : <Navigate to="/login" replace={true} />} />
+          ) : null}
+          {isAuthChecked ? (
           <Route path='/survey-gen-complete' element={ isAuthenticated ? <SurveyGenComplete /> : <Navigate to="/login" replace={true} />} />
-  
+          ) : null}
+          {isAuthChecked ? (
           <Route path='/managesurvey/survey/:surveyId/statistic' element={ isAuthenticated ? <SurveyStatistics /> : <Navigate to="/login" replace={true} />} />
+          ) : null}
           <Route path='/modifysurvey/:surveyId' element={<SurveyModify />}/>
           <Route path='/social-login' element={<SocialLogin />} />
+          {isAuthChecked ? (
           <Route path='/surveyitem' element={ isAuthenticated ? <SurveyItem /> : <Navigate to="/login" replace={true} />} />
+          ) : null}
+          {isAuthChecked ? (
           <Route path="/survey-response-lookup/:surveyId" element={ isAuthenticated ? <ResponseLookup /> : <Navigate to="/login" replace={true} />} />
+          ) : null}
+          {isAuthChecked ? (
           <Route path="/survey-response/:surveyId" element={ isAuthenticated ? <SurveyResponse /> : <Navigate to="/login" replace={true} />} />
+          ) : null}
+          {isAuthChecked ? (
           <Route path="/response-success" element={ isAuthenticated ? <SurveyComplete /> : <Navigate to="/login" replace={true} />} />
+          ) : null}
+          {isAuthChecked ? (
           <Route path="/surveyurl/:surveyId"  element={ isAuthenticated ? <SurveyURL /> : <Navigate to="/login" replace={true} />} />
+          ) : null}
+          {isAuthChecked ? (
           <Route path="/check-password/:surveyId" element={<CheckPassword />} />
-        </Routes>
+          ) : null}
+          </Routes>
       </BrowserRouter>
       <Chat />
       </div>
