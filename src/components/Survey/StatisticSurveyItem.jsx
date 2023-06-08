@@ -90,7 +90,7 @@ function StatisticSurveyItem(props) {
                 /> */}
 
                 <PieChart
-                  radius={40}
+                  radius={50}
                   data={data}
                   animate={true}
                   animationDuration={500}
@@ -102,7 +102,7 @@ function StatisticSurveyItem(props) {
                     return `${dataEntry.title}번 - ${dataEntry.value}명`
                   }}
                   labelStyle={{
-                    fontSize: '6px', // 라벨의 폰트 크기 조절
+                    fontSize: '3px', // 라벨의 폰트 크기 조절
                     fontWeight: 'bold', // 라벨의 글자 굵기 조절
                   }}
                 />
@@ -139,7 +139,14 @@ function StatisticSurveyItem(props) {
     return (
       <div className={styles.surveyItem}>
         <div>
-          <button onClick={handleShowAnswers}>
+          <button onClick={handleShowAnswers} style={{
+              border: "1px solid skyblue",
+              backgroundColor: "rgba(135,206,250)",
+              color: 'black',
+              padding: "5px",
+              borderRadius: "5px"
+            }}
+          >
             {showAnswers ? '통계 숨기기' : '통계 보기'}
           </button>
           <br></br> <br></br>
@@ -176,7 +183,14 @@ function StatisticSurveyItem(props) {
   function renderShortAnswer() {
     return (
       <div className={styles.surveyItem}>
-        <button onClick={handleShowAnswers}>
+        <button onClick={handleShowAnswers} style={{
+              border: "1px solid skyblue",
+              backgroundColor: "rgba(135,206,250)",
+              color: 'black',
+              padding: "5px",
+              borderRadius: "5px"
+            }}
+          >
           {showAnswers ? '답변 숨기기' : '답변 보기'}
         </button>
         <br></br> <br></br>

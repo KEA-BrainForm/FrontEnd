@@ -7,13 +7,13 @@ import NavigationBar from './components/NavigationBar/NavigationBar';
 import Signup from './pages/signup';
 import Login from './pages/login';
 import SurveyResponse from './pages/SurveyResponse';
-import SurveyComplete from './components/Survey/SurveyComplete';
+import SurveyComplete from './pages/SurveyComplete';
 import SurveyGenComplete from './pages/SurveyGenerateComplete';
 import SurveyStatistics from './pages/statistics';
 import Chat from './components/Chat/chat';
 import SocialLogin from './components/Login/SocialLogin';
 import SurveyItem from './components/Survey/SurveyItem';
-import CheckPassword from './components/Survey/CheckPassword';
+import CheckPassword from './pages/CheckPassword';
 import SurveyModify from './pages/SurveyModify';
 import ResponseLookup from './pages/ResponseLookup';
 import SurveyURL from './pages/SurveyURL';
@@ -47,6 +47,9 @@ function App() {
           <Routes>
            <Route path='/' element={<Home />} />
            {isAuthChecked ? (<Route path='/createsurvey' element={ isAuthenticated ? <Createsurvey /> : <Navigate to="/login" replace={true} />} />
+          ) : null}
+           <Route path='/tutorial' element={<Tutorial />} />
+           {isAuthChecked ? (<Route path='/tutorial' element={ isAuthenticated ? <Tutorial /> : <Navigate to="/login" replace={true} />} />
           ) : null}
           {isAuthChecked ? (
           <Route path='/managesurvey' element={ isAuthenticated ? <Managesurvey /> : <Navigate to="/login" replace={true} />}/>
