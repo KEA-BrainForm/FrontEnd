@@ -82,13 +82,9 @@ const Home = () => {
                
                 BRAIN FORM
                 </h1>
-                <a
-                  className="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft"
-                  href={"/tutorial"}
-                  target='_blank'
-                >
-                  BrainForm program download
-                </a>
+                <Link to="/tutorial" className="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">
+  How to use?
+</Link>
                 <a
                   className="btn btn-outline-light py-md-3 px-md-5 animated slideInRight"
                   onClick={onMoveToForm2}
@@ -140,9 +136,10 @@ const Home = () => {
                 Brain Form
               </h1>
             </div>
-            <p className="mb-4">
-            Many of the people who participate in the survey do not focus on the survey response or answer without thinking properly. Therefore, our website determines the concentration of respondents by measuring brain waves and reflects them in the survey results.
-            </p>
+            <p className="mb-4" style={{ fontSize: 15}}>
+  설문에 참여하는 많은 사람들이 제대로 생각하지 않고 설문 응답에 집중하거나 답변하지 않습니다. <br/>따라서 저희 홈페이지에서는 뇌파를 측정하여 응답자의 집중도를 파악하여 설문결과에 반영하고 있습니다.
+
+</p>
             <div className="row g-0 mb-3">
               <div className="col-sm-6 wow zoomIn" data-wow-delay="0.2s">
                 <h5 className="mb-3">
@@ -209,9 +206,9 @@ const Home = () => {
               <div className="service-icon">
                 <i className="fa fa-brain text-white" />
               </div>
-              <h4 className="mb-3">Electroencephalogram measurement</h4>
+              <h4 className="mb-3">뇌파 측정</h4>
               <p className="m-0">
-                More accurate and analyzed results can be obtained through EEG measurements during the survey.
+              조사시 EEG 측정을 통해 보다 정확하고 분석된 결과를 얻을 수 있습니다.
               </p>
             </div>
           </div>
@@ -220,9 +217,9 @@ const Home = () => {
               <div className="service-icon">
                 <i className="fa fa-chart-pie text-white" />
               </div>
-              <h4 className="mb-3">Data Analytics</h4>
+              <h4 className="mb-3">데이터 분석</h4>
               <p className="m-0">
-                The survey results and EEG measurement results are not only visualized and shown, but also analyzed in connection with EEG measurement results.
+              조사 결과와 뇌파 측정 결과를 시각화하며 이후 뇌파 측정 결과와 연계하여 분석합니다.
               </p>
             </div>
           </div>
@@ -231,9 +228,9 @@ const Home = () => {
               <div className="service-icon">
                 <i className="fa fa-face-smile text-white" />
               </div>
-              <h4 className="mb-3">Easy to use</h4>
+              <h4 className="mb-3">간편함</h4>
               <p className="m-0">
-              It provides a simple and easy UI for users to use. Anyone can easily participate in the EEG survey if they have an EEG measurement device, and even if they don't, they can participate too.
+              사용자에게 간편한 UI를 제공합니다. 누구나 쉽게 참여할 수 있습니다.
               </p>
             </div>
           </div>
@@ -249,16 +246,16 @@ const Home = () => {
           <div className="col-lg-7">
             <div className="section-title position-relative pb-3 mb-5">
               <h5 className="fw-bold text-primary text-uppercase">
-                BrainForm의 Identity, 뇌파 측정
+              EEG measurements during the survey
               </h5>
               <h1 className="mb-0">
-                EEG measurements during the survey
+                 BrainForm의 Identity, 뇌파 측정
               </h1>
             </div>
             
             <p className="mb-4">
-            Participants can measure brain waves while participating in the survey. The survey creator can check the participants' EEG graphs along with the survey results, and exclude questionnaires with less than a certain concentration. Participants can view their own EEG measurements, visualized as graphs. In addition, you can easily end the survey by blinking your eyes more than three times quickly after completing the survey.
-            {/* 참여자는 설문에 참여하면서 뇌파를 측정할 수 있습니다. 설문 생성자는 설문 결과와 함께 참여자들의 뇌파 그래프를 확인할 수 있으며, 집중도가 일정 이하인 설문지는 배제할 수 있습니다. 참여자는 그래프로 시각화된 자신의 뇌파 측정 결과를 확인할 수 있습니다. 또한, 설문 완료 후 눈을 빠르게 3회 이상 깜빡임으로써 설문을 간편하게 종료할 수 있습니다. */}
+            {/* Participants can measure brain waves while participating in the survey. The survey creator can check the participants' EEG graphs along with the survey results, and exclude questionnaires with less than a certain concentration. Participants can view their own EEG measurements, visualized as graphs. In addition, you can easily end the survey by blinking your eyes more than three times quickly after completing the survey. */}
+            참여자는 설문에 참여하면서 뇌파를 측정할 수 있습니다. 설문 생성자는 설문 결과와 함께 참여자들의 뇌파 그래프를 확인할 수 있으며, 집중도가 일정 이하인 설문지는 배제할 수 있습니다. <br/>참여자는 그래프로 시각화된 자신의 뇌파 측정 결과를 확인할 수 있습니다. 또한, 설문 완료 후 눈을 빠르게 3회 이상 깜빡임으로써 설문을 간편하게 종료할 수 있습니다.
             </p>
            
           </div>
@@ -294,17 +291,18 @@ const Home = () => {
           <div className="col-lg-7">
             <div className="section-title position-relative pb-3 mb-5">
               <h5 className="fw-bold text-primary text-uppercase">
-                쉬운 설문조사 만들기
+                Make a survey easily
               </h5>
               <h1 className="mb-0">
-                Make a survey easily
+              쉬운 설문조사 만들기
               </h1>
             </div>
             
             <p className="mb-4">
-              Anyone can easily create and distribute surveys. It supports the generation of multiple-choice, pros and cons, and subjective questions, and determines whether the EEG measurement function is used when participating in the survey.
-After the survey is created, a participation link is created for easy sharing.
+            누구나 쉽게 설문조사를 만들고 배포할 수 있습니다. 객관식, 찬반, 주관식 질문 생성을 지원하고, 설문 참여 시 EEG 측정 기능 사용 여부를 결정합니다.
+설문이 생성되면 쉽게 공유할 수 있도록 참여 링크가 생성됩니다.
             </p>
+            
            
           </div>
         </div>
@@ -542,4 +540,3 @@ After the survey is created, a participation link is created for easy sharing.
 }
 
 export default Home;
-

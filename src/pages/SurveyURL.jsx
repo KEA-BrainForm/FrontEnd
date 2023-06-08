@@ -11,7 +11,7 @@ import Button from "../components/Button/Button";
 
 function SurveyGenerateComplete() {
   const { surveyId } = useParams();
-  const baseUrl = "http://localhost:3000/check-password/";
+  const baseUrl = "http://brainform.xyz/check-password/";
   const uniqueUrl = `${baseUrl}${surveyId}`;
 
   const [copied, setCopied] = useState(false);

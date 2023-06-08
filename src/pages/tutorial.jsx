@@ -3,15 +3,24 @@ import React, { useEffect, useRef } from 'react';
 import 'animate.css';
 import WOW from 'wowjs';
 import 'bootstrap/dist/css/bootstrap.css';
-
+import ConnectDevice from "../assets/images/ConnectDevice.png"
 import { useNavigate, Link } from "react-router-dom";
 import brainhome from '../assets/images/brainhome.png';
+import braindevice from '../assets/images/brain_device.png';
+import brainmain from '../assets/images/brain_home.png';
 import logos from '../assets/images/Logo.png';
 import dy from '../assets/images/박도영.jpg';
 import jw from '../assets/images/서지원.jpg';
 import hb from '../assets/images/안해빈.jpg';
 import kd from '../assets/images/서강덕.jpg';
 import js from '../assets/images/박재석.jpg';
+
+import Fitting1 from '../assets/images/Fitting-Figure-1.png';
+import Fitting2 from '../assets/images/Fitting-Figure-2.png';
+import Fitting3 from '../assets/images/Fitting-Figure-3.png';
+import Fitting4 from '../assets/images/Fitting-Figure-4.png';
+
+
 import mindwave from '../assets/images/mindwave.jpg';
 import createSurvey from '../assets/images/createSurvey.png'
 
@@ -21,13 +30,13 @@ const Tutorial = () => {
     new WOW.WOW().init();
   }, []);
 
-  const how = useRef(); 
-  const contact = useRef(); 
-  const onMoveToForm = () => {
-    how.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const program = useRef(); 
+  const device = useRef(); 
+  const onMoveToForm1 = () => {
+    program.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
   const onMoveToForm2 = () => {
-    contact.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    device.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   return (
@@ -47,8 +56,8 @@ const Tutorial = () => {
       rel="stylesheet"
     />
     {/* Icon Font Stylesheet */}
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
       rel="stylesheet"
     />
     <link
@@ -72,7 +81,9 @@ const Tutorial = () => {
       >
         <div className="carousel-inner">
           <div className="carousel-item active">
-            <img className="w-100" src={brainhome} alt="Image" />
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <img className="image" src={brainhome} alt="Image" style={{ height: "400px" }} />
+            </div>
             <div className="carousel-caption d-flex flex-column align-items-center justify-content-center">
               <div className="p-3" style={{ maxWidth: 900 }}>
                 <h5 className="text-white text-uppercase mb-3 animated slideInDown">
@@ -84,16 +95,16 @@ const Tutorial = () => {
                 </h1>
                 <a
                   className="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft"
-                  href={"https://drive.google.com/file/d/1fGpd4qOjD3rrap8cViqZaOxKdj9V1HQT/view?usp=sharing"}
                   target='_blank'
+                  onClick={onMoveToForm1}
                 >
-                  BrainForm program download
+                  뇌파 프로그램 사용 가이드
                 </a>
                 <a
                   className="btn btn-outline-light py-md-3 px-md-5 animated slideInRight"
                   onClick={onMoveToForm2}
                 >
-                  Contact Us
+                  뇌파 기기 착용 가이드
                 </a>
               </div>
             </div>
@@ -127,335 +138,231 @@ const Tutorial = () => {
       
       </div>
   
+
    
-   
-    {/* About Start */}
+
+    {/* Team Start */}
+
+    <div className="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s" ref={program}>
+  <div className="container py-5">
+    <div className="section-title text-center position-relative pb-3 mb-5 mx-auto" style={{ maxWidth: 600 }}>
+      <h5 className="fw-bold text-primary text-uppercase">EEG Program User Guide</h5>
+      <h1 className="mb-0">뇌파 프로그램 사용 가이드</h1>
+    </div >
+    </div>
+    
+    </div>
     <div className="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
       <div className="container py-">
-        <div className="row g-5">
-          <div className="col-lg-7">
+        <div className="row g-5" style={{marginRight : 300}}>
+          <div className="col-lg-7"  >
             <div className="section-title position-relative pb-3 mb-5">
-              <h5 className="fw-bold text-primary text-uppercase">Our Website</h5>
+              <h5 className="fw-bold text-primary text-uppercase">Device Connector</h5>
               <h1 className="mb-0">
-                Brain Form
+                BrainForm Device Connector
               </h1>
             </div>
-            <p className="mb-4">
-            Many of the people who participate in the survey do not focus on the survey response or answer without thinking properly. Therefore, our website determines the concentration of respondents by measuring brain waves and reflects them in the survey results.
-            </p>
-            <div className="row g-0 mb-3">
-              <div className="col-sm-6 wow zoomIn" data-wow-delay="0.2s">
-                <h5 className="mb-3">
-                  <i className="fa fa-check text-primary me-3" />
-                  Reliability
-                </h5>
-                <h5 className="mb-3">
-                  <i className="fa fa-check text-primary me-3" />
-                  Response rate
-                </h5>
-              </div>
-              <div className="col-sm-6 wow zoomIn" data-wow-delay="0.4s">
-                <h5 className="mb-3">
-                  <i className="fa fa-check text-primary me-3" />
-                  Variety of utilization
-                </h5>
-                <h5 className="mb-3">
-                  <i className="fa fa-check text-primary me-3" />
-                  Easy to use
-                </h5>
-              </div>
-            </div>
-            <div
-              className="d-flex align-items-center mb-4 wow fadeIn"
-              data-wow-delay="0.6s"
-            >
-            
-            </div>
-            <Link to='./createsurvey' className="btn btn-primary py-3 px-5 mt-3 wow zoomIn"
+            <p className="mb-4" style={{ fontSize: 18}}>
+            BrainForm은 다양한 NeuroSky Mindwave 뇌파 기기와 호환되며, 이러한 기기와의 연결을 통해 실시간으로 뇌파 값을 획득합니다. 사용자는 BrainForm 소프트웨어를 사용하여 뇌파 기기와의 연결을 설정하고, 원하는 뇌파 데이터를 선택하여 수집할 수 있습니다. 뇌파 데이터는 고도의 정확성과 신뢰성을 보장하기 위해 실시간으로 처리됩니다.
+</p>
+           
+            <Link to='https://drive.google.com/file/d/1fGpd4qOjD3rrap8cViqZaOxKdj9V1HQT/view?usp=drive_link./createsurvey' className="btn btn-primary py-4 px-6 mt-5 wow zoomIn"
               data-wow-delay="0.9s">
-              Go make your Form
+              BrainForm program download
             </Link>
           </div>
           <div className="col-lg-5" style={{ minHeight: 500 }}>
             <div className="position-relative h-100">
               <img
-                className="position-absolute w-100 h-100 rounded wow zoomIn"
+                className="position-absolute w-105 h-100 rounded wow zoomIn"
                 data-wow-delay="0.9s"
-                src={logos}
-                style={{ objectFit: "cover" }}
+                src={braindevice}
+               
               />
             </div>
           </div>
         </div>
       </div>
-    </div>
-    {/* About End */}
-    
-    {/* Service Start */}
-    <div className="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
-      <div className="container py-5">
-        <div
-          className="section-title text-center position-relative pb-3 mb-5 mx-auto"
-          style={{ maxWidth: 600 }}
-        >
-          <h5 className="fw-bold text-primary text-uppercase">Our Services</h5>
-          <h1 className="mb-0">
-            Why do people use Brain Form?
-          </h1>
-        </div>
-        <div className="row g-5">
-          <div className="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.3s">
-            <div className="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center">
-              <div className="service-icon">
-                <i className="fa fa-brain text-white" />
-              </div>
-              <h4 className="mb-3">Electroencephalogram measurement</h4>
-              <p className="m-0">
-                More accurate and analyzed results can be obtained through EEG measurements during the survey.
-              </p>
-            </div>
-          </div>
-          <div className="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.6s">
-            <div className="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center">
-              <div className="service-icon">
-                <i className="fa fa-chart-pie text-white" />
-              </div>
-              <h4 className="mb-3">Data Analytics</h4>
-              <p className="m-0">
-                The survey results and EEG measurement results are not only visualized and shown, but also analyzed in connection with EEG measurement results.
-              </p>
-            </div>
-          </div>
-          <div className="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.9s">
-            <div className="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center">
-              <div className="service-icon">
-                <i className="fa fa-face-smile text-white" />
-              </div>
-              <h4 className="mb-3">Easy to use</h4>
-              <p className="m-0">
-              It provides a simple and easy UI for users to use. Anyone can easily participate in the EEG survey if they have an EEG measurement device, and even if they don't, they can participate too.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    {/* Service End */}
-    
-    {/* Quote Start */}
-    <div className="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
-      <div className="container py-5">
-        <div className="row g-5">
-          <div className="col-lg-7">
-            <div className="section-title position-relative pb-3 mb-5">
-              <h5 className="fw-bold text-primary text-uppercase">
-                BrainForm의 Identity, 뇌파 측정
-              </h5>
-              <h1 className="mb-0">
-                EEG measurements during the survey
-              </h1>
-            </div>
-            
-            <p className="mb-4">
-            Participants can measure brain waves while participating in the survey. The survey creator can check the participants' EEG graphs along with the survey results, and exclude questionnaires with less than a certain concentration. Participants can view their own EEG measurements, visualized as graphs. In addition, you can easily end the survey by blinking your eyes more than three times quickly after completing the survey.
-            {/* 참여자는 설문에 참여하면서 뇌파를 측정할 수 있습니다. 설문 생성자는 설문 결과와 함께 참여자들의 뇌파 그래프를 확인할 수 있으며, 집중도가 일정 이하인 설문지는 배제할 수 있습니다. 참여자는 그래프로 시각화된 자신의 뇌파 측정 결과를 확인할 수 있습니다. 또한, 설문 완료 후 눈을 빠르게 3회 이상 깜빡임으로써 설문을 간편하게 종료할 수 있습니다. */}
-            </p>
-           
-          </div>
-          <div className="col-lg-5" style={{ minHeight: 500 }}>
-            <div className="position-relative h-100">
-              <img
-                className="position-absolute w-100 h-100 rounded wow zoomIn"
-                data-wow-delay="0.9s"
-                src={mindwave}
-                style={{ objectFit: "cover" }}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    {/* Quote End */}
 
-    {/* Quote Start */}
-   <div className="container-fluid py-5 wow fadeInUp" ref= {how} data-wow-delay="0.1s">
-      <div className="container py-5">
-        <div className="row g-5">
-        <div className="col-lg-5" style={{ minHeight: 500 }}>
-            <div className="position-relative h-100">
-              <img
-                className="position-absolute w-100 h-100 rounded wow zoomIn"
-                data-wow-delay="0.9s"
-                src={createSurvey}
-                style={{ objectFit: "cover" }}
-              />
-            </div>
-          </div>
-          <div className="col-lg-7">
-            <div className="section-title position-relative pb-3 mb-5">
-              <h5 className="fw-bold text-primary text-uppercase">
-                쉬운 설문조사 만들기
-              </h5>
-              <h1 className="mb-0">
-                Make a survey easily
+      
+      <div className="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+  <br/><br/><br/><br/>
+   <div className="row g-5"  style={{marginLeft : 100}}>
+      
+  <h1 className="mb-0" style={{marginLeft : 250}}>
+                BrainForm Device Connector
               </h1>
-            </div>
-            
-            <p className="mb-4">
-              Anyone can easily create and distribute surveys. It supports the generation of multiple-choice, pros and cons, and subjective questions, and determines whether the EEG measurement function is used when participating in the survey.
-After the survey is created, a participation link is created for easy sharing.
-            </p>
-           
-          </div>
-        </div>
-      </div>
-    </div>
-    {/* Quote End */}
+    <div className="position-relative d-flex justify-content-center align-items-center" >
+      <img
+        className="rounded wow zoomIn"
+        data-wow-delay="0.9s"
+        src={ConnectDevice}
+        style={{ width: "80%", height: "auto" }}
+        alt="Connect Device"
+      />
+     
+      
     
+  </div>
+  <div>
+  <h2 className="mb-0" style={{textAlign: "center"}}>
+                설문 응답 시작에 앞서 뇌파 측정 프로그램을 실행하고 프로그램 화면에 나타난 패스워드를 입력해주세요
+              </h2>
+              </div>
+  </div>
+</div>
+    </div>
+    <div className="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s" ref={device} >
+  <div className="container py-5">
+    <div className="section-title text-center position-relative pb-3 mb-5 mx-auto" style={{ maxWidth: 600 }}>
+      <h5 className="fw-bold text-primary text-uppercase">NeuroSky MindWave Mobile</h5>
+      <h1 className="mb-0">뇌파 기기 착용 가이드</h1>
 
-    {/* Team Start */}
-    <div className="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s" ref={contact}>
-      <div className="container py-5">
-        <div
-          className="section-title text-center position-relative pb-3 mb-5 mx-auto"
-          style={{ maxWidth: 600 }}
-        >
-          <h5 className="fw-bold text-primary text-uppercase">Team Members</h5>
-          <h1 className="mb-0">
-            Team KAKAO99%
-          </h1>
+    </div >
+
+
+  <div className="row g-5"></div>
+<div style={{ marginLeft: '15%' }}>
+  <div className="container-fluid py-5 wow fadeInUp"  data-wow-delay="0.1s" style={{ minHeight: 50 }}>
+    <div className="container py-5">
+      <div className="row g-5">
+        <div className="col-lg-5" style={{ minHeight: 50 }}>
+          <div className="position-relative h-100">
+            <img
+              className="position-absolute w-95 h-95 rounded wow zoomIn"
+              data-wow-delay="0.9s"
+              src={Fitting1}
+              style={{ objectFit: "cover" }}
+            />
+          </div>
         </div>
-        <div className="row g-5">
-        <div className="col-lg-4 wow slideInUp" data-wow-delay="0.3s">
-            <div className="team-item bg-light rounded overflow-hidden">
-              <div className="team-img position-relative overflow-hidden">
-                <img className="img-fluid w-100 h-100" src={dy} alt="" />
-                <div className="team-social">
-                  <a
-                    className="btn btn-lg btn-primary btn-lg-square rounded"
-                    href="https://github.com/Doyoung-Park"
-                  >
-                    <i className="fab fa-github fw-normal" />
-                  </a>
-                  <a
-                    className="btn btn-lg btn-primary btn-lg-square rounded"
-                    href="mailto:doodoo55@gachon.ac.kr"
-                  >
-                    <i className="fa-solid fa-envelope" />
-                  </a>
-                </div>
-              </div>
-              <div className="text-center py-4">
-                <h4 className="text-primary">박도영 Do Young Park</h4>
-                <p className="text-uppercase m-0">Manager</p>
-              </div>
-            </div>
+        <div className="col-lg-5">
+          <div className="section-title position-relative pb-3 mb-5">
+          <h5 className="fw-bold text-primary text-uppercase">Set sensor arm direction</h5>
+          <h1 className="mb-0">1. 센서암 방향 설정</h1>
           </div>
-          <div className="col-lg-4 wow slideInUp" data-wow-delay="0.3s">
-            <div className="team-item bg-light rounded overflow-hidden">
-              <div className="team-img position-relative overflow-hidden">
-                <img className="img-fluid w-100" src={jw} alt="" />
-                <div className="team-social">
-                <a
-                    className="btn btn-lg btn-primary btn-lg-square rounded"
-                    href="https://github.com/manips1"
-                  >
-                    <i className="fab fa-github fw-normal" />
-                  </a>
-                  <a
-                    className="btn btn-lg btn-primary btn-lg-square rounded"
-                    href="mailto:jwjw6410@naver.com"
-                  >
-                    <i className="fa-solid fa-envelope" />
-                  </a>
-                </div>
-              </div>
-              <div className="text-center py-4">
-                <h4 className="text-primary">서지원 Ji Won Seo</h4>
-                <p className="text-uppercase m-0">Member</p>
-              </div>
-            </div>
+
+          <p className="mb-4" style={{ fontSize: 18}}>
+            MindWave의 이마 센서 암 방향을 정하십시오.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  {/* Quote End */}
+  <div className="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s" style={{ minHeight: 50 }}>
+    <div className="container py-5">
+      <div className="row g-5">
+        <div className="col-lg-7">
+          <div className="section-title position-relative pb-3 mb-5">
+          <h5 className="fw-bold text-primary text-uppercase">headband adjustable</h5>
+            <h1 className="mb-0">2. 오버 헤드 밴드 조절</h1>
           </div>
-          <div className="col-lg-4 wow slideInUp" data-wow-delay="0.3s">
-            <div className="team-item bg-light rounded overflow-hidden">
-              <div className="team-img position-relative overflow-hidden">
-                <img className="img-fluid w-100" src={hb} alt="" />
-                <div className="team-social">
-                <a
-                    className="btn btn-lg btn-primary btn-lg-square rounded"
-                    href="https://github.com/HaebinAHN"
-                  >
-                    <i className="fab fa-github fw-normal" />
-                  </a>
-                  <a
-                    className="btn btn-lg btn-primary btn-lg-square rounded"
-                    href="mailto:gnh06280@gachon.ac.kr"
-                  >
-                    <i className="fa-solid fa-envelope" />
-                  </a>
-                </div>
-              </div>
-              <div className="text-center py-4">
-                <h4 className="text-primary">안해빈 Hae Bin Ahn</h4>
-                <p className="text-uppercase m-0">Member</p>
-              </div>
-            </div>
+          <p className="mb-4" style={{ fontSize: 18}}>
+          MindWave의 오버 헤드 밴드는 조절 가능합니다. 다양한 크기에 맞게 확장하고 센서 암이 이마에 접촉되도록 머리에 착용하십시오.
+          </p>
+          <div className="row g-0 mb-3">
+            <div className="col-sm-6 wow zoomIn" data-wow-delay="0.2s"></div>
           </div>
-          <div className="col-lg-4 wow slideInUp" data-wow-delay="0.6s">
-            <div className="team-item bg-light rounded overflow-hidden">
-              <div className="team-img position-relative overflow-hidden">
-                <img className="img-fluid w-100" src={kd} alt="" />
-                <div className="team-social">
-                <a
-                    className="btn btn-lg btn-primary btn-lg-square rounded"
-                    href="https://github.com/rkdejr2321"
-                  >
-                    <i className="fab fa-github fw-normal" />
-                  </a>
-                  <a
-                    className="btn btn-lg btn-primary btn-lg-square rounded"
-                    href="mailto:rkdejr2321@naver.com"
-                  >
-                    <i className="fa-solid fa-envelope" />
-                  </a>
-                </div>
-              </div>
-              <div className="text-center py-4">
-                <h4 className="text-primary">서강덕 Kang Deok Seo</h4>
-                <p className="text-uppercase m-0">Member</p>
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-4 wow slideInUp" data-wow-delay="0.9s">
-            <div className="team-item bg-light rounded overflow-hidden">
-              <div className="team-img position-relative overflow-hidden">
-                <img className="img-fluid w-100" src={js} alt="" />
-                <div className="team-social">
-                <a
-                    className="btn btn-lg btn-primary btn-lg-square rounded"
-                    href="https://github.com/Jedo0224"
-                  >
-                    <i className="fab fa-github fw-normal" />
-                  </a>
-                  <a
-                    className="btn btn-lg btn-primary btn-lg-square rounded"
-                    href="mailto:qkrwotjr0@gmail.com"
-                  >
-                    <i className="fa-solid fa-envelope" />
-                  </a>
-                </div>
-              </div>
-              <div className="text-center py-4">
-                <h4 className="text-primary">박재석 Jae Seok Park</h4>
-                <p className="text-uppercase m-0">Member</p>
-              </div>
-            </div>
+          <div className="d-flex align-items-center mb-4 wow fadeIn" data-wow-delay="0.6s"></div>
+        </div>
+        <div className="col-lg-4" style={{ minHeight: 100 }}>
+          <div className="position-relative h-80">
+            <img
+              className="position-absolute w-95 h-95 rounded wow zoomIn"
+              data-wow-delay="0.9s"
+              src={Fitting2}
+              style={{ objectFit: "cover" }}
+            />
           </div>
         </div>
       </div>
     </div>
-    {/* Team End */}
+  </div>
+
+  <div className="container-fluid py-5 wow fadeInUp"  data-wow-delay="0.1s">
+    <div className="container py-5">
+      <div className="row g-5">
+        <div className="col-lg-5" style={{ minHeight: 50 }}>
+          <div className="position-relative h-100">
+            <img
+              className="position-absolute w-95 h-95 rounded wow zoomIn"
+              data-wow-delay="0.9s"
+              src={Fitting3}
+              style={{ objectFit: "cover" }}
+            />
+          </div>
+        </div>
+        <div className="col-lg-5">
+          <div className="section-title position-relative pb-3 mb-5">
+          <h5 className="fw-bold text-primary text-uppercase">Ear hoop fixation</h5>
+            <h1 className="mb-0">3. 이어 후프 고정</h1>
+          </div>
+
+          <p className="mb-4" style={{ fontSize: 18}}>
+          고무 이어 후프를 왼쪽 귀 뒤에 놓은 다음 이어 클립을 귓볼에 끼 웁니다.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  {/* Quote End */}
+  <div className="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+    <div className="container py-">
+      <div className="row g-5">
+        <div className="col-lg-7">
+          <div className="section-title position-relative pb-3 mb-5">
+            <h5 className="fw-bold text-primary text-uppercase">Check wearing the EEG device</h5>
+            <h1 className="mb-0">4. 뇌파 기기 착용 완료</h1>
+          </div>
+          <p className="mb-4" style={{ fontSize: 18}}>
+          이것이 MindWave가 적절하게 착용되었을 때의 모습입니다. <br/>
+          " 센서는 항상 피부에 직접 접촉 할 수 있어야합니다. 화장, 각질 또는 파편이 연결을 방해 할 수 있습니다. "
+          </p>
+          <div className="row g-0 mb-3">
+            <div className="col-sm-6 wow zoomIn" data-wow-delay="0.2s">
+              <h5 className="mb-3">
+                <i className="fa fa-check text-primary me-3" />
+                센서암 방향 확인
+              </h5>
+              <h5 className="mb-3">
+                <i className="fa fa-check text-primary me-3" />
+                헤드 밴드 조절
+              </h5>
+            </div>
+            <div className="col-sm-6 wow zoomIn" data-wow-delay="0.4s">
+              <h5 className="mb-3">
+                <i className="fa fa-check text-primary me-3" />
+                이어 후프 고정
+              </h5>
+              <h5 className="mb-3">
+                <i className="fa fa-check text-primary me-3" />
+                센서 피부 접촉 확인
+              </h5>
+            </div>
+          </div>
+          <div className="d-flex align-items-center mb-4 wow fadeIn" data-wow-delay="0.6s"></div>
+        </div>
+        <div className="col-lg-3" style={{ minHeight: 100 }}>
+          <div className="position-relative h-60">
+            <img
+              className="position-relative w-95 h-95 rounded wow zoomIn"
+              data-wow-delay="0.9s"
+              src={Fitting4}
+              style={{ objectFit: "cover" }}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
     
+      
+      </div>
     {/* Vendor Start */}
     <div className="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
       <div className="container py-5 mb-5">
@@ -496,7 +403,9 @@ After the survey is created, a participation link is created for easy sharing.
             </div>
           </div>
           <div className="col-lg-8 col-md-6">
+          <div className="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s" >
             
+            </div>
           </div>
         </div>
       </div>
@@ -520,10 +429,13 @@ After the survey is created, a participation link is created for easy sharing.
               </p>
               <br />
             </div>
+            
           </div>
         </div>
-      </div>
+      </div> 
     </div>
+
+
     {/* Footer End */}
     {/* Back to Top */}
     <a
@@ -534,6 +446,8 @@ After the survey is created, a participation link is created for easy sharing.
     </a>
     {/* JavaScript Libraries */}
     {/* Template Javascript */}
+
+   
   </>
   
   
@@ -542,4 +456,3 @@ After the survey is created, a participation link is created for easy sharing.
 }
 
 export default Tutorial;
-

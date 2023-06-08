@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
-import Button from "../Button/Button";
-
+import Button from "../components/Button/Button";
+import ConnectDevice from "../assets/images/ConnectDevice.png"
 import { useParams, useNavigate } from 'react-router-dom';
 
 
-import Styles from '../../styles/css/CheckPassword.module.css';
+import Styles from '../styles/css/CheckPassword.module.css';
 const token = localStorage.getItem("ACCESS_TOKEN");
 
 function CheckPassword() {
@@ -61,7 +61,7 @@ function CheckPassword() {
       });
 
       if (response.status === 200) {
-        window.alert("응답을 시작합니다."); // Show an alert on successful submission
+        //  window.alert("응답을 시작합니다."); // Show an alert on successful submission
         navigate(`/survey-response/${surveyId}`, { state: { password: inputPassword } });
       }
     } catch (error) {
@@ -70,7 +70,26 @@ function CheckPassword() {
   };
 
   return (
+    
     <div className={Styles.container}>
+          <div className="position-relative d-flex justify-content-center align-items-center" >
+      <img
+        className="rounded wow zoomIn"
+        data-wow-delay="0.9s"
+        src={ConnectDevice}
+        style={{ width: "80%", height: "auto" }}
+        alt="Connect Device"
+      />
+     
+      
+    
+  </div>
+  <div>
+  <h4 className="mb-0" style={{textAlign: "center"}}>
+                설문 응답 시작에 앞서 뇌파 측정 프로그램을 실행하고 프로그램 화면에 나타난 패스워드를 입력해주세요
+              </h4>
+              <br/>
+              </div>
       {surveyData ? (
         <>
           <h1 className={Styles.header}>설문 제목 : "{surveyData.title}"</h1>

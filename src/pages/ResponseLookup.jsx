@@ -58,17 +58,22 @@ const Card = styled.div`
 `;
 
 
-function ResponseLookup() {
 
- 
+
+function ResponseLookup() {
   const [surveyData, setSurveyData] = useState(null);
   const [selectedAnswers, setSelectedAnswers] = useState([]);
+  const [brainwaveData, setBrainWaveData] = useState(null);
+  const [imgUrl, setImgUrl] = useState(null);
   const navigate = useNavigate();
+
 
   const { surveyId } = useParams();
   const location = useLocation(); // Add this line
   //const password = location.state.password; // Add this line
 
+
+  
   const handleAfterSubmit = async (event) => {
     event.preventDefault();
     
@@ -92,6 +97,28 @@ function ResponseLookup() {
 
     fetchData();
   }, [surveyId]);
+
+  
+useEffect(() => {
+  const fetchData = async () => {
+
+    try {
+      const response = await axios.get(`/api/member/brainwave/result/${surveyId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      setBrainWaveData(response.data);
+      setImgUrl("http://localhost:8080/images/brainwave/" + response.data.image);
+      console.log(imgUrl);
+      console.log(surveyId);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  fetchData();
+}, [surveyId, token]);
 
   function handleSelectedAnswer(questionId, questionNum, answer, questionType) {
     const newAnswerObj = {
@@ -202,7 +229,16 @@ function ResponseLookup() {
             }
           />
         );
-      })}<br></br>
+        
+      })}
+      <Card>
+      <div>
+          <h5 className="fw-bold text-primary text-uppercase">뇌파 측정 결과</h5>
+        </div>
+      <Container>
+      <img src={imgUrl} alt="brainwave" />
+      </Container>
+        </Card>
     <form onSubmit={handleAfterSubmit}>
     
    

@@ -3,7 +3,7 @@ import axios from 'axios';
 import Button from "../components/Button/Button";
 import {SurveyItem} from '../components/Survey/SurveyItem';
 import { useParams, useNavigate, useLocation } from 'react-router-dom'; 
-import SurveyComplete from '../components/Survey/SurveyComplete';
+import SurveyComplete from './SurveyComplete';
 import '../styles/css/SurveyItem.module.css';
 import Dropdown from "../components/Survey/Dropdown";
 import { Grid, TextField } from "@mui/material";
